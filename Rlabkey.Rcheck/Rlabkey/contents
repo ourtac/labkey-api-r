@@ -1,0 +1,23 @@
+Entry: Rlabkey-package
+Aliases: Rlabkey-package Rlabkey
+Keywords: package
+Description: Import data from a labkey data base into an R data frame
+URL: ../../../library/Rlabkey/html/Rlabkey-package.html
+
+Entry: labkey.executeSql
+Aliases: labkey.executeSql
+Keywords: IO
+Description: Retrieve data from a labkey database using Sql commands
+URL: ../../../library/Rlabkey/html/labkey.executeSql.html
+
+Entry: labkey.selectRows
+Aliases: labkey.selectRows
+Keywords: IO
+Description: Retrieve data from a labkey database using url specifications
+URL: ../../../library/Rlabkey/html/labkey.selectRows.html
+
+Entry: makeFilter
+Aliases: makeFilter
+Keywords: file
+Description: Builds an array of filters
+URL: ../../../library/Rlabkey/html/makeFilter.html

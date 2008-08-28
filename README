@@ -1,0 +1,17 @@
+Contents of remoteapi/r:
+
+Rlabkey: This directory contains all source code for both documentation and R code. R code is in Rlabkey/r
+and documentation source code is in Rlabkey/man.
+
+Rlabkey.Rcheck: This directory contains the final documentation pdf and information relating to the check run
+of the package.
+
+Rlabkey_0.0.1.tar.gz: This is the package file that can be installed using R CMD INSTALL Rlabkey_0.0.1.tar.gz
+on the command line.
+
+
+#------------------------
+To put an R package together you must build and then check. These routienes can be run from the command line.
+
+1. First build the package: R CMD build Rlabkey
+2. If the build is successful, next check the package: R CMD check Rlabkey

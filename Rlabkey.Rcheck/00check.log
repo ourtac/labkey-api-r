@@ -1,0 +1,65 @@
+* using log directory '/home/val/Rlabkey_pkg/Rlabkey.Rcheck'
+* using R version 2.7.1 (2008-06-23)
+* using session charset: ASCII
+* checking for file 'Rlabkey/DESCRIPTION' ... OK
+* this is package 'Rlabkey' version '0.0.1'
+* checking package name space information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking whether package 'Rlabkey' can be installed ... OK
+* checking package directory ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the name space can be loaded with stated dependencies ... OK
+* checking for unstated dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+labkey.executeSql: no visible binding for global variable
+  'labkey.sessionCookieName'
+labkey.executeSql: no visible binding for global variable
+  'labkey.sessionCookieContents'
+labkey.selectRows: no visible binding for global variable
+  'labkey.sessionCookieName'
+labkey.selectRows: no visible binding for global variable
+  'labkey.sessionCookieContents'
+* checking Rd files ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... WARNING
+Warning in names(y)[ind] <- sapply(y[ind], as.character) :
+  number of items to replace is not a multiple of replacement length
+Codoc mismatches from documentation object 'makeFilter':
+makeFilter
+  Code: function(filter1, filter2 = NULL, filter3 = NULL, filter4 =
+                 NULL, filter5 = NULL)
+  Docs: function(c)
+  Argument names in code not in docs:
+    filter1 filter2 filter3 filter4 filter5
+  Argument names in docs not in code:
+    c
+  Mismatches in argument names:
+    Position: 1 Code: filter1 Docs: c
+
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'makeFilter'
+  c("colname", "operator", value)
+
+Functions with \usage entries need to have the appropriate \alias entries,
+and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See the chapter 'Writing R documentation files' in manual 'Writing R
+Extensions'.
+* creating Rlabkey-Ex.R ... OK
+* checking examples ... OK
+* creating Rlabkey-manual.tex ... OK
+* checking Rlabkey-manual.tex using pdflatex ... OK

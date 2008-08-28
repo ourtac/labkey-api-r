@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Builds an array of filters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for makeFilter {Rlabkey}"><tr><td>makeFilter {Rlabkey}</td><td align="right">R Documentation</td></tr></table>
+<h2>Builds an array of filters</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function takes inputs of column name, filter value and filter operator for
+the data to be filtered on. It returns an array of filters to be used in <code>labkey.selectRows</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+makeFilter(c("colname", "operator",value))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>colname</code></td>
+<td>
+a string specifying the name of the column to be filtered</td></tr>
+<tr valign="top"><td><code>operator</code></td>
+<td>
+a text string specifying what operator should be used in the filter</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+an integer or string specifying the value the columns should be filtered on</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Possible operator values are as follows:
+"EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN",
+"LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL",
+"IS_NULL", "IS_NOT_NULL", "CONTAINS", and "DOES_NOT_CONTAIN".
+</p>
+<p>
+Multiple filters can be applied (see examples). Currently this function supports
+specifying up to five filters.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The function returns either a single string or an array of strings to be use in the
+<code>colFilter</code> argument of the <code>labkey.selectRows</code> function.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Valerie Obenchain
+</p>
+
+
+<h3>References</h3>
+
+<p>
+http://www.omegahat.org/RCurl/, 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+https://www.labkey.org/project/home/begin.view
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="labkey.selectRows.html">labkey.selectRows</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Create filters
+myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+
+# Use in labkey.selectRows function
+getdata &lt;- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

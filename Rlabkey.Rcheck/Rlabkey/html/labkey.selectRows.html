@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Retrieve data from a labkey database using url specifications</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for labkey.selectRows {Rlabkey}"><tr><td>labkey.selectRows {Rlabkey}</td><td align="right">R Documentation</td></tr></table>
+<h2>Retrieve data from a labkey database using url specifications</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Use url to specify data to be imported into R. Prior to import, data columns
+can be sorted, specific columns or number of rows can be requested and
+data filters can be applied.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
+                                  colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
+                                  colFilter = NULL, stripAllHidden = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>baseUrl</code></td>
+<td>
+a string specifying the <code>baseUrl</code>for the HTTP request</td></tr>
+<tr valign="top"><td><code>folderPath</code></td>
+<td>
+a string specifying the <code>folderPath</code> for the HTTP request</td></tr>
+<tr valign="top"><td><code>schemaName</code></td>
+<td>
+a string specifying the  <code>schemaName</code> for the HTTP request</td></tr>
+<tr valign="top"><td><code>queryName</code></td>
+<td>
+a string specifying the <code>queryName</code> for the HTTP request</td></tr>
+<tr valign="top"><td><code>viewName</code></td>
+<td>
+(optional) a string specifying the <code>viewName</code> for the HTTP request</td></tr>
+<tr valign="top"><td><code>colSelect</code></td>
+<td>
+(optional) a vector of comma separated strings specifying which columns of a dataset or view to import</td></tr>
+<tr valign="top"><td><code>maxRows</code></td>
+<td>
+(optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.</td></tr>
+<tr valign="top"><td><code>colSort</code></td>
+<td>
+(optional) a string including the name of the column to sort preceeded by a "+" or "-" to indicate sort direction</td></tr>
+<tr valign="top"><td><code>rowOffset</code></td>
+<td>
+(optional) an integer specifying which row of data should be the first row in the retrieval. If no
+value is specified, the retrieval starts with the first row.</td></tr>
+<tr valign="top"><td><code>colFilter</code></td>
+<td>
+(optional) a vector or array object created by the <code>makeFilter</code> function which contains the
+column name, operator and value of the filter(s) to be applied to the retrieved data.</td></tr>
+<tr valign="top"><td><code>stripAllHidden</code></td>
+<td>
+(optional) a logical value indicating whether or not to save data columns that would normally be hiddenfrom user view. If no value is specified, no hidden columns are returned.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+A full dataset or user saved view can be imported into an R data frame using the <code>labkey.selectRows</code> 
+function. The function accepts as its arguments the components of the url that identify
+the location of the data and what actions should be taken on the data prior to import
+(ie, sorting, selecting particular columns or maximum number of rows, etc.) Data are returned in a data 
+frame with column names as they appear on the labkey database website. 
+</p>
+<p>
+Use care when specifying column names for the colSelect or colFilter arguments. Often the column name
+is not the same as the column header as seen on the web site. ***More help here*******
+</p>
+<p>
+When importing data from ATLAS.scharp.org, a quick and simple way to identify the necessary components of the url 
+(ie, schemaName, queryName, viewName, etc.) is to use the "export to R script" option avaiable as a drop down
+under the "views" tab for each dataset.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The requested data are returned in a data frame.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Valerie Obenchain
+</p>
+
+
+<h3>References</h3>
+
+<p>
+http://www.omegahat.org/RCurl/, 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+https://www.labkey.org/project/home/begin.view
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="labkey.executeSql.html">labkey.executeSql</a></code>, <code><a href="makeFilter.html">makeFilter</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Retrieving data from the Labkey.org web site:
+
+library(Rlabkey)
+
+# Retrieve HIV Test Results and plot Western Blot data
+getdata &lt;- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+                                schemaName="study", queryName="HIV Test Results")
+plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
+
+# Select columns and apply filters
+myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+getdata &lt;- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,4 +1,4 @@
-makeDF <- function(rawdata, keepKey)
+makeDF <- function(rawdata, stripAllHidden)
 {	decode <- fromJSON(rawdata)
 
   	## Put data in data frame 
@@ -31,10 +31,11 @@ makeDF <- function(rawdata, keepKey)
 
 
   	## Delete key column unless keepkey=TRUE
-  	if(keepKey==TRUE)   {} else
+  	if(stripAllHidden==FALSE)   {} else
   	                    {   if(is.null(decode$metaData$id)) {} else
-  	                            {   lsid.ind <- which(refdf$hindex==decode$metaData$id)
-  	                                newdat <- newdat[,-lsid.ind]}
+  	                            {   hide.ind <- which(refdf$hide==TRUE)
+  	                                newdat <- newdat[,-hide.ind]
+									refdf <- refdf[-hide.ind,]}
   	                    }
 
   	## Set the mode and convert the dates
@@ -51,3 +52,4 @@ makeDF <- function(rawdata, keepKey)
   	
   	return(newdat)
 }
+

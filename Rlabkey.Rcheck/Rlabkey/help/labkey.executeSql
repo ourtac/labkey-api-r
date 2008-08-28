@@ -1,0 +1,73 @@
+labkey.executeSql          package:Rlabkey          R Documentation
+
+_R_e_t_r_i_e_v_e _d_a_t_a _f_r_o_m _a _l_a_b_k_e_y _d_a_t_a_b_a_s_e _u_s_i_n_g _S_q_l _c_o_m_m_a_n_d_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Use Sql commands to specify data to be imported into R. Prior to
+     import, data can be manipulated through all standard Sql commands.
+
+_U_s_a_g_e:
+
+     labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
+                                       rowOffset = NULL, stripAllHidden = TRUE)
+
+_A_r_g_u_m_e_n_t_s:
+
+ baseUrl: a string specifying the 'baseUrl'for the HTTP request
+
+folderPath: a string specifying the 'folderPath' for the HTTP request
+
+schemaName: a string specifying the  'schemaName' for the HTTP request
+
+     sql: a string containing the 'sql' commands to be executed
+
+ maxRows: (optional) an integer specifying how many rows of data to
+          return. If no value is specified, all rows are returned.
+
+rowOffset: (optional) an integer specifying which row of data should be
+          the first row in the retrieval.  If no value is specified,
+          all rows are returned.
+
+stripAllHidden: (optional) a logical value indicating whether or not to
+          save data columns that would  normally be hidden from user
+          veiw. If no value is specified, no hidden columns are
+          returned.
+
+_D_e_t_a_i_l_s:
+
+     A full dataset or user saved view can be imported into an R data
+     frame using the 'labkey.executeSql' function. The function accepts
+     as its arguments components of the url that identify the location
+     of the data and what Sql actions should be taken on the data prior
+     to import. Data are returned in a data frame with column names as
+     they appear in on the labkey database website.
+
+_V_a_l_u_e:
+
+     The requested data are returned in a data frame.
+
+_A_u_t_h_o_r(_s):
+
+     Valerie Obenchain
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     http://www.omegahat.org/RCurl/, 
+     http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+     https://www.labkey.org/project/home/begin.view
+
+_S_e_e _A_l_s_o:
+
+     'labkey.selectRows'
+
+_E_x_a_m_p_l_e_s:
+
+     library(Rlabkey)
+
+     # Retrieve Participant ID, age and height from Demographics table
+     # on www.labkey.org
+     ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
+
+     #getdata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo",schemaName="study", sql="select Demographics.ParticipantId, Demographics.Age, Demographics.Height from Demographics")
+

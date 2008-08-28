@@ -1,0 +1,63 @@
+makeFilter              package:Rlabkey              R Documentation
+
+_B_u_i_l_d_s _a_n _a_r_r_a_y _o_f _f_i_l_t_e_r_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     This function takes inputs of column name, filter value and filter
+     operator for the data to be filtered on. It returns an array of
+     filters to be used in 'labkey.selectRows'
+
+_U_s_a_g_e:
+
+     makeFilter(c("colname", "operator",value))
+
+_A_r_g_u_m_e_n_t_s:
+
+ colname: a string specifying the name of the column to be filtered
+
+operator: a text string specifying what operator should be used in the
+          filter
+
+   value: an integer or string specifying the value the columns should
+          be filtered on
+
+_D_e_t_a_i_l_s:
+
+     Possible operator values are as follows: "EQUALS", "NOT_EQUALS",
+     "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN",
+     "LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL",
+     "NOT_EQUAL_OR_NULL", "IS_NULL", "IS_NOT_NULL", "CONTAINS", and
+     "DOES_NOT_CONTAIN".
+
+     Multiple filters can be applied (see examples). Currently this
+     function supports specifying up to five filters.
+
+_V_a_l_u_e:
+
+     The function returns either a single string or an array of strings
+     to be use in the 'colFilter' argument of the 'labkey.selectRows'
+     function.
+
+_A_u_t_h_o_r(_s):
+
+     Valerie Obenchain
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     http://www.omegahat.org/RCurl/, 
+     http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+     https://www.labkey.org/project/home/begin.view
+
+_S_e_e _A_l_s_o:
+
+     'labkey.selectRows'
+
+_E_x_a_m_p_l_e_s:
+
+     # Create filters
+     myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+
+     # Use in labkey.selectRows function
+     getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
