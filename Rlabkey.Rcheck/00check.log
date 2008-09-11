@@ -1,6 +1,6 @@
-* using log directory '/home/val/Rlabkey_pkg/Rlabkey.Rcheck'
-* using R version 2.7.1 (2008-06-23)
-* using session charset: ASCII
+* using log directory '/home/vobencha/work/peter/labkey/Rlabkey.Rcheck'
+* using R version 2.7.2 (2008-08-25)
+* using session charset: UTF-8
 * checking for file 'Rlabkey/DESCRIPTION' ... OK
 * this is package 'Rlabkey' version '0.0.1'
 * checking package name space information ... OK
@@ -24,20 +24,38 @@
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... NOTE
+labkey.delete: no visible binding for global variable
+  ‘labkey.sessionCookieName’
+labkey.delete: no visible binding for global variable
+  ‘labkey.sessionCookieContents’
 labkey.executeSql: no visible binding for global variable
-  'labkey.sessionCookieName'
+  ‘labkey.sessionCookieName’
 labkey.executeSql: no visible binding for global variable
-  'labkey.sessionCookieContents'
+  ‘labkey.sessionCookieContents’
+labkey.insertRows: no visible binding for global variable
+  ‘labkey.sessionCookieName’
+labkey.insertRows: no visible binding for global variable
+  ‘labkey.sessionCookieContents’
 labkey.selectRows: no visible binding for global variable
-  'labkey.sessionCookieName'
+  ‘labkey.sessionCookieName’
 labkey.selectRows: no visible binding for global variable
-  'labkey.sessionCookieContents'
+  ‘labkey.sessionCookieContents’
+labkey.update: no visible binding for global variable
+  ‘labkey.sessionCookieName’
+labkey.update: no visible binding for global variable
+  ‘labkey.sessionCookieContents’
 * checking Rd files ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... WARNING
 Warning in names(y)[ind] <- sapply(y[ind], as.character) :
   number of items to replace is not a multiple of replacement length
+Functions/methods with usage in documentation object 'labkey.deleteRows' but not in code:
+  labkey.deleteRows
+
+Functions/methods with usage in documentation object 'labkey.updateRows' but not in code:
+  labkey.updateRows
+
 Codoc mismatches from documentation object 'makeFilter':
 makeFilter
   Code: function(filter1, filter2 = NULL, filter3 = NULL, filter4 =
@@ -62,4 +80,37 @@ Extensions'.
 * creating Rlabkey-Ex.R ... OK
 * checking examples ... OK
 * creating Rlabkey-manual.tex ... OK
-* checking Rlabkey-manual.tex using pdflatex ... OK
+* checking Rlabkey-manual.tex using pdflatex ... ERROR
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+LaTeX errors found:
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.43 ...ttp://linux.about.com/library/cmd/blcmdl5_
+                                                  netrc.htm for more informa...
+--
+! LaTeX Error: Command \end{list} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+--
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+--
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+--
+! Missing $ inserted.
+<inserted text> 
+                $
+l.45 \end{Details}
+                  

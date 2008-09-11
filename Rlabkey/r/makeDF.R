@@ -6,6 +6,9 @@ makeDF <- function(rawdata, stripAllHidden)
   	for(j in 1:length(decode$rows)) {hold.dat <- rbind(hold.dat, decode$rows[[j]])}
   	hold.dat <- as.data.frame(hold.dat)
 
+	## Check for no rows returned
+	if(length(hold.dat)<1) { stop("No rows of data were returned. Query may be too restrictive.")}
+
 
   	## Get column names in proper order, associated header index, hidden tag, and data type
   	cnames <- NULL

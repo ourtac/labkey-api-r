@@ -40,11 +40,14 @@ https://www.labkey.org/project/home/begin.view}
 
 library(Rlabkey)
 
-# Retrieve Participant ID, age and height from Demographics table
-# on www.labkey.org
+# Retrieve participant id, visit date and hemoglobin from Lab Results table
+# from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#getdata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo",schemaName="study", sql="select Demographics.ParticipantId, Demographics.Age, Demographics.Height from Demographics")
+
+#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
+#				sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+
 
 }
 \keyword{IO}

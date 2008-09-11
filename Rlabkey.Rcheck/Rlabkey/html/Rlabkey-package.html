@@ -12,8 +12,15 @@
 
 <p>
 This package allows the import of data from a labkey data base
-into an R data frame. The import can be accomplished with Sql
+into an R data frame through the use of Sql
 commands or by specifying the query schema information.
+</p>
+<p>
+Data in a labkey data base can be modified from an R session
+by using the <code>insert</code>, <code>update</code>, and <code>delete</code> functions.
+The user must have the appropriate authorization on the labkey
+server in order to modify data in the data base through the use of
+these functions.
 </p>
 
 
@@ -41,7 +48,26 @@ commands or by specifying the query schema information.
 </tr>
 </table>
 <p>
-Need to insert text on how to use the package in general.
+Using this package to access a password protected labkey data base requires that the user
+has their login information in a.netrc file. The .netrc file
+contains configuration and autologin information for the File Transfer Protocol client (ftp).
+The file should be located in your home directory and the permissions on the file should be unreadable for 
+everybody except the owner. Permissions can be set with the chmod command from the unix command line
+as chmod 600 .netrc.  ***Insert how to do this for windows.
+The following three lines must be in your .netrc file:
+machine machinename
+login mylogin
+password mypassword
+</p>
+<p>
+An example would be:
+machine atlas.scharp.org
+login vobencha@fhcrc.org
+password mypassword
+</p>
+<p>
+See http://linux.about.com/library/cmd/blcmdl5_netrc.htm for more information on how to configure
+the .netrc file.
 </p>
 
 

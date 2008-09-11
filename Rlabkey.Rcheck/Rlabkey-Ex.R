@@ -85,11 +85,12 @@ flush(stderr()); flush(stdout())
 
 library(Rlabkey)
 
-# Retrieve Participant ID, age and height from Demographics table
-# on www.labkey.org
+# Retrieve participant id, visit date and hemoglobin from Lab Results table
+# from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#getdata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo",schemaName="study", sql="select Demographics.ParticipantId, Demographics.Age, Demographics.Height from Demographics")
+#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
+#                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
 
 
 
@@ -137,8 +138,11 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 
-# Create filters
+# Specification of two filters:
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+
+# Filter using "equals one of" operator:
+myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
 # Use in labkey.selectRows function
 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)

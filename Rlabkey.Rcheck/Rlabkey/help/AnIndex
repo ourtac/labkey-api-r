@@ -1,5 +1,8 @@
 Rlabkey-package	Rlabkey-package
+labkey.deleteRows	labkey.deleteRows
 labkey.executeSql	labkey.executeSql
+labkey.insertRows	labkey.insertRows
 labkey.selectRows	labkey.selectRows
+labkey.updateRows	labkey.updateRows
 makeFilter	makeFilter
 Rlabkey	Rlabkey-package

@@ -19,6 +19,7 @@ makeFilter <- function(filter1, filter2=NULL, filter3=NULL, filter4=NULL, filter
 			{	# Match the operator
 				fop  <- switch(EXPR=fmat[i,2], 	
 								"EQUALS"="eq",
+								"EQUALS_ONE_OF"="in",
 								"NOT_EQUALS"="neq", 	
 								"GREATER_THAN"="gt",
 								"GREATER_THAN_OR_EQUAL_TO"="gte",
@@ -33,8 +34,9 @@ makeFilter <- function(filter1, filter2=NULL, filter3=NULL, filter4=NULL, filter
 								"DOES_NOT_CONTAIN"="doesnotcontain")
 				
 				if(is.null(fop)==TRUE) stop ("Invalid operator name.")
-				colnam <- fmat[i,1]
-				fvalue <- fmat[i,3]
+				# url encode column name and value	
+				colnam <- URLencode(fmat[i,1])
+				fvalue <- URLencode(fmat[i,3])
 				filters[i] <- paste(colnam,"~",fop,"=",fvalue,sep="")
 			}
 		 

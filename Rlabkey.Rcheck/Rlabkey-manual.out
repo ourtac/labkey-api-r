@@ -1,4 +1,7 @@
 \BOOKMARK [1][-]{Rfn.Rlabkey.Rdash.package.1}{Rlabkey-package}{}
+\BOOKMARK [1][-]{Rfn.labkey.deleteRows.1}{labkey.deleteRows}{}
 \BOOKMARK [1][-]{Rfn.labkey.executeSql.1}{labkey.executeSql}{}
-\BOOKMARK [1][-]{Rfn.makeFilter.1}{makeFilter}{}
+\BOOKMARK [1][-]{Rfn.labkey.insertRows.1}{labkey.insertRows}{}
 \BOOKMARK [1][-]{Rfn.labkey.selectRows.1}{labkey.selectRows}{}
+\BOOKMARK [1][-]{Rfn.labkey.updateRows.1}{labkey.updateRows}{}
+\BOOKMARK [1][-]{Rfn.makeFilter.1}{makeFilter}{}

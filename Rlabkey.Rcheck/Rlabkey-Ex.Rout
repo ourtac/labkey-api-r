@@ -1,11 +1,13 @@
 
-R version 2.7.1 (2008-06-23)
+R version 2.7.2 (2008-08-25)
 Copyright (C) 2008 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
@@ -104,11 +106,12 @@ Loading required package: rjson
 > 
 > library(Rlabkey)
 > 
-> # Retrieve Participant ID, age and height from Demographics table
-> # on www.labkey.org
+> # Retrieve participant id, visit date and hemoglobin from Lab Results table
+> # from www.labkey.org
 > ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 > 
-> #getdata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo",schemaName="study", sql="select Demographics.ParticipantId, Demographics.Age, Demographics.Height from Demographics")
+> #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
+> #                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
 > 
 > 
 > 
@@ -133,7 +136,6 @@ Loading required package: rjson
 > # Retrieve HIV Test Results and plot Western Blot data
 > getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
 +                                 schemaName="study", queryName="HIV Test Results")
-winscard_clnt.c:3349:SCardCheckDaemonAvailability() PCSC Not Running
 > plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
 > 
 > # Select columns and apply filters
@@ -157,8 +159,11 @@ winscard_clnt.c:3349:SCardCheckDaemonAvailability() PCSC Not Running
 > ### ** Examples
 > 
 > 
-> # Create filters
+> # Specification of two filters:
 > myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+> 
+> # Filter using "equals one of" operator:
+> myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 > 
 > # Use in labkey.selectRows function
 > getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
@@ -170,7 +175,7 @@ winscard_clnt.c:3349:SCardCheckDaemonAvailability() PCSC Not Running
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.976 0.061 2.379 0 0 
+Time elapsed:  0.684 0.008 1.475 0 0 
 > grDevices::dev.off()
 null device 
           1 
