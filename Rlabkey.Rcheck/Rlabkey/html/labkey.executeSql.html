@@ -20,7 +20,7 @@ be manipulated through all standard Sql commands.
 
 <pre>
 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
-                                  rowOffset = NULL, stripAllHidden = TRUE)
+rowOffset = NULL, stripAllHidden = TRUE)
 </pre>
 
 
@@ -77,8 +77,8 @@ Valerie Obenchain
 <h3>References</h3>
 
 <p>
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,<br> 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,<br>
 https://www.labkey.org/project/home/begin.view
 </p>
 
@@ -86,7 +86,8 @@ https://www.labkey.org/project/home/begin.view
 <h3>See Also</h3>
 
 <p>
-<code><a href="labkey.selectRows.html">labkey.selectRows</a></code>
+<code><a href="labkey.selectRows.html">labkey.selectRows</a></code>, <code><a href="makeFilter.html">makeFilter</a></code>, <code><a href="labkey.insertRows.html">labkey.insertRows</a></code>, 
+<code><a href="labkey.updateRows.html">labkey.updateRows</a></code>, <code><a href="labkey.deleteRows.html">labkey.deleteRows</a></code>
 </p>
 
 
@@ -100,8 +101,9 @@ library(Rlabkey)
 # from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#mydata &lt;- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
-#                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+#mydata &lt;- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
+# "Lab Results".Labhemo from "Lab Results"')
 
 </pre>
 

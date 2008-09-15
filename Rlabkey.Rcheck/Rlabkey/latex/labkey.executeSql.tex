@@ -7,7 +7,7 @@ be manipulated through all standard Sql commands.
 \begin{Usage}
 \begin{verbatim}
 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
-                                  rowOffset = NULL, stripAllHidden = TRUE)
+rowOffset = NULL, stripAllHidden = TRUE)
 \end{verbatim}
 \end{Usage}
 \begin{Arguments}
@@ -36,12 +36,13 @@ The requested data are returned in a data frame.
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,\\ 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.selectRows}{labkey.selectRows}}
+\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{makeFilter}{makeFilter}}, \code{\LinkA{labkey.insertRows}{labkey.insertRows}}, 
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -52,8 +53,9 @@ library(Rlabkey)
 # from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
-#                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
+# "Lab Results".Labhemo from "Lab Results"')
 
 \end{ExampleCode}
 \end{Examples}

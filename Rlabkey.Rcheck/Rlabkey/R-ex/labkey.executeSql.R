@@ -12,8 +12,9 @@ library(Rlabkey)
 # from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
-#                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
+# "Lab Results".Labhemo from "Lab Results"')
 
 
 

@@ -4,15 +4,16 @@ _R_e_t_r_i_e_v_e _d_a_t_a _f_r_o_m _a _l_a_b_k_e_y _d_a
 
 _D_e_s_c_r_i_p_t_i_o_n:
 
-     Use url to specify data to be imported into R. Prior to import,
-     data columns can be sorted, specific columns or number of rows can
-     be requested and data filters can be applied.
+     Use url specifications (query specifications??) to specify data to
+     be imported into R. Prior to import,  the data columns can be
+     sorted, specific columns or number of rows can be requested and
+     data filters can be applied.
 
 _U_s_a_g_e:
 
      labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
-                                       colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
-                                       colFilter = NULL, stripAllHidden = TRUE)
+     colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
+     colFilter = NULL, stripAllHidden = TRUE)
 
 _A_r_g_u_m_e_n_t_s:
 
@@ -57,18 +58,19 @@ _D_e_t_a_i_l_s:
      accepts as its arguments the components of the url that identify
      the location of the data and what actions should be taken on the
      data prior to import (ie, sorting, selecting particular columns or
-     maximum number of rows, etc.) Data are returned in a data  frame
+     maximum number of rows, etc.). Data are returned in a data  frame
      with column names as they appear on the labkey database website. 
 
      Use care when specifying column names for the colSelect or
-     colFilter arguments. Often the column name is not the same as the
-     column header as seen on the web site. ***More help here*******
+     colFilter arguments. Often the column name that appears on the web
+     site is not the same as the column label. The column label is what
+     is needed in colselect and colFilter arguments. 
 
      When importing data from ATLAS.scharp.org, a quick and simple way
      to identify the necessary components of the url  (ie, schemaName,
-     queryName, viewName, etc.) is to use the "export to R script"
-     option avaiable as a drop down under the "views" tab for each
-     dataset.
+     queryName, viewName, the correct column lables etc.) is to use the
+     "export to R script" option avaiable as a drop down options under
+     the "views" tab for each dataset.
 
 _V_a_l_u_e:
 
@@ -80,13 +82,14 @@ _A_u_t_h_o_r(_s):
 
 _R_e_f_e_r_e_n_c_e_s:
 
-     http://www.omegahat.org/RCurl/, 
-     http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
-     https://www.labkey.org/project/home/begin.view
+     http://www.omegahat.org/RCurl/,
+       http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+      https://www.labkey.org/project/home/begin.view
 
 _S_e_e _A_l_s_o:
 
-     'labkey.executeSql', 'makeFilter'
+     'labkey.executeSql', 'makeFilter', 'labkey.insertRows', 
+     'labkey.updateRows', 'labkey.deleteRows'
 
 _E_x_a_m_p_l_e_s:
 
@@ -101,5 +104,8 @@ _E_x_a_m_p_l_e_s:
 
      # Select columns and apply filters
      myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-     getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+     getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+     schemaName="study", queryName="HIV Test Results", 
+     colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 

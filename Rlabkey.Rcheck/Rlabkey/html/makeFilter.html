@@ -11,8 +11,8 @@
 <h3>Description</h3>
 
 <p>
-This function takes inputs of column name, filter value and filter operator for
-the data to be filtered on. It returns an array of filters to be used in <code>labkey.selectRows</code>
+This function takes inputs of column name, filter value and filter operator and 
+returns an array of filters to be used in <code>labkey.selectRows</code>.
 </p>
 
 
@@ -31,7 +31,7 @@ makeFilter(c("colname", "operator",value))
 a string specifying the name of the column to be filtered</td></tr>
 <tr valign="top"><td><code>operator</code></td>
 <td>
-a text string specifying what operator should be used in the filter</td></tr>
+a string specifying what operator should be used in the filter (see options below)</td></tr>
 <tr valign="top"><td><code>value</code></td>
 <td>
 an integer or string specifying the value the columns should be filtered on</td></tr>
@@ -40,14 +40,15 @@ an integer or string specifying the value the columns should be filtered on</td>
 <h3>Details</h3>
 
 <p>
-Possible operator values are as follows:
-"EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN",
-"LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL",
-"IS_NULL", "IS_NOT_NULL", "CONTAINS", and "DOES_NOT_CONTAIN".
+These filters are applied to the data prior to import into R. Currently this function
+allows the user to specify up to five filters. Multiple filters can be entered named or
+un-named vectors (see examples below).
 </p>
 <p>
-Multiple filters can be applied (see examples). Currently this function supports
-specifying up to five filters.
+Possible operator values are as follows:
+"EQUALS", "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN",
+"LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL",
+"IS_NULL", "IS_NOT_NULL", "CONTAINS", and "DOES_NOT_CONTAIN".
 </p>
 
 
@@ -67,8 +68,8 @@ Valerie Obenchain
 <h3>References</h3>
 
 <p>
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/, <br>
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,<br>
 https://www.labkey.org/project/home/begin.view
 </p>
 
@@ -84,14 +85,16 @@ https://www.labkey.org/project/home/begin.view
 
 <pre>
 
-# Specification of two filters:
+# Specify two filters:
 myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
 # Filter using "equals one of" operator:
 myfilter2 &lt;- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
 # Use in labkey.selectRows function
-getdata &lt;- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+getdata &lt;- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 
 
 </pre>

@@ -10,7 +10,7 @@ _D_e_s_c_r_i_p_t_i_o_n:
 _U_s_a_g_e:
 
      labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
-                                       rowOffset = NULL, stripAllHidden = TRUE)
+     rowOffset = NULL, stripAllHidden = TRUE)
 
 _A_r_g_u_m_e_n_t_s:
 
@@ -53,13 +53,14 @@ _A_u_t_h_o_r(_s):
 
 _R_e_f_e_r_e_n_c_e_s:
 
-     http://www.omegahat.org/RCurl/, 
-     http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
-     https://www.labkey.org/project/home/begin.view
+     http://www.omegahat.org/RCurl/,
+       http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+      https://www.labkey.org/project/home/begin.view
 
 _S_e_e _A_l_s_o:
 
-     'labkey.selectRows'
+     'labkey.selectRows', 'makeFilter', 'labkey.insertRows', 
+     'labkey.updateRows', 'labkey.deleteRows'
 
 _E_x_a_m_p_l_e_s:
 
@@ -69,6 +70,7 @@ _E_x_a_m_p_l_e_s:
      # from www.labkey.org
      ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-     #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
-     #                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+     #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+     # schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
+     # "Lab Results".Labhemo from "Lab Results"')
 

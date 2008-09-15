@@ -1,25 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><title>R: Import data from a labkey data base into an R data frame</title>
+<html><head><title>R: Import/export data between a labkey database and an R session</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="../../R.css">
 </head><body>
 
 <table width="100%" summary="page for Rlabkey-package {Rlabkey}"><tr><td>Rlabkey-package {Rlabkey}</td><td align="right">R Documentation</td></tr></table>
-<h2>Import data from a labkey data base into an R data frame</h2>
+<h2>Import/export data between a labkey database and an R session</h2>
 
 
 <h3>Description</h3>
 
 <p>
-This package allows the import of data from a labkey data base
-into an R data frame through the use of Sql
-commands or by specifying the query schema information.
+This package allows the transfer of data between a labkey database and an R session. Data can be imported from 
+a labkey database into R by specifying the query schema information (<code>labkey.selectRows</code>) 
+or by using sql commands (<code>labkey.executeSql</code>). From an R session,
+a user can send data to update existing data (<code>labkey.updateRows</code>) or to be inserted as new data 
+(<code>labkey.insertRows</code>) or specify rows of data to be deleted from the labkey database (<code>labkey.deleteRows</code>). 
 </p>
 <p>
-Data in a labkey data base can be modified from an R session
-by using the <code>insert</code>, <code>update</code>, and <code>delete</code> functions.
 The user must have the appropriate authorization on the labkey
-server in order to modify data in the data base through the use of
+server in order to modify data in the database through the use of
 these functions.
 </p>
 
@@ -52,22 +52,21 @@ Using this package to access a password protected labkey data base requires that
 has their login information in a.netrc file. The .netrc file
 contains configuration and autologin information for the File Transfer Protocol client (ftp).
 The file should be located in your home directory and the permissions on the file should be unreadable for 
-everybody except the owner. Permissions can be set with the chmod command from the unix command line
-as chmod 600 .netrc.  ***Insert how to do this for windows.
-The following three lines must be in your .netrc file:
-machine machinename
-login mylogin
-password mypassword
+everybody except the owner. Permissions can be set in UNIX from the command line with chmod 600 .netrc.  
+***Insert how to do this for windows.***
+The following three lines must be included in the .netrc file either separated by white space
+(spaces, tabs, or newlines) or commas.
 </p>
 <p>
-An example would be:
-machine atlas.scharp.org
-login vobencha@fhcrc.org
-password mypassword
+machine remote-machine-name<br>
+login my-user-name<br>
+password my-password
 </p>
 <p>
-See http://linux.about.com/library/cmd/blcmdl5_netrc.htm for more information on how to configure
-the .netrc file.
+An example would be:<br>
+machine atlas.scharp.org<br>
+login vobencha@fhcrc.org<br>
+password mypassword<br>
 </p>
 
 
@@ -81,8 +80,8 @@ Valerie Obenchain
 <h3>References</h3>
 
 <p>
-http://www.omegahat.org/RCurl/,
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,<br>
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,<br>
 https://www.labkey.org/project/home/begin.view
 </p>
 
@@ -90,7 +89,8 @@ https://www.labkey.org/project/home/begin.view
 <h3>See Also</h3>
 
 <p>
-<code><a href="labkey.selectRows.html">labkey.selectRows</a></code>, <code><a href="labkey.executeSql.html">labkey.executeSql</a></code>, <code><a href="makeFilter.html">makeFilter</a></code>
+<code><a href="labkey.selectRows.html">labkey.selectRows</a></code>, <code><a href="labkey.executeSql.html">labkey.executeSql</a></code>, <code><a href="makeFilter.html">makeFilter</a></code>, 
+<code><a href="labkey.insertRows.html">labkey.insertRows</a></code>, <code><a href="labkey.updateRows.html">labkey.updateRows</a></code>, <code><a href="labkey.deleteRows.html">labkey.deleteRows</a></code>
 </p>
 
 

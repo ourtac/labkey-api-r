@@ -5,8 +5,8 @@ _B_u_i_l_d_s _a_n _a_r_r_a_y _o_f _f_i_l_t_e_r_s
 _D_e_s_c_r_i_p_t_i_o_n:
 
      This function takes inputs of column name, filter value and filter
-     operator for the data to be filtered on. It returns an array of
-     filters to be used in 'labkey.selectRows'
+     operator and  returns an array of filters to be used in
+     'labkey.selectRows'.
 
 _U_s_a_g_e:
 
@@ -16,22 +16,24 @@ _A_r_g_u_m_e_n_t_s:
 
  colname: a string specifying the name of the column to be filtered
 
-operator: a text string specifying what operator should be used in the
-          filter
+operator: a string specifying what operator should be used in the
+          filter (see options below)
 
    value: an integer or string specifying the value the columns should
           be filtered on
 
 _D_e_t_a_i_l_s:
 
-     Possible operator values are as follows: "EQUALS", "NOT_EQUALS",
-     "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN",
-     "LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL",
-     "NOT_EQUAL_OR_NULL", "IS_NULL", "IS_NOT_NULL", "CONTAINS", and
-     "DOES_NOT_CONTAIN".
+     These filters are applied to the data prior to import into R.
+     Currently this function allows the user to specify up to five
+     filters. Multiple filters can be entered named or un-named vectors
+     (see examples below).
 
-     Multiple filters can be applied (see examples). Currently this
-     function supports specifying up to five filters.
+     Possible operator values are as follows: "EQUALS",
+     "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN",
+     "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_THAN_OR_EQUAL_TO",
+     "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_NULL",
+     "IS_NOT_NULL", "CONTAINS", and "DOES_NOT_CONTAIN".
 
 _V_a_l_u_e:
 
@@ -46,8 +48,8 @@ _A_u_t_h_o_r(_s):
 _R_e_f_e_r_e_n_c_e_s:
 
      http://www.omegahat.org/RCurl/, 
-     http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
-     https://www.labkey.org/project/home/begin.view
+      http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+      https://www.labkey.org/project/home/begin.view
 
 _S_e_e _A_l_s_o:
 
@@ -55,12 +57,14 @@ _S_e_e _A_l_s_o:
 
 _E_x_a_m_p_l_e_s:
 
-     # Specification of two filters:
+     # Specify two filters:
      myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
      # Filter using "equals one of" operator:
      myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
      # Use in labkey.selectRows function
-     getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+     getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+     schemaName="study", queryName="HIV Test Results", 
+     colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 

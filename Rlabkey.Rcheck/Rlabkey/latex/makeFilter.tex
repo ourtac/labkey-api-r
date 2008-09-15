@@ -1,8 +1,8 @@
 \HeaderA{makeFilter}{Builds an array of filters}{makeFilter}
 \keyword{file}{makeFilter}
 \begin{Description}\relax
-This function takes inputs of column name, filter value and filter operator for
-the data to be filtered on. It returns an array of filters to be used in \code{labkey.selectRows}
+This function takes inputs of column name, filter value and filter operator and 
+returns an array of filters to be used in \code{labkey.selectRows}.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
@@ -12,18 +12,19 @@ makeFilter(c("colname", "operator",value))
 \begin{Arguments}
 \begin{ldescription}
 \item[\code{colname}] a string specifying the name of the column to be filtered
-\item[\code{operator}] a text string specifying what operator should be used in the filter
+\item[\code{operator}] a string specifying what operator should be used in the filter (see options below)
 \item[\code{value}] an integer or string specifying the value the columns should be filtered on
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
+These filters are applied to the data prior to import into R. Currently this function
+allows the user to specify up to five filters. Multiple filters can be entered named or
+un-named vectors (see examples below).
+
 Possible operator values are as follows:
-"EQUALS", "NOT\_EQUALS", "GREATER\_THAN", "GREATER\_THAN\_OR\_EQUAL\_TO", "LESS\_THAN",
+"EQUALS", "EQUALS\_ONE\_OF", "NOT\_EQUALS", "GREATER\_THAN", "GREATER\_THAN\_OR\_EQUAL\_TO", "LESS\_THAN",
 "LESS\_THAN\_OR\_EQUAL\_TO", "DATE\_EQUAL", "DATE\_NOT\_EQUAL", "NOT\_EQUAL\_OR\_NULL",
 "IS\_NULL", "IS\_NOT\_NULL", "CONTAINS", and "DOES\_NOT\_CONTAIN".
-
-Multiple filters can be applied (see examples). Currently this function supports
-specifying up to five filters.
 \end{Details}
 \begin{Value}
 The function returns either a single string or an array of strings to be use in the
@@ -33,8 +34,8 @@ The function returns either a single string or an array of strings to be use in 
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/, \\
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
@@ -43,14 +44,16 @@ https://www.labkey.org/project/home/begin.view
 \begin{Examples}
 \begin{ExampleCode}
 
-# Specification of two filters:
+# Specify two filters:
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
 # Filter using "equals one of" operator:
 myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
 # Use in labkey.selectRows function
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 
 
 \end{ExampleCode}

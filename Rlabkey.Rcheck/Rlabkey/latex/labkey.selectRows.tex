@@ -1,15 +1,15 @@
 \HeaderA{labkey.selectRows}{Retrieve data from a labkey database using url specifications}{labkey.selectRows}
 \keyword{IO}{labkey.selectRows}
 \begin{Description}\relax
-Use url to specify data to be imported into R. Prior to import, data columns
-can be sorted, specific columns or number of rows can be requested and
+Use url specifications (query specifications??) to specify data to be imported into R. Prior to import, 
+the data columns can be sorted, specific columns or number of rows can be requested and
 data filters can be applied.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
-                                  colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
-                                  colFilter = NULL, stripAllHidden = TRUE)
+colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
+colFilter = NULL, stripAllHidden = TRUE)
 \end{verbatim}
 \end{Usage}
 \begin{Arguments}
@@ -33,15 +33,15 @@ column name, operator and value of the filter(s) to be applied to the retrieved 
 A full dataset or user saved view can be imported into an R data frame using the \code{labkey.selectRows} 
 function. The function accepts as its arguments the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
-(ie, sorting, selecting particular columns or maximum number of rows, etc.) Data are returned in a data 
+(ie, sorting, selecting particular columns or maximum number of rows, etc.). Data are returned in a data 
 frame with column names as they appear on the labkey database website. 
 
 Use care when specifying column names for the colSelect or colFilter arguments. Often the column name
-is not the same as the column header as seen on the web site. ***More help here*******
+that appears on the web site is not the same as the column label. The column label is what is needed in
+colselect and colFilter arguments. 
 
 When importing data from ATLAS.scharp.org, a quick and simple way to identify the necessary components of the url 
-(ie, schemaName, queryName, viewName, etc.) is to use the "export to R script" option avaiable as a drop down
-under the "views" tab for each dataset.
+(ie, schemaName, queryName, viewName, the correct column lables etc.) is to use the "export to R script" option avaiable as a drop down options under the "views" tab for each dataset.
 \end{Details}
 \begin{Value}
 The requested data are returned in a data frame.
@@ -50,12 +50,13 @@ The requested data are returned in a data frame.
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,\\ 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}
+\code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, \code{\LinkA{labkey.insertRows}{labkey.insertRows}}, 
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -71,7 +72,10 @@ plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
 
 # Select columns and apply filters
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 
 
 \end{ExampleCode}

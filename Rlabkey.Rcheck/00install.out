@@ -1,8 +1,4 @@
 * Installing *source* package 'Rlabkey' ...
-** R
-** preparing package for lazy loading
-Loading required package: RCurl
-Loading required package: rjson
 ** help
 Note: removing empty section \examples
 Note: removing empty section \examples
