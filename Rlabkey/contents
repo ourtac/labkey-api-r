@@ -24,3 +24,22 @@ Keywords: package
 Description: Import data from labkey database into R
 URL: ../../../library/Rlabkey/html/Rlabkey.html
 
+Entry: labkey.insertRows
+Aliases: labkey.insertRows
+Keywords: IO
+Description: Insert rows of data from R into a labkey database
+URL: ../../../library/Rlabkey/html/labkey.insertRows.html
+
+
+Entry: labkey.updateRows
+Aliases: labkey.updateRows
+Keywords: IO
+Description: Update existing rows of data in a labkey database
+URL: ../../../library/Rlabkey/html/labkey.updateRows.html
+
+
+Entry: labkey.deleteRows
+Aliases: labkey.deleteRows
+Keywords: IO
+Description: Delete rows of data from a labkey database
+URL: ../../../library/Rlabkey/html/labkey.deleteRows.html

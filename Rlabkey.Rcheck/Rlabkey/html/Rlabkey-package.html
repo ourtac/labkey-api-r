@@ -11,10 +11,11 @@
 <h3>Description</h3>
 
 <p>
-This package allows the transfer of data between a labkey database and an R session. Data can be imported from 
+This package allows the transfer of data between a labkey database and an R session as well as the
+ability to modify data in the labkey database from an R seession. Data can be imported from 
 a labkey database into R by specifying the query schema information (<code>labkey.selectRows</code>) 
 or by using sql commands (<code>labkey.executeSql</code>). From an R session,
-a user can send data to update existing data (<code>labkey.updateRows</code>) or to be inserted as new data 
+a user can also send data to update existing data (<code>labkey.updateRows</code>) or to be inserted as new data 
 (<code>labkey.insertRows</code>) or specify rows of data to be deleted from the labkey database (<code>labkey.deleteRows</code>). 
 </p>
 <p>
@@ -50,17 +51,22 @@ these functions.
 <p>
 Using this package to access a password protected labkey data base requires that the user
 has their login information in a.netrc file. The .netrc file
-contains configuration and autologin information for the File Transfer Protocol client (ftp).
-The file should be located in your home directory and the permissions on the file should be unreadable for 
+contains configuration and autologin information for the File Transfer Protocol client (ftp) and
+other programs such as CURL.
+The file should be located in the users home directory and the permissions on the file should be unreadable for 
 everybody except the owner. Permissions can be set in UNIX from the command line with chmod 600 .netrc.  
-***Insert how to do this for windows.***
-The following three lines must be included in the .netrc file either separated by white space
+</p>
+<p>
+On a windows machine, create and  environment variable called 'HOME' that is set to your home directory ('c:/Users/&lt;User-Name&gt;' on Vista) or any directory you want to use. In that directory, create a text file named _netrc (note that it's underscore netrc, not dot netrc like it is on UNIX). 
+</p>
+<p>
+The following three lines must be included in the .netrc or _netrc file either separated by white space
 (spaces, tabs, or newlines) or commas.
 </p>
 <p>
-machine remote-machine-name<br>
-login my-user-name<br>
-password my-password
+machine &lt;remote-machine-name&gt;<br>
+login &lt;user-email&gt;<br>
+password &lt;user-password&gt;
 </p>
 <p>
 An example would be:<br>
@@ -95,6 +101,6 @@ https://www.labkey.org/project/home/begin.view
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.1 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.2 <a href="00Index.html">Index]</a></div>
 
 </body></html>

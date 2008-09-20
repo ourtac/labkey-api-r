@@ -1,7 +1,7 @@
 \HeaderA{labkey.selectRows}{Retrieve data from a labkey database using url specifications}{labkey.selectRows}
 \keyword{IO}{labkey.selectRows}
 \begin{Description}\relax
-Use url specifications (query specifications??) to specify data to be imported into R. Prior to import, 
+Use simple filters and sorts to specify data to be imported into R. Prior to import, 
 the data columns can be sorted, specific columns or number of rows can be requested and
 data filters can be applied.
 \end{Description}
@@ -14,14 +14,15 @@ colFilter = NULL, stripAllHidden = TRUE)
 \end{Usage}
 \begin{Arguments}
 \begin{ldescription}
-\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the HTTP request
-\item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
-\item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
-\item[\code{queryName}] a string specifying the \code{queryName} for the HTTP request
-\item[\code{viewName}] (optional) a string specifying the \code{viewName} for the HTTP request
+\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the labkey server
+\item[\code{folderPath}] a string specifying the \code{folderPath} 
+\item[\code{schemaName}] a string specifying the  \code{schemaName} for the query
+\item[\code{queryName}] a string specifying the \code{queryName}
+\item[\code{viewName}] (optional) a string specifying the \code{viewName}
 \item[\code{colSelect}] (optional) a vector of comma separated strings specifying which columns of a dataset or view to import
 \item[\code{maxRows}] (optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.
-\item[\code{colSort}] (optional) a string including the name of the column to sort preceeded by a "+" or "-" to indicate sort direction
+\item[\code{colSort}] (optional) a string including the name of the column to sort preceeded by a \dQuote{+} or
+\dQuote{-} to indicate sort direction
 \item[\code{rowOffset}] (optional) an integer specifying which row of data should be the first row in the retrieval. If no
 value is specified, the retrieval starts with the first row.
 \item[\code{colFilter}] (optional) a vector or array object created by the \code{makeFilter} function which contains the
@@ -37,11 +38,12 @@ the location of the data and what actions should be taken on the data prior to i
 frame with column names as they appear on the labkey database website. 
 
 Use care when specifying column names for the colSelect or colFilter arguments. Often the column name
-that appears on the web site is not the same as the column label. The column label is what is needed in
+that appears on the web site is not the same as the column caption. The column name is what is needed in
 colselect and colFilter arguments. 
 
 When importing data from ATLAS.scharp.org, a quick and simple way to identify the necessary components of the url 
-(ie, schemaName, queryName, viewName, the correct column lables etc.) is to use the "export to R script" option avaiable as a drop down options under the "views" tab for each dataset.
+(i.e., schemaName, queryName, viewName, the correct column names etc.) is to use the \dQuote{export to R script}
+option avaiable as a drop down options under the \dQuote{views} tab for each dataset.
 \end{Details}
 \begin{Value}
 The requested data are returned in a data frame.

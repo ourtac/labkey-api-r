@@ -1,8 +1,8 @@
-\HeaderA{labkey.executeSql}{Retrieve data from a labkey database using Sql commands}{labkey.executeSql}
+\HeaderA{labkey.executeSql}{Retrieve data from a labkey database using SQL commands}{labkey.executeSql}
 \keyword{IO}{labkey.executeSql}
 \begin{Description}\relax
 Use Sql commands to specify data to be imported into R. Prior to import, data can
-be manipulated through all standard Sql commands.
+be manipulated through standard SQL commands supported in labkey SQL.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
@@ -12,21 +12,21 @@ rowOffset = NULL, stripAllHidden = TRUE)
 \end{Usage}
 \begin{Arguments}
 \begin{ldescription}
-\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the HTTP request
-\item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
-\item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
+\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the labkey server
+\item[\code{folderPath}] a string specifying the \code{folderPath} 
+\item[\code{schemaName}] a string specifying the  \code{schemaName} for the query
 \item[\code{sql}] a string containing the \code{sql} commands to be executed
-\item[\code{maxRows}] (optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.
+\item[\code{maxRows}] (optional) an integer specifying the maximum number of rows to return. If no value is specified, all rows are returned.
 \item[\code{rowOffset}] (optional) an integer specifying which row of data should be the first row in the retrieval. 
-If no value is specified, all rows are returned.
+If no value is specified, rows will begin at the start of the result set.
 \item[\code{stripAllHidden}] (optional) a logical value indicating whether or not to save data columns that would 
 normally be hidden from user veiw. If no value is specified, no hidden columns are returned.
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
-A full dataset or user saved view can be imported into an R data frame using the \code{labkey.executeSql}
+Rows returned from the SQL query can be imported into an R data frame using the \code{labkey.executeSql}
 function. The function accepts as its arguments components of the url that identify the location of the
-data and what Sql actions should be taken on the data prior to import. Data are returned in a data frame
+data and what SQL actions should be taken on the data prior to import. Data are returned in a data frame
 with column names as they appear in on the labkey database website.
 \end{Details}
 \begin{Value}

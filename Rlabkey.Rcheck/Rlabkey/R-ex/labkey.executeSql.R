@@ -1,5 +1,5 @@
 ### Name: labkey.executeSql
-### Title: Retrieve data from a labkey database using Sql commands
+### Title: Retrieve data from a labkey database using SQL commands
 ### Aliases: labkey.executeSql
 ### Keywords: IO
 

@@ -1,18 +1,19 @@
 \documentclass{article}
 \usepackage[ae,hyper]{Rd}
 \begin{document}
-\HeaderA{Rlabkey-package}{Import data from a labkey data base into an R data frame}{Rlabkey.Rdash.package}
+\HeaderA{Rlabkey-package}{Import/export data between a labkey database and an R session}{Rlabkey.Rdash.package}
 \aliasA{Rlabkey}{Rlabkey-package}{Rlabkey}
 \keyword{package}{Rlabkey-package}
 \begin{Description}\relax
-This package allows the import of data from a labkey data base
-into an R data frame through the use of Sql
-commands or by specifying the query schema information.
+This package allows the transfer of data between a labkey database and an R session as well as the
+ability to modify data in the labkey database from an R seession. Data can be imported from 
+a labkey database into R by specifying the query schema information (\code{labkey.selectRows}) 
+or by using sql commands (\code{labkey.executeSql}). From an R session,
+a user can also send data to update existing data (\code{labkey.updateRows}) or to be inserted as new data 
+(\code{labkey.insertRows}) or specify rows of data to be deleted from the labkey database (\code{labkey.deleteRows}). 
 
-Data in a labkey data base can be modified from an R session
-by using the \code{insert}, \code{update}, and \code{delete} functions.
 The user must have the appropriate authorization on the labkey
-server in order to modify data in the data base through the use of
+server in order to modify data in the database through the use of
 these functions.
 \end{Description}
 \begin{Details}\relax
@@ -26,39 +27,43 @@ LazyLoad: & yes\\
 }
 Using this package to access a password protected labkey data base requires that the user
 has their login information in a.netrc file. The .netrc file
-contains configuration and autologin information for the File Transfer Protocol client (ftp).
-The file should be located in your home directory and the permissions on the file should be unreadable for 
-everybody except the owner. Permissions can be set with the chmod command from the unix command line
-as chmod 600 .netrc.  ***Insert how to do this for windows.
-The following three lines must be in your .netrc file:
-machine machinename
-login mylogin
-password mypassword
+contains configuration and autologin information for the File Transfer Protocol client (ftp) and
+other programs such as CURL.
+The file should be located in the users home directory and the permissions on the file should be unreadable for 
+everybody except the owner. Permissions can be set in UNIX from the command line with chmod 600 .netrc.  
 
-An example would be:
-machine atlas.scharp.org
-login vobencha@fhcrc.org
-password mypassword
+On a windows machine, create and  environment variable called 'HOME' that is set to your home directory ('c:/Users/<User-Name>' on Vista) or any directory you want to use. In that directory, create a text file named \_netrc (note that it's underscore netrc, not dot netrc like it is on UNIX). 
 
-See http://linux.about.com/library/cmd/blcmdl5_netrc.htm for more information on how to configure
-the .netrc file.
+The following three lines must be included in the .netrc or \_netrc file either separated by white space
+(spaces, tabs, or newlines) or commas.
+
+machine <remote-machine-name>\\
+login <user-email>\\
+password <user-password>
+
+
+An example would be:\\
+machine atlas.scharp.org\\
+login vobencha@fhcrc.org\\
+password mypassword\\
 \end{Details}
 \begin{Author}\relax
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/,
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,\\
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}
+\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
+\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 
 \HeaderA{labkey.deleteRows}{Delete rows of data in a labkey database}{labkey.deleteRows}
 \keyword{IO}{labkey.deleteRows}
 \begin{Description}\relax
-From an R session, specify which row(s) of data should be delted from the database.
+From an R session, specify which row(s) of data should be deleted from the database.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
@@ -71,60 +76,79 @@ labkey.deleteRows(baseUrl, folderPath, schemaName, queryName, toDelete, stripAll
 \item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
 \item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
 \item[\code{queryName}] a string specifying the  \code{queryName} for the HTTP request
-\item[\code{toDelete}] a list containing the column name of the "key" or "data identifier" and the 
-corresponding identification number of the row(s) of data to be deleted
-\item[\code{stripAllHidden}] [optional] a logical value indicating whether or not to save data columns that would 
-normally be hidden from user veiw. If no value is specified, no hidden columns are returned.
-\end{ldescription}
-\end{Arguments}
-\begin{Details}\relax
-A single row or multiple rows of data can be deleted at a time.
-\end{Details}
-\begin{Value}
-Information returned to the user will include the \code{schemaName} and the \code{queryName} used in the update
-as well as the number of rows affected (ie, deleted).
-\end{Value}
-\begin{Author}\relax
-Valerie Obenchain
-\end{Author}
-\begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
-https://www.labkey.org/project/home/begin.view
-\end{References}
-\begin{SeeAlso}\relax
-\code{\LinkA{labkey.selectRows}{labkey.selectRows}}
-\end{SeeAlso}
-
-\HeaderA{labkey.executeSql}{Retrieve data from a labkey database using Sql commands}{labkey.executeSql}
-\keyword{IO}{labkey.executeSql}
-\begin{Description}\relax
-Use Sql commands to specify data to be imported into R. Prior to import, data can
-be manipulated through all standard Sql commands.
-\end{Description}
-\begin{Usage}
-\begin{verbatim}
-labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
-                                  rowOffset = NULL, stripAllHidden = TRUE)
-\end{verbatim}
-\end{Usage}
-\begin{Arguments}
-\begin{ldescription}
-\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the HTTP request
-\item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
-\item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
-\item[\code{sql}] a string containing the \code{sql} commands to be executed
-\item[\code{maxRows}] (optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.
-\item[\code{rowOffset}] (optional) an integer specifying which row of data should be the first row in the retrieval. 
-If no value is specified, all rows are returned.
+\item[\code{toDelete}] a data frame containing a single column of data containing the data identifiers of the rows to be deleted
 \item[\code{stripAllHidden}] (optional) a logical value indicating whether or not to save data columns that would 
 normally be hidden from user veiw. If no value is specified, no hidden columns are returned.
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
-A full dataset or user saved view can be imported into an R data frame using the \code{labkey.executeSql}
+A single row or multiple rows of data can be deleted.  The \code{toDelete} data frame should contain a single column of data which are the values of the data identifiers.  The colname of the data frame should
+be the column name of the data identifier (e.g., lsid). The data frame must be created with the \code{stringsAsFactors}
+set to FALSE.
+
+NOTE: The column name of a column of data is the name used in the database and API. The column caption is the 
+caption that is visable in the dataset on the web site. To correctly identify the column name, use the 
+\dQuote{export to R script} option available as a drop down option under the \dQuote{views} tab for each dataset.
+\end{Details}
+\begin{Value}
+A list is returned with name/value categories of command, rowsAffected, rows, queryName, containerPath and schemaName.
+The \bold{schemaName}, \bold{queryName} and \bold{containerPath} properties contain the same schema, query 
+and folder path used in the request.  The
+\bold{rowsAffected} property indicates he number of rows affected by the API action. This will typically be the same
+number as passed in the request. The \bold{rows} property contains a list of row objects corresponding to the rows
+deleted.
+\end{Value}
+\begin{Author}\relax
+Valerie Obenchain
+\end{Author}
+\begin{References}\relax
+http://www.omegahat.org/RCurl/, \\
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
+https://www.labkey.org/project/home/begin.view
+\end{References}
+\begin{SeeAlso}\relax
+\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
+\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \code{\LinkA{labkey.updateRows}{labkey.updateRows}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+# Examples to be updated when labkey.org has 8.3
+#mydf <- data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****','urn:lsid:labkey.org.****'),stringsAsFactors=FALSE))
+
+#mydata <- labkey.deleteRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", toDelete=mydf)
+
+\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{labkey.executeSql}{Retrieve data from a labkey database using SQL commands}{labkey.executeSql}
+\keyword{IO}{labkey.executeSql}
+\begin{Description}\relax
+Use Sql commands to specify data to be imported into R. Prior to import, data can
+be manipulated through standard SQL commands supported in labkey SQL.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
+rowOffset = NULL, stripAllHidden = TRUE)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the labkey server
+\item[\code{folderPath}] a string specifying the \code{folderPath} 
+\item[\code{schemaName}] a string specifying the  \code{schemaName} for the query
+\item[\code{sql}] a string containing the \code{sql} commands to be executed
+\item[\code{maxRows}] (optional) an integer specifying the maximum number of rows to return. If no value is specified, all rows are returned.
+\item[\code{rowOffset}] (optional) an integer specifying which row of data should be the first row in the retrieval. 
+If no value is specified, rows will begin at the start of the result set.
+\item[\code{stripAllHidden}] (optional) a logical value indicating whether or not to save data columns that would 
+normally be hidden from user veiw. If no value is specified, no hidden columns are returned.
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+Rows returned from the SQL query can be imported into an R data frame using the \code{labkey.executeSql}
 function. The function accepts as its arguments components of the url that identify the location of the
-data and what Sql actions should be taken on the data prior to import. Data are returned in a data frame
+data and what SQL actions should be taken on the data prior to import. Data are returned in a data frame
 with column names as they appear in on the labkey database website.
 \end{Details}
 \begin{Value}
@@ -134,12 +158,13 @@ The requested data are returned in a data frame.
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,\\ 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.selectRows}{labkey.selectRows}}
+\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{makeFilter}{makeFilter}}, \code{\LinkA{labkey.insertRows}{labkey.insertRows}}, 
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -150,8 +175,9 @@ library(Rlabkey)
 # from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
-#                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
+# "Lab Results".Labhemo from "Lab Results"')
 
 \end{ExampleCode}
 \end{Examples}
@@ -159,7 +185,7 @@ library(Rlabkey)
 \HeaderA{labkey.insertRows}{Insert new rows of data into a labkey database}{labkey.insertRows}
 \keyword{IO}{labkey.insertRows}
 \begin{Description}\relax
-Send data from an R session to a labkey server to insert new rows of data in the database.
+Send data from an R session to be inserted into the database as new rows.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
@@ -168,58 +194,82 @@ labkey.insertRows(baseUrl, folderPath, schemaName, queryName, toInsert, stripAll
 \end{Usage}
 \begin{Arguments}
 \begin{ldescription}
-\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the HTTP request
-\item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
-\item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
-\item[\code{queryName}] a string specifying the  \code{queryName} for the HTTP request
-\item[\code{toInsert}] a list containing field names and the corresponding data values to be inserted
-\item[\code{stripAllHidden}] [optional] a logical value indicating whether or not to save data columns that would 
+\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the labkey server
+\item[\code{folderPath}] a string specifying the \code{folderPath} 
+\item[\code{schemaName}] a string specifying the  \code{schemaName} for the query
+\item[\code{queryName}] a string specifying the  \code{queryName} 
+\item[\code{toInsert}] a data frame containing rows of data to be inserted
+\item[\code{stripAllHidden}] (optional) a logical value indicating whether or not to save data columns that would 
 normally be hidden from user veiw. If no value is specified, no hidden columns are returned.
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
-A single row or multiple rows of data can be inserted at a time.
+A single row or multiple rows of data can be inserted.  The \code{toInsert} data frame should contain
+all of the rows of data to be inserted and must be created with the \code{stringsAsFactors} option
+set to FALSE.  The colname of the data frame should be the column names of the data.
+When inserting data into a study dataset, the sequence number must be specified.
+
+NOTE: The column name of a column of data is the name used in the database and API. The column caption is the
+caption that is visable in the dataset on the web site. To correctly identify the column name, use the
+\dQuote{export to R script} option available as a drop down option under the \dQuote{views} tab for each dataset.
 \end{Details}
 \begin{Value}
-Information returned to the user will include the \code{schemaName} and the \code{queryName} used in the insert
-as well as the number of rows affected and the data sent.
+A list is returned with name/value categories of command, rowsAffected, rows, queryName, containerPath and schemaName.
+The \bold{schemaName}, \bold{queryName} and \bold{containerPath} properties contain the same schema, query 
+and folder path used in the request.  The
+\bold{rowsAffected} property indicates he number of rows affected by the API action. This will typically be the same
+number as passed in the request. The \bold{rows} property contains a list of row objects corresponding to the rows 
+inserted.
 \end{Value}
 \begin{Author}\relax
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,\\ 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.selectRows}{labkey.selectRows}}
+\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+# Example to be modified when 8.3 is on labkey.org
+# Insert some data:
+#mydf <- data.frame(SequenceNum=c(2,3), lsid=c("URG345","URG346"), participantId=c(5055, 5056), stringsAsFactors=FALSE)
+
+#mydata <- labkey.insertRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results, toInsert=mydf)
+
+
+\end{ExampleCode}
+\end{Examples}
 
 \HeaderA{labkey.selectRows}{Retrieve data from a labkey database using url specifications}{labkey.selectRows}
 \keyword{IO}{labkey.selectRows}
 \begin{Description}\relax
-Use url to specify data to be imported into R. Prior to import, data columns
-can be sorted, specific columns or number of rows can be requested and
+Use simple filters and sorts to specify data to be imported into R. Prior to import, 
+the data columns can be sorted, specific columns or number of rows can be requested and
 data filters can be applied.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
-                                  colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
-                                  colFilter = NULL, stripAllHidden = TRUE)
+colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
+colFilter = NULL, stripAllHidden = TRUE)
 \end{verbatim}
 \end{Usage}
 \begin{Arguments}
 \begin{ldescription}
-\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the HTTP request
-\item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
-\item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
-\item[\code{queryName}] a string specifying the \code{queryName} for the HTTP request
-\item[\code{viewName}] (optional) a string specifying the \code{viewName} for the HTTP request
+\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the labkey server
+\item[\code{folderPath}] a string specifying the \code{folderPath} 
+\item[\code{schemaName}] a string specifying the  \code{schemaName} for the query
+\item[\code{queryName}] a string specifying the \code{queryName}
+\item[\code{viewName}] (optional) a string specifying the \code{viewName}
 \item[\code{colSelect}] (optional) a vector of comma separated strings specifying which columns of a dataset or view to import
 \item[\code{maxRows}] (optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.
-\item[\code{colSort}] (optional) a string including the name of the column to sort preceeded by a "+" or "-" to indicate sort direction
+\item[\code{colSort}] (optional) a string including the name of the column to sort preceeded by a \dQuote{+} or
+\dQuote{-} to indicate sort direction
 \item[\code{rowOffset}] (optional) an integer specifying which row of data should be the first row in the retrieval. If no
 value is specified, the retrieval starts with the first row.
 \item[\code{colFilter}] (optional) a vector or array object created by the \code{makeFilter} function which contains the
@@ -231,15 +281,16 @@ column name, operator and value of the filter(s) to be applied to the retrieved 
 A full dataset or user saved view can be imported into an R data frame using the \code{labkey.selectRows} 
 function. The function accepts as its arguments the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
-(ie, sorting, selecting particular columns or maximum number of rows, etc.) Data are returned in a data 
+(ie, sorting, selecting particular columns or maximum number of rows, etc.). Data are returned in a data 
 frame with column names as they appear on the labkey database website. 
 
 Use care when specifying column names for the colSelect or colFilter arguments. Often the column name
-is not the same as the column header as seen on the web site. ***More help here*******
+that appears on the web site is not the same as the column caption. The column name is what is needed in
+colselect and colFilter arguments. 
 
 When importing data from ATLAS.scharp.org, a quick and simple way to identify the necessary components of the url 
-(ie, schemaName, queryName, viewName, etc.) is to use the "export to R script" option avaiable as a drop down
-under the "views" tab for each dataset.
+(i.e., schemaName, queryName, viewName, the correct column names etc.) is to use the \dQuote{export to R script}
+option avaiable as a drop down options under the \dQuote{views} tab for each dataset.
 \end{Details}
 \begin{Value}
 The requested data are returned in a data frame.
@@ -248,12 +299,13 @@ The requested data are returned in a data frame.
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/,\\ 
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}
+\code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, \code{\LinkA{labkey.insertRows}{labkey.insertRows}}, 
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -269,16 +321,19 @@ plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
 
 # Select columns and apply filters
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 
 
 \end{ExampleCode}
 \end{Examples}
 
-\HeaderA{labkey.updateRows}{Update rows of data in a labkey database}{labkey.updateRows}
+\HeaderA{labkey.updateRows}{Update existing rows of data in a labkey database}{labkey.updateRows}
 \keyword{IO}{labkey.updateRows}
 \begin{Description}\relax
-Send data from an R session to a labkey server to update rows of data in the database.
+Send data from an R session to update existing rows of data in the database.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
@@ -287,60 +342,83 @@ labkey.updateRows(baseUrl, folderPath, schemaName, queryName, toUpdate, stripAll
 \end{Usage}
 \begin{Arguments}
 \begin{ldescription}
-\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the HTTP request
-\item[\code{folderPath}] a string specifying the \code{folderPath} for the HTTP request
-\item[\code{schemaName}] a string specifying the  \code{schemaName} for the HTTP request
-\item[\code{queryName}] a string specifying the  \code{queryName} for the HTTP request
-\item[\code{toUpdate}] a list containing the name of the field and the corresponding data values to be updated
-\item[\code{stripAllHidden}] [optional] a logical value indicating whether or not to save data columns that would 
+\item[\code{baseUrl}] a string specifying the \code{baseUrl}for the labkey server
+\item[\code{folderPath}] a string specifying the \code{folderPath} 
+\item[\code{schemaName}] a string specifying the  \code{schemaName}for the query
+\item[\code{queryName}] a string specifying the  \code{queryName}
+\item[\code{toUpdate}] a data frame containing the row(s) of data to be updated
+\item[\code{stripAllHidden}] (optional) a logical value indicating whether or not to save data columns that would 
 normally be hidden from user veiw. If no value is specified, no hidden columns are returned.
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
-A single row or multiple rows of data can be updated at a time.
+A single row or multiple rows of data can be updated.  The \code{toUpdate} data frame should contain 
+all of the rows of data to be updated and must be created with the \code{stringsAsFactors} option
+set to FALSE.  The colname of the data frame should be the column names of the data.
+
+NOTE: The column name of a column of data is the name used in the database and API. The column caption is the
+caption that is visable in the dataset on the web site. To correctly identify the column name, use the       
+\dQuote{export to R script} option available as a drop down option under the \dQuote{views} tab for each dataset.
 \end{Details}
 \begin{Value}
-Information returned to the user will include the \code{schemaName} and the \code{queryName} used in the update
-as well as the number of rows affected and the data sent in the update.
+A list is returned with name/value categories of command, rowsAffected, rows, queryName, containerPath and schemaName.
+The \bold{schemaName}, \bold{queryName} and \bold{containerPath} properties contain the same schema, query 
+and folder path used in the request.  The
+\bold{rowsAffected} property indicates he number of rows affected by the API action. This will typically be the same
+number as passed in the request. The \bold{rows} property contains a list of row objects corresponding to the rows
+updated.
 \end{Value}
 \begin{Author}\relax
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/, \\
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
-\code{\LinkA{labkey.selectRows}{labkey.selectRows}}
+\code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
+\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+# Examples to be updated when labkey.org has 8.3
+#mydf=data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****') , ParticipantId=c(700010040, 700010066), MVdt=c('09-Aug-06','09-Aug-06'), MVcomm=c('y','y'), MVswitch=c(88,99), stringsAsFactors=FALSE)
+
+#mydata <- labkey.updateRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", toUpdate=mydf)
+
+
+\end{ExampleCode}
+\end{Examples}
 
 \HeaderA{makeFilter}{Builds an array of filters}{makeFilter}
 \keyword{file}{makeFilter}
 \begin{Description}\relax
-This function takes inputs of column name, filter value and filter operator for
-the data to be filtered on. It returns an array of filters to be used in \code{labkey.selectRows}
+This function takes inputs of column name, filter value and filter operator and 
+returns an array of filters to be used in \code{labkey.selectRows}.
 \end{Description}
 \begin{Usage}
 \begin{verbatim}
-makeFilter(c("colname", "operator",value))
+makeFilter(c(colname, operator,value))
 \end{verbatim}
 \end{Usage}
 \begin{Arguments}
 \begin{ldescription}
 \item[\code{colname}] a string specifying the name of the column to be filtered
-\item[\code{operator}] a text string specifying what operator should be used in the filter
+\item[\code{operator}] a string specifying what operator should be used in the filter (see options below)
 \item[\code{value}] an integer or string specifying the value the columns should be filtered on
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
+These filters are applied to the data prior to import into R. Currently this function
+allows the user to specify up to five filters. Multiple filters can be entered named or
+un-named vectors (see examples below).
+
 Possible operator values are as follows:
-"EQUALS", "NOT\_EQUALS", "GREATER\_THAN", "GREATER\_THAN\_OR\_EQUAL\_TO", "LESS\_THAN",
+"EQUALS", "EQUALS\_ONE\_OF", "NOT\_EQUALS", "GREATER\_THAN", "GREATER\_THAN\_OR\_EQUAL\_TO", "LESS\_THAN",
 "LESS\_THAN\_OR\_EQUAL\_TO", "DATE\_EQUAL", "DATE\_NOT\_EQUAL", "NOT\_EQUAL\_OR\_NULL",
 "IS\_NULL", "IS\_NOT\_NULL", "CONTAINS", and "DOES\_NOT\_CONTAIN".
-
-Multiple filters can be applied (see examples). Currently this function supports
-specifying up to five filters.
 \end{Details}
 \begin{Value}
 The function returns either a single string or an array of strings to be use in the
@@ -350,8 +428,8 @@ The function returns either a single string or an array of strings to be use in 
 Valerie Obenchain
 \end{Author}
 \begin{References}\relax
-http://www.omegahat.org/RCurl/, 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,
+http://www.omegahat.org/RCurl/, \\
+http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\\
 https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
@@ -360,14 +438,16 @@ https://www.labkey.org/project/home/begin.view
 \begin{Examples}
 \begin{ExampleCode}
 
-# Specification of two filters:
+# Specify two filters:
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
 # Filter using "equals one of" operator:
 myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
 # Use in labkey.selectRows function
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 
 
 \end{ExampleCode}

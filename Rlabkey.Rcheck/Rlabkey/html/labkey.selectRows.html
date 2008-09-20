@@ -11,7 +11,7 @@
 <h3>Description</h3>
 
 <p>
-Use url specifications (query specifications??) to specify data to be imported into R. Prior to import, 
+Use simple filters and sorts to specify data to be imported into R. Prior to import, 
 the data columns can be sorted, specific columns or number of rows can be requested and
 data filters can be applied.
 </p>
@@ -31,19 +31,19 @@ colFilter = NULL, stripAllHidden = TRUE)
 <table summary="R argblock">
 <tr valign="top"><td><code>baseUrl</code></td>
 <td>
-a string specifying the <code>baseUrl</code>for the HTTP request</td></tr>
+a string specifying the <code>baseUrl</code>for the labkey server</td></tr>
 <tr valign="top"><td><code>folderPath</code></td>
 <td>
-a string specifying the <code>folderPath</code> for the HTTP request</td></tr>
+a string specifying the <code>folderPath</code> </td></tr>
 <tr valign="top"><td><code>schemaName</code></td>
 <td>
-a string specifying the  <code>schemaName</code> for the HTTP request</td></tr>
+a string specifying the  <code>schemaName</code> for the query</td></tr>
 <tr valign="top"><td><code>queryName</code></td>
 <td>
-a string specifying the <code>queryName</code> for the HTTP request</td></tr>
+a string specifying the <code>queryName</code></td></tr>
 <tr valign="top"><td><code>viewName</code></td>
 <td>
-(optional) a string specifying the <code>viewName</code> for the HTTP request</td></tr>
+(optional) a string specifying the <code>viewName</code></td></tr>
 <tr valign="top"><td><code>colSelect</code></td>
 <td>
 (optional) a vector of comma separated strings specifying which columns of a dataset or view to import</td></tr>
@@ -52,7 +52,8 @@ a string specifying the <code>queryName</code> for the HTTP request</td></tr>
 (optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.</td></tr>
 <tr valign="top"><td><code>colSort</code></td>
 <td>
-(optional) a string including the name of the column to sort preceeded by a "+" or "-" to indicate sort direction</td></tr>
+(optional) a string including the name of the column to sort preceeded by a &ldquo;+&rdquo; or
+&ldquo;-&rdquo; to indicate sort direction</td></tr>
 <tr valign="top"><td><code>rowOffset</code></td>
 <td>
 (optional) an integer specifying which row of data should be the first row in the retrieval. If no
@@ -77,12 +78,13 @@ frame with column names as they appear on the labkey database website.
 </p>
 <p>
 Use care when specifying column names for the colSelect or colFilter arguments. Often the column name
-that appears on the web site is not the same as the column label. The column label is what is needed in
+that appears on the web site is not the same as the column caption. The column name is what is needed in
 colselect and colFilter arguments. 
 </p>
 <p>
 When importing data from ATLAS.scharp.org, a quick and simple way to identify the necessary components of the url 
-(ie, schemaName, queryName, viewName, the correct column lables etc.) is to use the "export to R script" option avaiable as a drop down options under the "views" tab for each dataset.
+(i.e., schemaName, queryName, viewName, the correct column names etc.) is to use the &ldquo;export to R script&rdquo;
+option avaiable as a drop down options under the &ldquo;views&rdquo; tab for each dataset.
 </p>
 
 
@@ -140,6 +142,6 @@ colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.1 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.2 <a href="00Index.html">Index]</a></div>
 
 </body></html>

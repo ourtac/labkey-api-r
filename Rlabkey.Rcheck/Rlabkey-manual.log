@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  10 SEP 2008 17:05
+This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  19 SEP 2008 09:38
 entering extended mode
 **\nonstopmode{}\input{Rlabkey-manual.tex}
 (./Rlabkey-manual.tex (/usr/share/texmf/tex/latex/base/article.cls
@@ -278,250 +278,247 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.43 ...ttp://linux.about.com/library/cmd/blcmdl5_
-                                                  netrc.htm for more informa...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Underfull \hbox (badness 10000) in paragraph at lines 45--49
 
-
-! LaTeX Error: Command \end{list} invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.45 \end{Details}
-                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.45 \end{Details}
-                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.45 \end{Details}
-                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.45 \end{Details}
-                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (83.7624pt too wide) in paragraph at lines 43--46
-[]\T1/aer/m/n/10 See http://linux.about.com/library/cmd/blcmdl5$[]\OML/cmm/m/it
-/10 etrc:htmformoreinformationonhowtoconfigurethe:netrcfile:$ 
- []
-
-
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 50--53
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (97.33997pt too wide) in paragraph at lines 65--65
+Overfull \hbox (37.1175pt too wide) in paragraph at lines 59--61
+[][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
+ labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 make-Filter[][]\T1/a
+er/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/aer/m/n/10 , [][]\T1/a
+ett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 ,
+ []
+
+
+Overfull \hbox (97.33997pt too wide) in paragraph at lines 70--70
  []\T1/aett/m/n/10 labkey.deleteRows(baseUrl, folderPath, schemaName, queryName
 , toDelete, stripAllHidden = TRUE)[] 
  []
 
-
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 91--94
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
- []
-
 [2]
-Overfull \hbox (35.66405pt too wide) in paragraph at lines 125--129
-[]\T1/aer/m/n/10 A full dataset or user saved view can be im-ported into an R d
-ata frame us-ing the \T1/aett/m/n/10 labkey.executeSql
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 110--112
+[][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
+ labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 makeFilter[][]\T1/ae
+r/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/aer/m/n/10 , [][]\T1/ae
+tt/m/n/10 labkey.updateRows[][] 
  []
 
-
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 137--140
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
- []
-
-[3]
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 151
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 116
 .
- (/usr/local/lib64/R/share/texmf/ts1aett.fd
+(/usr/local/lib64/R/share/texmf/ts1aett.fd
 File: ts1aett.fd 
 )
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 151
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 116
 .
 
 (/usr/share/texmf/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <9> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 151.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 116.
 
-Overfull \hbox (137.68065pt too wide) in paragraph at lines 153--153
+Overfull \hbox (232.0467pt too wide) in paragraph at lines 116--116
+ []\T1/aett/m/n/9 #mydf <- data.frame(lsid=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ur
+n:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aet
+t/m/n/9 urn:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/
+9 '\T1/aett/m/n/9 urn:lsid:labkey.org.****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ),str
+ingsAsFactors=FALSE))[] 
+ []
+
+
+Overfull \hbox (349.89737pt too wide) in paragraph at lines 118--118
+ []\T1/aett/m/n/9 #mydata <- labkey.deleteRows(baseUrl="https://www.labkey.org"
+, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
+s", toDelete=mydf)[] 
+ []
+
+[3]
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 166--168
+[][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
+ makeFilter[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/ae
+r/m/n/10 , [][]\T1/aett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 , [][]\T1/ae
+tt/m/n/10 labkey.deleteRows[][] 
+ []
+
+
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 178--178
  []\T1/aett/m/n/9 #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo", schemaName="study",[] 
+, folderPath="/home/Study/demo",[] 
+ []
+
+[4]
+Overfull \hbox (0.92668pt too wide) in paragraph at lines 179--179
+ []\T1/aett/m/n/9 # schemaName="study", sql= \TS1/cmtt/m/n/9 '\T1/aett/m/n/9 se
+lect "Lab Results".ParticipantId, "Lab Results".Labdt,[] 
  []
 
 
-Overfull \hbox (250.87874pt too wide) in paragraph at lines 154--154
- []\T1/aett/m/n/9 #                               sql= \TS1/cmtt/m/n/9 '\T1/aet
-t/m/n/9 select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".
-Labhemo from "Lab Results"\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 )[] 
- []
-
-
-Overfull \hbox (97.33997pt too wide) in paragraph at lines 166--166
+Overfull \hbox (97.33997pt too wide) in paragraph at lines 192--192
  []\T1/aett/m/n/10 labkey.insertRows(baseUrl, folderPath, schemaName, queryName
 , toInsert, stripAllHidden = TRUE)[] 
  []
 
-[4]
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 191--194
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
+[5]
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 233--235
+[][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
+ labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 makeFilter[][]\T1/ae
+r/m/n/10 , [][]\T1/aett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 , [][]\T1/ae
+tt/m/n/10 labkey.deleteRows[][] 
  []
 
 
-Overfull \hbox (13.50012pt too wide) in paragraph at lines 208--208
+Overfull \hbox (165.97621pt too wide) in paragraph at lines 240--240
+ []\T1/aett/m/n/9 #mydf <- data.frame(SequenceNum=c(2,3), lsid=c("URG345","URG3
+46"), participantId=c(5055, 5056), stringsAsFactors=FALSE)[] 
+ []
+
+
+Overfull \hbox (345.18144pt too wide) in paragraph at lines 242--242
+ []\T1/aett/m/n/9 #mydata <- labkey.insertRows(baseUrl="https://www.labkey.org"
+, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
+s, toInsert=mydf)[] 
+ []
+
+
+Overfull \hbox (13.50012pt too wide) in paragraph at lines 257--257
  []\T1/aett/m/n/10 labkey.selectRows(baseUrl, folderPath, schemaName, queryName
 , viewName = NULL,[] 
  []
 
-
-Overfull \hbox (134.0199pt too wide) in paragraph at lines 209--209
- []                                  \T1/aett/m/n/10 colSelect = NULL, maxRows 
-= NULL, rowOffset = NULL, colSort = NULL,[] 
- []
-
-[5]
-Overfull \hbox (35.66405pt too wide) in paragraph at lines 231--236
+[6]
+Overfull \hbox (35.66405pt too wide) in paragraph at lines 281--286
 []\T1/aer/m/n/10 A full dataset or user saved view can be im-ported into an R d
 ata frame us-ing the \T1/aett/m/n/10 labkey.selectRows
  []
 
 
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 251--254
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 307--309
+[][][]\T1/aett/m/n/10 labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
+ makeFilter[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/ae
+r/m/n/10 , [][]\T1/aett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 , [][]\T1/ae
+tt/m/n/10 labkey.deleteRows[][] 
  []
 
-[6]
-Overfull \hbox (43.3621pt too wide) in paragraph at lines 266--266
+[7]
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 318--318
  []\T1/aett/m/n/9 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org"
 , folderPath="/home/Study/demo",[] 
  []
 
 
-Overfull \hbox (71.65767pt too wide) in paragraph at lines 271--271
+Overfull \hbox (71.65767pt too wide) in paragraph at lines 323--323
  []\T1/aett/m/n/9 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
 c("HIVRapidTest","EQUALS","Positive"))[] 
  []
 
 
-Overfull \hbox (708.30783pt too wide) in paragraph at lines 272--272
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 325--325
  []\T1/aett/m/n/9 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
-s", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFi
-lter=myfilters)[] 
+, folderPath="/home/Study/demo",[] 
  []
 
 
-Overfull \hbox (97.33997pt too wide) in paragraph at lines 285--285
+Overfull \hbox (29.21432pt too wide) in paragraph at lines 327--327
+ []\T1/aett/m/n/9 colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapi
+dTest"), colFilter=myfilters)[] 
+ []
+
+
+Overfull \hbox (97.33997pt too wide) in paragraph at lines 340--340
  []\T1/aett/m/n/10 labkey.updateRows(baseUrl, folderPath, schemaName, queryName
 , toUpdate, stripAllHidden = TRUE)[] 
  []
 
-
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 310--313
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
- []
-
-[7]
-Overfull \hbox (1.31653pt too wide) in paragraph at lines 337--341
-[]\T1/aer/m/n/10 Possible op-er-a-tor val-ues are as fol-lows: "EQUALS", "NOT_E
-QUALS", "GREATER_THAN",
+[8]
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 380--382
+[][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
+ labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 makeFilter[][]\T1/ae
+r/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/aer/m/n/10 , [][]\T1/ae
+tt/m/n/10 labkey.deleteRows[][] 
  []
 
 
-Overfull \hbox (48.87666pt too wide) in paragraph at lines 337--341
+Overfull \hbox (614.08432pt too wide) in paragraph at lines 387--387
+ []\T1/aett/m/n/9 #mydf=data.frame(lsid=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 urn:l
+sid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aett/m
+/n/9 urn:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ) , ParticipantId=
+c(700010040, 700010066), MVdt=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 09-Aug-06\TS1/c
+mtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 09-Aug-06\TS1/cmtt/m
+/n/9 '\T1/aett/m/n/9 ), MVcomm=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 y\TS1/cmtt/m/n
+/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 y\TS1/cmtt/m/n/9 '\T1/aett/
+m/n/9 ), MVswitch=c(88,99), stringsAsFactors=FALSE)[] 
+ []
+
+
+Overfull \hbox (349.89737pt too wide) in paragraph at lines 389--389
+ []\T1/aett/m/n/9 #mydata <- labkey.updateRows(baseUrl="https://www.labkey.org"
+, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
+s", toUpdate=mydf)[] 
+ []
+
+[9]
+Overfull \hbox (3.27612pt too wide) in paragraph at lines 418--422
+[]\T1/aer/m/n/10 Possible op-er-a-tor val-ues are as fol-lows: "EQUALS", "EQUAL
+S_ONE_OF", "NOT_EQUALS",
+ []
+
+
+Overfull \hbox (92.3444pt too wide) in paragraph at lines 418--422
+\T1/aer/m/n/10 "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_T
+HAN_OR_EQUAL_TO",
+ []
+
+
+Overfull \hbox (48.87666pt too wide) in paragraph at lines 418--422
 \T1/aer/m/n/10 "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_NULL", 
 "IS_NOT_NULL",
  []
 
-
-Overfull \hbox (23.12857pt too wide) in paragraph at lines 353--356
-[]\T1/aer/m/n/10 http://www.omegahat.org/RCurl/, http://dssm.unipa.it/CRAN/web/
-packages/rjson/rjson.pdf,
- []
-
-[8]
-Overfull \hbox (71.65767pt too wide) in paragraph at lines 364--364
+[10]
+Overfull \hbox (71.65767pt too wide) in paragraph at lines 442--442
  []\T1/aett/m/n/9 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
 c("HIVRapidTest","EQUALS","Positive"))[] 
  []
 
 
-Overfull \hbox (10.35062pt too wide) in paragraph at lines 367--367
+Overfull \hbox (10.35062pt too wide) in paragraph at lines 445--445
  []\T1/aett/m/n/9 myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_O
 F","Equals ; Less than"))[] 
  []
 
 
-Overfull \hbox (708.30783pt too wide) in paragraph at lines 370--370
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 448--448
  []\T1/aett/m/n/9 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
-s", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFi
-lter=myfilters)[] 
+, folderPath="/home/Study/demo",[] 
  []
 
-[9] (./Rlabkey-manual.aux) ) 
+
+Overfull \hbox (29.21432pt too wide) in paragraph at lines 450--450
+ []\T1/aett/m/n/9 colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapi
+dTest"), colFilter=myfilters)[] 
+ []
+
+[11] (./Rlabkey-manual.aux) ) 
 Here is how much of TeX's memory you used:
- 3531 strings out of 94079
- 48071 string characters out of 1165775
+ 3536 strings out of 94079
+ 48118 string characters out of 1165775
  97690 words of memory out of 3500000
  6694 multiletter control sequences out of 10000+50000
  17143 words of font info for 40 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
- 38i,5n,27p,277b,594s stack positions out of 5000i,500n,6000p,200000b,5000s
- </var/cache/fonts/pk/ljfour/jknappen/ec/tctt0900.6
-00pk></usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/font
-s/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi7.pf
-b></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fonts/ty
-pe1/bluesky/cm/cmti10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmtt10.pfb><
-/usr/share/texmf/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on Rlabkey-manual.pdf (9 pages, 95375 bytes).
+ 38i,5n,27p,353b,595s stack positions out of 5000i,500n,6000p,200000b,5000s
+ </var/cache/fonts/pk/ljfour/jknappen/ec/tctt0900.
+600pk></usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fon
+ts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.p
+fb></usr/share/texmf/fonts/type1/bluesky/cm/cmti10.pfb></usr/share/texmf/fonts/
+type1/bluesky/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmtt9.pfb>
+
+Output written on Rlabkey-manual.pdf (11 pages, 104676 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 82 named destinations out of 1000 (max. 131072)
+ 211 PDF objects out of 1000 (max. 8388607)
+ 87 named destinations out of 1000 (max. 131072)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

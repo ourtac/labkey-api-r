@@ -4,10 +4,10 @@ _R_e_t_r_i_e_v_e _d_a_t_a _f_r_o_m _a _l_a_b_k_e_y _d_a
 
 _D_e_s_c_r_i_p_t_i_o_n:
 
-     Use url specifications (query specifications??) to specify data to
-     be imported into R. Prior to import,  the data columns can be
-     sorted, specific columns or number of rows can be requested and
-     data filters can be applied.
+     Use simple filters and sorts to specify data to be imported into
+     R. Prior to import,  the data columns can be sorted, specific
+     columns or number of rows can be requested and data filters can be
+     applied.
 
 _U_s_a_g_e:
 
@@ -17,16 +17,15 @@ _U_s_a_g_e:
 
 _A_r_g_u_m_e_n_t_s:
 
- baseUrl: a string specifying the 'baseUrl'for the HTTP request
+ baseUrl: a string specifying the 'baseUrl'for the labkey server
 
-folderPath: a string specifying the 'folderPath' for the HTTP request
+folderPath: a string specifying the 'folderPath' 
 
-schemaName: a string specifying the  'schemaName' for the HTTP request
+schemaName: a string specifying the  'schemaName' for the query
 
-queryName: a string specifying the 'queryName' for the HTTP request
+queryName: a string specifying the 'queryName'
 
-viewName: (optional) a string specifying the 'viewName' for the HTTP
-          request
+viewName: (optional) a string specifying the 'viewName'
 
 colSelect: (optional) a vector of comma separated strings specifying
           which columns of a dataset or view to import
@@ -63,14 +62,14 @@ _D_e_t_a_i_l_s:
 
      Use care when specifying column names for the colSelect or
      colFilter arguments. Often the column name that appears on the web
-     site is not the same as the column label. The column label is what
-     is needed in colselect and colFilter arguments. 
+     site is not the same as the column caption. The column name is
+     what is needed in colselect and colFilter arguments. 
 
      When importing data from ATLAS.scharp.org, a quick and simple way
-     to identify the necessary components of the url  (ie, schemaName,
-     queryName, viewName, the correct column lables etc.) is to use the
-     "export to R script" option avaiable as a drop down options under
-     the "views" tab for each dataset.
+     to identify the necessary components of the url  (i.e.,
+     schemaName, queryName, viewName, the correct column names etc.) is
+     to use the "export to R script" option avaiable as a drop down
+     options under the "views" tab for each dataset.
 
 _V_a_l_u_e:
 

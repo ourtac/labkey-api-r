@@ -10,7 +10,7 @@ _D_e_s_c_r_i_p_t_i_o_n:
 
 _U_s_a_g_e:
 
-     makeFilter(c("colname", "operator",value))
+     makeFilter(c(colname, operator,value))
 
 _A_r_g_u_m_e_n_t_s:
 

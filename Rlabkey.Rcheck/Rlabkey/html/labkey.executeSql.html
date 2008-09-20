@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><title>R: Retrieve data from a labkey database using Sql commands</title>
+<html><head><title>R: Retrieve data from a labkey database using SQL commands</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="../../R.css">
 </head><body>
 
 <table width="100%" summary="page for labkey.executeSql {Rlabkey}"><tr><td>labkey.executeSql {Rlabkey}</td><td align="right">R Documentation</td></tr></table>
-<h2>Retrieve data from a labkey database using Sql commands</h2>
+<h2>Retrieve data from a labkey database using SQL commands</h2>
 
 
 <h3>Description</h3>
 
 <p>
 Use Sql commands to specify data to be imported into R. Prior to import, data can
-be manipulated through all standard Sql commands.
+be manipulated through standard SQL commands supported in labkey SQL.
 </p>
 
 
@@ -29,23 +29,23 @@ rowOffset = NULL, stripAllHidden = TRUE)
 <table summary="R argblock">
 <tr valign="top"><td><code>baseUrl</code></td>
 <td>
-a string specifying the <code>baseUrl</code>for the HTTP request</td></tr>
+a string specifying the <code>baseUrl</code>for the labkey server</td></tr>
 <tr valign="top"><td><code>folderPath</code></td>
 <td>
-a string specifying the <code>folderPath</code> for the HTTP request</td></tr>
+a string specifying the <code>folderPath</code> </td></tr>
 <tr valign="top"><td><code>schemaName</code></td>
 <td>
-a string specifying the  <code>schemaName</code> for the HTTP request</td></tr>
+a string specifying the  <code>schemaName</code> for the query</td></tr>
 <tr valign="top"><td><code>sql</code></td>
 <td>
 a string containing the <code>sql</code> commands to be executed</td></tr>
 <tr valign="top"><td><code>maxRows</code></td>
 <td>
-(optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.</td></tr>
+(optional) an integer specifying the maximum number of rows to return. If no value is specified, all rows are returned.</td></tr>
 <tr valign="top"><td><code>rowOffset</code></td>
 <td>
 (optional) an integer specifying which row of data should be the first row in the retrieval. 
-If no value is specified, all rows are returned.</td></tr>
+If no value is specified, rows will begin at the start of the result set.</td></tr>
 <tr valign="top"><td><code>stripAllHidden</code></td>
 <td>
 (optional) a logical value indicating whether or not to save data columns that would 
@@ -55,9 +55,9 @@ normally be hidden from user veiw. If no value is specified, no hidden columns a
 <h3>Details</h3>
 
 <p>
-A full dataset or user saved view can be imported into an R data frame using the <code>labkey.executeSql</code>
+Rows returned from the SQL query can be imported into an R data frame using the <code>labkey.executeSql</code>
 function. The function accepts as its arguments components of the url that identify the location of the
-data and what Sql actions should be taken on the data prior to import. Data are returned in a data frame
+data and what SQL actions should be taken on the data prior to import. Data are returned in a data frame
 with column names as they appear in on the labkey database website.
 </p>
 
@@ -109,6 +109,6 @@ library(Rlabkey)
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.1 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.2 <a href="00Index.html">Index]</a></div>
 
 </body></html>

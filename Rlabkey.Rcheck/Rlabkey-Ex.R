@@ -70,13 +70,33 @@ library('Rlabkey')
 
 assign(".oldSearch", search(), pos = 'CheckExEnv')
 assign(".oldNS", loadedNamespaces(), pos = 'CheckExEnv')
+cleanEx(); nameEx("labkey.deleteRows")
+### * labkey.deleteRows
+
+flush(stderr()); flush(stdout())
+
+### Name: labkey.deleteRows
+### Title: Delete rows of data in a labkey database
+### Aliases: labkey.deleteRows
+### Keywords: IO
+
+### ** Examples
+
+# Examples to be updated when labkey.org has 8.3
+#mydf <- data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****','urn:lsid:labkey.org.****'),stringsAsFactors=FALSE))
+
+#mydata <- labkey.deleteRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", toDelete=mydf)
+
+
+
+
 cleanEx(); nameEx("labkey.executeSql")
 ### * labkey.executeSql
 
 flush(stderr()); flush(stdout())
 
 ### Name: labkey.executeSql
-### Title: Retrieve data from a labkey database using Sql commands
+### Title: Retrieve data from a labkey database using SQL commands
 ### Aliases: labkey.executeSql
 ### Keywords: IO
 
@@ -89,8 +109,31 @@ library(Rlabkey)
 # from www.labkey.org
 ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
 
-#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", 
-#                               sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, "Lab Results".Labhemo from "Lab Results"')
+#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
+# "Lab Results".Labhemo from "Lab Results"')
+
+
+
+
+cleanEx(); nameEx("labkey.insertRows")
+### * labkey.insertRows
+
+flush(stderr()); flush(stdout())
+
+### Name: labkey.insertRows
+### Title: Insert new rows of data into a labkey database
+### Aliases: labkey.insertRows
+### Keywords: IO
+
+### ** Examples
+
+# Example to be modified when 8.3 is on labkey.org
+# Insert some data:
+#mydf <- data.frame(SequenceNum=c(2,3), lsid=c("URG345","URG346"), participantId=c(5055, 5056), stringsAsFactors=FALSE)
+
+#mydata <- labkey.insertRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results, toInsert=mydf)
+
 
 
 
@@ -119,7 +162,32 @@ plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
 
 # Select columns and apply filters
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+
+
+
+
+
+cleanEx(); nameEx("labkey.updateRows")
+### * labkey.updateRows
+
+flush(stderr()); flush(stdout())
+
+### Name: labkey.updateRows
+### Title: Update existing rows of data in a labkey database
+### Aliases: labkey.updateRows
+### Keywords: IO
+
+### ** Examples
+
+
+# Examples to be updated when labkey.org has 8.3
+#mydf=data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****') , ParticipantId=c(700010040, 700010066), MVdt=c('09-Aug-06','09-Aug-06'), MVcomm=c('y','y'), MVswitch=c(88,99), stringsAsFactors=FALSE)
+
+#mydata <- labkey.updateRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", toUpdate=mydf)
 
 
 
@@ -138,14 +206,16 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 
-# Specification of two filters:
+# Specify two filters:
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
 # Filter using "equals one of" operator:
 myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
 # Use in labkey.selectRows function
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
+schemaName="study", queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
 
 
 

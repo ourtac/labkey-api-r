@@ -1,11 +1,12 @@
 labkey.executeSql          package:Rlabkey          R Documentation
 
-_R_e_t_r_i_e_v_e _d_a_t_a _f_r_o_m _a _l_a_b_k_e_y _d_a_t_a_b_a_s_e _u_s_i_n_g _S_q_l _c_o_m_m_a_n_d_s
+_R_e_t_r_i_e_v_e _d_a_t_a _f_r_o_m _a _l_a_b_k_e_y _d_a_t_a_b_a_s_e _u_s_i_n_g _S_Q_L _c_o_m_m_a_n_d_s
 
 _D_e_s_c_r_i_p_t_i_o_n:
 
      Use Sql commands to specify data to be imported into R. Prior to
-     import, data can be manipulated through all standard Sql commands.
+     import, data can be manipulated through standard SQL commands
+     supported in labkey SQL.
 
 _U_s_a_g_e:
 
@@ -14,20 +15,20 @@ _U_s_a_g_e:
 
 _A_r_g_u_m_e_n_t_s:
 
- baseUrl: a string specifying the 'baseUrl'for the HTTP request
+ baseUrl: a string specifying the 'baseUrl'for the labkey server
 
-folderPath: a string specifying the 'folderPath' for the HTTP request
+folderPath: a string specifying the 'folderPath' 
 
-schemaName: a string specifying the  'schemaName' for the HTTP request
+schemaName: a string specifying the  'schemaName' for the query
 
      sql: a string containing the 'sql' commands to be executed
 
- maxRows: (optional) an integer specifying how many rows of data to
-          return. If no value is specified, all rows are returned.
+ maxRows: (optional) an integer specifying the maximum number of rows
+          to return. If no value is specified, all rows are returned.
 
 rowOffset: (optional) an integer specifying which row of data should be
           the first row in the retrieval.  If no value is specified,
-          all rows are returned.
+          rows will begin at the start of the result set.
 
 stripAllHidden: (optional) a logical value indicating whether or not to
           save data columns that would  normally be hidden from user
@@ -36,10 +37,10 @@ stripAllHidden: (optional) a logical value indicating whether or not to
 
 _D_e_t_a_i_l_s:
 
-     A full dataset or user saved view can be imported into an R data
+     Rows returned from the SQL query can be imported into an R data
      frame using the 'labkey.executeSql' function. The function accepts
      as its arguments components of the url that identify the location
-     of the data and what Sql actions should be taken on the data prior
+     of the data and what SQL actions should be taken on the data prior
      to import. Data are returned in a data frame with column names as
      they appear in on the labkey database website.
 

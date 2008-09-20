@@ -5,13 +5,14 @@ _I_m_p_o_r_t/_e_x_p_o_r_t _d_a_t_a _b_e_t_w_e_e_n _a _l
 _D_e_s_c_r_i_p_t_i_o_n:
 
      This package allows the transfer of data between a labkey database
-     and an R session. Data can be imported from  a labkey database
-     into R by specifying the query schema information
+     and an R session as well as the ability to modify data in the
+     labkey database from an R seession. Data can be imported from  a
+     labkey database into R by specifying the query schema information
      ('labkey.selectRows')  or by using sql commands
-     ('labkey.executeSql'). From an R session, a user can send data to
-     update existing data ('labkey.updateRows') or to be inserted as
-     new data  ('labkey.insertRows') or specify rows of data to be
-     deleted from the labkey database ('labkey.deleteRows'). 
+     ('labkey.executeSql'). From an R session, a user can also send
+     data to update existing data ('labkey.updateRows') or to be
+     inserted as new data  ('labkey.insertRows') or specify rows of
+     data to be deleted from the labkey database ('labkey.deleteRows'). 
 
      The user must have the appropriate authorization on the labkey
      server in order to modify data in the database through the use of
@@ -30,17 +31,25 @@ _D_e_t_a_i_l_s:
      Using this package to access a password protected labkey data base
      requires that the user has their login information in a.netrc
      file. The .netrc file contains configuration and autologin
-     information for the File Transfer Protocol client (ftp). The file
-     should be located in your home directory and the permissions on
-     the file should be unreadable for  everybody except the owner.
-     Permissions can be set in UNIX from the command line with chmod
-     600 .netrc.   ***Insert how to do this for windows.*** The
-     following three lines must be included in the .netrc file either
-     separated by white space (spaces, tabs, or newlines) or commas.
+     information for the File Transfer Protocol client (ftp) and other
+     programs such as CURL. The file should be located in the users
+     home directory and the permissions on the file should be
+     unreadable for  everybody except the owner. Permissions can be set
+     in UNIX from the command line with chmod 600 .netrc.  
 
-     machine remote-machine-name
-      login my-user-name
-      password my-password
+     On a windows machine, create and  environment variable called
+     'HOME' that is set to your home directory ('c:/Users/<User-Name>'
+     on Vista) or any directory you want to use. In that directory,
+     create a text file named _netrc (note that it's underscore netrc,
+     not dot netrc like it is on UNIX). 
+
+     The following three lines must be included in the .netrc or _netrc
+     file either separated by white space (spaces, tabs, or newlines)
+     or commas.
+
+     machine <remote-machine-name>
+      login <user-email>
+      password <user-password>
 
      An example would be:
       machine atlas.scharp.org
