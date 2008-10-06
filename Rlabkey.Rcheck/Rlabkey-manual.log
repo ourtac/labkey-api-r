@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  19 SEP 2008 09:38
+This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  3 OCT 2008 18:00
 entering extended mode
 **\nonstopmode{}\input{Rlabkey-manual.tex}
 (./Rlabkey-manual.tex (/usr/share/texmf/tex/latex/base/article.cls
@@ -278,91 +278,94 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--49
+Overfull \hbox (8.63719pt too wide) in paragraph at lines 8--13
+\T1/aer/m/n/10 (\T1/aett/m/n/10 labkey.insertRows\T1/aer/m/n/10 ) or data can b
+e deleted from the labkey database (\T1/aett/m/n/10 labkey.deleteRows\T1/aer/m/
+n/10 ). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--53
 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (37.1175pt too wide) in paragraph at lines 59--61
+Overfull \hbox (37.1175pt too wide) in paragraph at lines 66--68
 [][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
  labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 make-Filter[][]\T1/a
 er/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/aer/m/n/10 , [][]\T1/a
 ett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 ,
  []
 
-
-Overfull \hbox (97.33997pt too wide) in paragraph at lines 70--70
- []\T1/aett/m/n/10 labkey.deleteRows(baseUrl, folderPath, schemaName, queryName
-, toDelete, stripAllHidden = TRUE)[] 
- []
-
 [2]
-Overfull \hbox (34.3476pt too wide) in paragraph at lines 110--112
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 121--123
 [][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
  labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 makeFilter[][]\T1/ae
 r/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/aer/m/n/10 , [][]\T1/ae
 tt/m/n/10 labkey.updateRows[][] 
  []
 
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 116
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 128
 .
 (/usr/local/lib64/R/share/texmf/ts1aett.fd
 File: ts1aett.fd 
 )
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 116
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 128
 .
 
 (/usr/share/texmf/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <9> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 116.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 128.
 
-Overfull \hbox (232.0467pt too wide) in paragraph at lines 116--116
- []\T1/aett/m/n/9 #mydf <- data.frame(lsid=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ur
-n:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aet
-t/m/n/9 urn:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/
-9 '\T1/aett/m/n/9 urn:lsid:labkey.org.****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ),str
-ingsAsFactors=FALSE))[] 
- []
-
-
-Overfull \hbox (349.89737pt too wide) in paragraph at lines 118--118
- []\T1/aett/m/n/9 #mydata <- labkey.deleteRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
-s", toDelete=mydf)[] 
+Overfull \hbox (0.95044pt too wide) in paragraph at lines 128--128
+ []\T1/aett/m/n/9 #delrows <- data.frame(lsid=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9
+ urn:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/
+aett/m/n/9 urn:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,[] 
  []
 
 [3]
-Overfull \hbox (34.3476pt too wide) in paragraph at lines 166--168
+Overfull \hbox (34.53418pt too wide) in paragraph at lines 166--169
+[]\T1/aer/m/n/10 Rows re-turned from the SQL query are im-ported into an R data
+ frame us-ing the \T1/aett/m/n/10 labkey.executeSql
+ []
+
+
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 190--192
 [][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
  makeFilter[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/ae
 r/m/n/10 , [][]\T1/aett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 , [][]\T1/ae
 tt/m/n/10 labkey.deleteRows[][] 
  []
 
-
-Overfull \hbox (43.3621pt too wide) in paragraph at lines 178--178
- []\T1/aett/m/n/9 #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo",[] 
- []
-
 [4]
-Overfull \hbox (0.92668pt too wide) in paragraph at lines 179--179
- []\T1/aett/m/n/9 # schemaName="study", sql= \TS1/cmtt/m/n/9 '\T1/aett/m/n/9 se
-lect "Lab Results".ParticipantId, "Lab Results".Labdt,[] 
+Overfull \hbox (354.64497pt too wide) in paragraph at lines 200--200
+ []\T1/aett/m/n/9 #                            sql = \TS1/cmtt/m/n/9 '\T1/aett/
+m/n/9 select "Status Assessment".ParticipantId from "Status Assessment" where "
+Status Asses#sment"."StatusMeetCriteria"=\\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 yes\\
+TS1/cmtt/m/n/9 ''\T1/aett/m/n/9 )[] 
  []
 
 
-Overfull \hbox (97.33997pt too wide) in paragraph at lines 192--192
- []\T1/aett/m/n/10 labkey.insertRows(baseUrl, folderPath, schemaName, queryName
-, toInsert, stripAllHidden = TRUE)[] 
+Overfull \hbox (288.59032pt too wide) in paragraph at lines 207--207
+ []\T1/aett/m/n/9 #                            sql = "select Demographics.Gende
+r, avg(Demographics.Age) as Number from Demographics group b#y Demographics.Gen
+der")[] 
+ []
+
+
+Overfull \hbox (349.91321pt too wide) in paragraph at lines 214--214
+ []\T1/aett/m/n/9 #                            sql = \TS1/cmtt/m/n/9 '\T1/aett/
+m/n/9 select "Status Assessment".StatusPartner1 from "Status Assessment" where 
+"Status Asse#ssment".StatusPartner1 is not null\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 
+)[] 
  []
 
 [5]
-Overfull \hbox (34.3476pt too wide) in paragraph at lines 233--235
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 273--275
 [][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
  labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 makeFilter[][]\T1/ae
 r/m/n/10 , [][]\T1/aett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 , [][]\T1/ae
@@ -370,70 +373,81 @@ tt/m/n/10 labkey.deleteRows[][]
  []
 
 
-Overfull \hbox (165.97621pt too wide) in paragraph at lines 240--240
- []\T1/aett/m/n/9 #mydf <- data.frame(SequenceNum=c(2,3), lsid=c("URG345","URG3
-46"), participantId=c(5055, 5056), stringsAsFactors=FALSE)[] 
+Overfull \hbox (48.07803pt too wide) in paragraph at lines 280--280
+ []\T1/aett/m/n/9 #newrows <- data.frame(participantID=c(24932540, 24932541), S
+equenceNum=c(2,3), age=c(40, 25),[] 
  []
 
 
-Overfull \hbox (345.18144pt too wide) in paragraph at lines 242--242
- []\T1/aett/m/n/9 #mydata <- labkey.insertRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
-s, toInsert=mydf)[] 
+Overfull \hbox (5.63469pt too wide) in paragraph at lines 281--281
+ []\T1/aett/m/n/9 #height=c(70,65), gender=c("m","f"), city=c("Boston","New Yor
+k"), state=c("MA","NY"),[] 
  []
 
-
-Overfull \hbox (13.50012pt too wide) in paragraph at lines 257--257
+[6]
+Overfull \hbox (13.50012pt too wide) in paragraph at lines 301--301
  []\T1/aett/m/n/10 labkey.selectRows(baseUrl, folderPath, schemaName, queryName
 , viewName = NULL,[] 
  []
 
-[6]
-Overfull \hbox (35.66405pt too wide) in paragraph at lines 281--286
+
+Overfull \hbox (35.66405pt too wide) in paragraph at lines 325--329
 []\T1/aer/m/n/10 A full dataset or user saved view can be im-ported into an R d
 ata frame us-ing the \T1/aett/m/n/10 labkey.selectRows
  []
 
-
-Overfull \hbox (34.3476pt too wide) in paragraph at lines 307--309
+[7]
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 349--351
 [][][]\T1/aett/m/n/10 labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
  makeFilter[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/ae
 r/m/n/10 , [][]\T1/aett/m/n/10 labkey.updateRows[][]\T1/aer/m/n/10 , [][]\T1/ae
 tt/m/n/10 labkey.deleteRows[][] 
  []
 
-[7]
-Overfull \hbox (43.3621pt too wide) in paragraph at lines 318--318
- []\T1/aett/m/n/9 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo",[] 
+
+Overfull \hbox (48.07803pt too wide) in paragraph at lines 357--357
+ []\T1/aett/m/n/9 #                                                            
+   folderPath="/home/Study/demo",[] 
  []
 
 
-Overfull \hbox (71.65767pt too wide) in paragraph at lines 323--323
- []\T1/aett/m/n/9 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-c("HIVRapidTest","EQUALS","Positive"))[] 
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 359--359
+ []\T1/aett/m/n/9 #                                                            
+   queryName="HIV Test Results")[] 
  []
 
 
-Overfull \hbox (43.3621pt too wide) in paragraph at lines 325--325
- []\T1/aett/m/n/9 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo",[] 
+Overfull \hbox (76.3736pt too wide) in paragraph at lines 363--363
+ []\T1/aett/m/n/9 #myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500),
+ c("HIVRapidTest","EQUALS","Positive"))[] 
  []
 
 
-Overfull \hbox (29.21432pt too wide) in paragraph at lines 327--327
- []\T1/aett/m/n/9 colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapi
-dTest"), colFilter=myfilters)[] 
+Overfull \hbox (48.07803pt too wide) in paragraph at lines 366--366
+ []\T1/aett/m/n/9 #                                                            
+   folderPath="/home/Study/demo",[] 
  []
 
 
-Overfull \hbox (97.33997pt too wide) in paragraph at lines 340--340
- []\T1/aett/m/n/10 labkey.updateRows(baseUrl, folderPath, schemaName, queryName
-, toUpdate, stripAllHidden = TRUE)[] 
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 368--368
+ []\T1/aett/m/n/9 #                                                            
+   queryName="HIV Test Results",[] 
  []
 
-[8]
-Overfull \hbox (34.3476pt too wide) in paragraph at lines 380--382
+
+Overfull \hbox (231.99919pt too wide) in paragraph at lines 369--369
+ []\T1/aett/m/n/9 #                                                            
+   colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"),[] 
+ []
+
+
+Overfull \hbox (0.91876pt too wide) in paragraph at lines 370--370
+ []\T1/aett/m/n/9 #                                                            
+   colFilter=myfilters)[] 
+ []
+
+[8] [9]
+Overfull \hbox (34.3476pt too wide) in paragraph at lines 427--429
 [][][]\T1/aett/m/n/10 labkey.selectRows[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10
  labkey.executeSql[][]\T1/aer/m/n/10 , [][]\T1/aett/m/n/10 makeFilter[][]\T1/ae
 r/m/n/10 , [][]\T1/aett/m/n/10 labkey.insertRows[][]\T1/aer/m/n/10 , [][]\T1/ae
@@ -441,62 +455,61 @@ tt/m/n/10 labkey.deleteRows[][]
  []
 
 
-Overfull \hbox (614.08432pt too wide) in paragraph at lines 387--387
- []\T1/aett/m/n/9 #mydf=data.frame(lsid=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 urn:l
-sid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aett/m
-/n/9 urn:lsid:labkey.org:****\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 ) , ParticipantId=
-c(700010040, 700010066), MVdt=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 09-Aug-06\TS1/c
-mtt/m/n/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 09-Aug-06\TS1/cmtt/m
-/n/9 '\T1/aett/m/n/9 ), MVcomm=c(\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 y\TS1/cmtt/m/n
-/9 '\T1/aett/m/n/9 ,\TS1/cmtt/m/n/9 '\T1/aett/m/n/9 y\TS1/cmtt/m/n/9 '\T1/aett/
-m/n/9 ), MVswitch=c(88,99), stringsAsFactors=FALSE)[] 
+Overfull \hbox (48.07803pt too wide) in paragraph at lines 435--435
+ []\T1/aett/m/n/9 #                                                            
+   folderPath="/home/Study/demo",[] 
  []
 
 
-Overfull \hbox (349.89737pt too wide) in paragraph at lines 389--389
- []\T1/aett/m/n/9 #mydata <- labkey.updateRows(baseUrl="https://www.labkey.org"
-, folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Result
-s", toUpdate=mydf)[] 
+Overfull \hbox (24.4984pt too wide) in paragraph at lines 437--437
+ []\T1/aett/m/n/9 #                                                            
+   queryName="Demographics")[] 
  []
 
-[9]
-Overfull \hbox (3.27612pt too wide) in paragraph at lines 418--422
+[10]
+Overfull \hbox (3.27612pt too wide) in paragraph at lines 478--482
 []\T1/aer/m/n/10 Possible op-er-a-tor val-ues are as fol-lows: "EQUALS", "EQUAL
 S_ONE_OF", "NOT_EQUALS",
  []
 
 
-Overfull \hbox (92.3444pt too wide) in paragraph at lines 418--422
+Overfull \hbox (92.3444pt too wide) in paragraph at lines 478--482
 \T1/aer/m/n/10 "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_T
 HAN_OR_EQUAL_TO",
  []
 
 
-Overfull \hbox (48.87666pt too wide) in paragraph at lines 418--422
-\T1/aer/m/n/10 "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_NULL", 
-"IS_NOT_NULL",
+Overfull \hbox (79.51604pt too wide) in paragraph at lines 478--482
+\T1/aer/m/n/10 "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_MISSING
+", "IS_NOT_MISSING",
  []
 
-[10]
-Overfull \hbox (71.65767pt too wide) in paragraph at lines 442--442
+
+Overfull \hbox (25.64418pt too wide) in paragraph at lines 478--482
+\T1/aer/m/n/10 "CON-TAINS", "DOES_NOT_CONTAIN", "STARTS_WITH", and "DOES_NOT_ST
+ART_WITH". 
+ []
+
+
+Overfull \hbox (71.65767pt too wide) in paragraph at lines 502--502
  []\T1/aett/m/n/9 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
 c("HIVRapidTest","EQUALS","Positive"))[] 
  []
 
 
-Overfull \hbox (10.35062pt too wide) in paragraph at lines 445--445
+Overfull \hbox (10.35062pt too wide) in paragraph at lines 505--505
  []\T1/aett/m/n/9 myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_O
 F","Equals ; Less than"))[] 
  []
 
 
-Overfull \hbox (43.3621pt too wide) in paragraph at lines 448--448
+Overfull \hbox (43.3621pt too wide) in paragraph at lines 508--508
  []\T1/aett/m/n/9 getdata <- labkey.selectRows(baseUrl="https://www.labkey.org"
 , folderPath="/home/Study/demo",[] 
  []
 
 
-Overfull \hbox (29.21432pt too wide) in paragraph at lines 450--450
+Overfull \hbox (29.21432pt too wide) in paragraph at lines 510--510
  []\T1/aett/m/n/9 colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapi
 dTest"), colFilter=myfilters)[] 
  []
@@ -505,18 +518,18 @@ dTest"), colFilter=myfilters)[]
 Here is how much of TeX's memory you used:
  3536 strings out of 94079
  48118 string characters out of 1165775
- 97690 words of memory out of 3500000
+ 98690 words of memory out of 3500000
  6694 multiletter control sequences out of 10000+50000
  17143 words of font info for 40 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
- 38i,5n,27p,353b,595s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 38i,5n,27p,265b,594s stack positions out of 5000i,500n,6000p,200000b,5000s
  </var/cache/fonts/pk/ljfour/jknappen/ec/tctt0900.
 600pk></usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fon
 ts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.p
 fb></usr/share/texmf/fonts/type1/bluesky/cm/cmti10.pfb></usr/share/texmf/fonts/
 type1/bluesky/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmtt9.pfb>
 
-Output written on Rlabkey-manual.pdf (11 pages, 104676 bytes).
+Output written on Rlabkey-manual.pdf (11 pages, 106340 bytes).
 PDF statistics:
  211 PDF objects out of 1000 (max. 8388607)
  87 named destinations out of 1000 (max. 131072)

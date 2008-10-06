@@ -32,8 +32,9 @@ _D_e_t_a_i_l_s:
      Possible operator values are as follows: "EQUALS",
      "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN",
      "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_THAN_OR_EQUAL_TO",
-     "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_NULL",
-     "IS_NOT_NULL", "CONTAINS", and "DOES_NOT_CONTAIN".
+     "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_MISSING",
+     "IS_NOT_MISSING", "CONTAINS", "DOES_NOT_CONTAIN", "STARTS_WITH",
+     and "DOES_NOT_START_WITH".
 
 _V_a_l_u_e:
 

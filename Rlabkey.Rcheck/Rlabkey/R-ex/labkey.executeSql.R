@@ -6,15 +6,28 @@
 ### ** Examples
 
 
-library(Rlabkey)
+### Select participants who meet acute status requirements
+#getacute <- labkey.executeSql(baseUrl="https://www.labkey.org",
+#                            folderPath="/home/Study/demo",
+#                            schemaName="study",
+#                            sql = 'select "Status Assessment".ParticipantId from "Status Assessment" where "Status Asses#sment"."StatusMeetCriteria"=\'yes\'')
+#
+#
+### Average ages over different gender groups
+#getage <- labkey.executeSql(baseUrl="https://www.labkey.org",
+#                            folderPath="/home/Study/demo",
+#                            schemaName="study",
+#                            sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics group b#y Demographics.Gender")
+#
 
-# Retrieve participant id, visit date and hemoglobin from Lab Results table
-# from www.labkey.org
-### NOTE: This won't work until 8.3 is up on www.labkey.org ####
+### Select data for participants with partner information 
+#getpartners <- labkey.executeSql(baseUrl="https://www.labkey.org",
+#                            folderPath="/home/Study/demo",
+#                            schemaName="study",
+#                            sql = 'select "Status Assessment".StatusPartner1 from "Status Assessment" where "Status Asse#ssment".StatusPartner1 is not null')
+#
 
-#mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
-# "Lab Results".Labhemo from "Lab Results"')
+
 
 
 

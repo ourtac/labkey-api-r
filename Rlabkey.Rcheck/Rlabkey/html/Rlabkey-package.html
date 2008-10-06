@@ -1,26 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><title>R: Import/export data between a labkey database and an R session</title>
+<html><head><title>R: Import/export data between a labkey database and R</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="../../R.css">
 </head><body>
 
 <table width="100%" summary="page for Rlabkey-package {Rlabkey}"><tr><td>Rlabkey-package {Rlabkey}</td><td align="right">R Documentation</td></tr></table>
-<h2>Import/export data between a labkey database and an R session</h2>
+<h2>Import/export data between a labkey database and R</h2>
 
 
 <h3>Description</h3>
 
 <p>
-This package allows the transfer of data between a labkey database and an R session as well as the
-ability to modify data in the labkey database from an R seession. Data can be imported from 
+This package allows the transfer of data between a labkey database and an R session. Data can be imported from 
 a labkey database into R by specifying the query schema information (<code>labkey.selectRows</code>) 
-or by using sql commands (<code>labkey.executeSql</code>). From an R session,
-a user can also send data to update existing data (<code>labkey.updateRows</code>) or to be inserted as new data 
-(<code>labkey.insertRows</code>) or specify rows of data to be deleted from the labkey database (<code>labkey.deleteRows</code>). 
+or by using sql commands (<code>labkey.executeSql</code>). From an R session, existing data can be updated
+(<code>labkey.updateRows</code>), new data can be inserted (<code>labkey.insertRows</code>) or  
+data can be deleted from the labkey database (<code>labkey.deleteRows</code>). 
 </p>
 <p>
 The user must have the appropriate authorization on the labkey
-server in order to modify data in the database through the use of
+server in order to modify the database through the use of
 these functions.
 </p>
 
@@ -36,10 +35,10 @@ these functions.
   <td align="left"> Type: </td>  <td align="left"> Package</td>
 </tr>
 <tr>
-  <td align="left"> Version: </td>  <td align="left"> 0.0.1</td>
+  <td align="left"> Version: </td>  <td align="left"> 0.0.3</td>
 </tr>
 <tr>
-  <td align="left"> Date: </td>  <td align="left"> 2008-08-18</td>
+  <td align="left"> Date: </td>  <td align="left"> 2008-09-02</td>
 </tr>
 <tr>
   <td align="left"> License: </td>  <td align="left"> Apache 2.0</td>
@@ -50,14 +49,20 @@ these functions.
 </table>
 <p>
 Using this package to access a password protected labkey data base requires that the user
-has their login information in a.netrc file. The .netrc file
+has their login information in a netrc file. The netrc file
 contains configuration and autologin information for the File Transfer Protocol client (ftp) and
 other programs such as CURL.
-The file should be located in the users home directory and the permissions on the file should be unreadable for 
-everybody except the owner. Permissions can be set in UNIX from the command line with chmod 600 .netrc.  
 </p>
 <p>
-On a windows machine, create and  environment variable called 'HOME' that is set to your home directory ('c:/Users/&lt;User-Name&gt;' on Vista) or any directory you want to use. In that directory, create a text file named _netrc (note that it's underscore netrc, not dot netrc like it is on UNIX). 
+On a UNIX system this file should be named .netrc (dot netrc) and on windows it sould be 
+named _netrc (underscore netrc). The file should be located in the users home directory and the 
+permissions on the file should be unreadable for everybody except the owner.  
+</p>
+<p>
+To create the _netrc on a windows machine, first create an environment variable called 'HOME' that 
+is set to your home directory (c:/Users/&lt;User-Name&gt; on Vista) or any directory you want to use. 
+In that directory, create a text file named _netrc (note that it's underscore netrc, not dot 
+netrc like it is on UNIX). 
 </p>
 <p>
 The following three lines must be included in the .netrc or _netrc file either separated by white space
@@ -69,10 +74,14 @@ login &lt;user-email&gt;<br>
 password &lt;user-password&gt;
 </p>
 <p>
-An example would be:<br>
+One example would be:<br>
 machine atlas.scharp.org<br>
 login vobencha@fhcrc.org<br>
 password mypassword<br>
+</p>
+<p>
+Another example would be:<br>
+machine atlas.scharp.org login vobencha@fhcrc.org password mypassword
 </p>
 
 
@@ -101,6 +110,6 @@ https://www.labkey.org/project/home/begin.view
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.2 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.3 <a href="00Index.html">Index]</a></div>
 
 </body></html>

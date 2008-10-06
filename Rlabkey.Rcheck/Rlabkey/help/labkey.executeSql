@@ -31,22 +31,31 @@ rowOffset: (optional) an integer specifying which row of data should be
           rows will begin at the start of the result set.
 
 stripAllHidden: (optional) a logical value indicating whether or not to
-          save data columns that would  normally be hidden from user
+          return data columns that would  normally be hidden from user
           veiw. If no value is specified, no hidden columns are
           returned.
 
 _D_e_t_a_i_l_s:
 
-     Rows returned from the SQL query can be imported into an R data
-     frame using the 'labkey.executeSql' function. The function accepts
-     as its arguments components of the url that identify the location
-     of the data and what SQL actions should be taken on the data prior
-     to import. Data are returned in a data frame with column names as
-     they appear in on the labkey database website.
+     Rows returned from the SQL query are imported into an R data frame
+     using the 'labkey.executeSql' function. Function arguments are
+     components of the url that identify the location of the data and
+     what SQL actions should be taken on the data prior to import.
+
+     NOTE: Each variable in a dataset has both a column label and a
+     column name. The column label is visable at the top of each column
+     on the web page and is longer and more descriptive. The column
+     name is shorter and is used "behind the scenes" for database
+     manipulation. It is the column name that must be used in the
+     Rlabkey functions when a column name is expected. To identify a
+     particular column name in a dataset on a web site, use the "export
+     to R script" option available as a drop down option under the
+     "views" tab for each dataset.
 
 _V_a_l_u_e:
 
-     The requested data are returned in a data frame.
+     The requested data are returned in a data frame with column names
+     as they appear on the website.
 
 _A_u_t_h_o_r(_s):
 
@@ -65,13 +74,24 @@ _S_e_e _A_l_s_o:
 
 _E_x_a_m_p_l_e_s:
 
-     library(Rlabkey)
+     ### Select participants who meet acute status requirements
+     #getacute <- labkey.executeSql(baseUrl="https://www.labkey.org",
+     #                            folderPath="/home/Study/demo",
+     #                            schemaName="study",
+     #                            sql = 'select "Status Assessment".ParticipantId from "Status Assessment" where "Status Asses#sment"."StatusMeetCriteria"=\'yes\'')
+     #
+     #
+     ### Average ages over different gender groups
+     #getage <- labkey.executeSql(baseUrl="https://www.labkey.org",
+     #                            folderPath="/home/Study/demo",
+     #                            schemaName="study",
+     #                            sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics group b#y Demographics.Gender")
+     #
 
-     # Retrieve participant id, visit date and hemoglobin from Lab Results table
-     # from www.labkey.org
-     ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
-
-     #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-     # schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
-     # "Lab Results".Labhemo from "Lab Results"')
+     ### Select data for participants with partner information 
+     #getpartners <- labkey.executeSql(baseUrl="https://www.labkey.org",
+     #                            folderPath="/home/Study/demo",
+     #                            schemaName="study",
+     #                            sql = 'select "Status Assessment".StatusPartner1 from "Status Assessment" where "Status Asse#ssment".StatusPartner1 is not null')
+     #
 

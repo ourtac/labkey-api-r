@@ -1,47 +1,49 @@
 Rlabkey-package           package:Rlabkey           R Documentation
 
-_I_m_p_o_r_t/_e_x_p_o_r_t _d_a_t_a _b_e_t_w_e_e_n _a _l_a_b_k_e_y _d_a_t_a_b_a_s_e _a_n_d _a_n _R _s_e_s_s_i_o_n
+_I_m_p_o_r_t/_e_x_p_o_r_t _d_a_t_a _b_e_t_w_e_e_n _a _l_a_b_k_e_y _d_a_t_a_b_a_s_e _a_n_d _R
 
 _D_e_s_c_r_i_p_t_i_o_n:
 
      This package allows the transfer of data between a labkey database
-     and an R session as well as the ability to modify data in the
-     labkey database from an R seession. Data can be imported from  a
-     labkey database into R by specifying the query schema information
+     and an R session. Data can be imported from  a labkey database
+     into R by specifying the query schema information
      ('labkey.selectRows')  or by using sql commands
-     ('labkey.executeSql'). From an R session, a user can also send
-     data to update existing data ('labkey.updateRows') or to be
-     inserted as new data  ('labkey.insertRows') or specify rows of
-     data to be deleted from the labkey database ('labkey.deleteRows'). 
+     ('labkey.executeSql'). From an R session, existing data can be
+     updated ('labkey.updateRows'), new data can be inserted
+     ('labkey.insertRows') or   data can be deleted from the labkey
+     database ('labkey.deleteRows'). 
 
      The user must have the appropriate authorization on the labkey
-     server in order to modify data in the database through the use of
-     these functions.
+     server in order to modify the database through the use of these
+     functions.
 
 _D_e_t_a_i_l_s:
 
 
        Package:   Rlabkey
        Type:      Package
-       Version:   0.0.1
-       Date:      2008-08-18
+       Version:   0.0.3
+       Date:      2008-09-02
        License:   Apache 2.0
        LazyLoad:  yes
 
      Using this package to access a password protected labkey data base
-     requires that the user has their login information in a.netrc
-     file. The .netrc file contains configuration and autologin
+     requires that the user has their login information in a netrc
+     file. The netrc file contains configuration and autologin
      information for the File Transfer Protocol client (ftp) and other
-     programs such as CURL. The file should be located in the users
-     home directory and the permissions on the file should be
-     unreadable for  everybody except the owner. Permissions can be set
-     in UNIX from the command line with chmod 600 .netrc.  
+     programs such as CURL.
 
-     On a windows machine, create and  environment variable called
-     'HOME' that is set to your home directory ('c:/Users/<User-Name>'
-     on Vista) or any directory you want to use. In that directory,
-     create a text file named _netrc (note that it's underscore netrc,
-     not dot netrc like it is on UNIX). 
+     On a UNIX system this file should be named .netrc (dot netrc) and
+     on windows it sould be  named _netrc (underscore netrc). The file
+     should be located in the users home directory and the  permissions
+     on the file should be unreadable for everybody except the owner.  
+
+     To create the _netrc on a windows machine, first create an
+     environment variable called 'HOME' that  is set to your home
+     directory (c:/Users/<User-Name> on Vista) or any directory you
+     want to use.  In that directory, create a text file named _netrc
+     (note that it's underscore netrc, not dot  netrc like it is on
+     UNIX). 
 
      The following three lines must be included in the .netrc or _netrc
      file either separated by white space (spaces, tabs, or newlines)
@@ -51,10 +53,14 @@ _D_e_t_a_i_l_s:
       login <user-email>
       password <user-password>
 
-     An example would be:
+     One example would be:
       machine atlas.scharp.org
       login vobencha@fhcrc.org
       password mypassword
+
+     Another example would be:
+      machine atlas.scharp.org login vobencha@fhcrc.org password
+     mypassword
 
 _A_u_t_h_o_r(_s):
 

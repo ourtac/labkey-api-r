@@ -97,16 +97,22 @@ Loading required package: rjson
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: labkey.deleteRows
-> ### Title: Delete rows of data in a labkey database
+> ### Title: Delete rows of data from a labkey database
 > ### Aliases: labkey.deleteRows
 > ### Keywords: IO
 > 
 > ### ** Examples
 > 
-> # Examples to be updated when labkey.org has 8.3
-> #mydf <- data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****','urn:lsid:labkey.org.****'),stringsAsFactors=FALSE))
 > 
-> #mydata <- labkey.deleteRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", toDelete=mydf)
+> ## Delete two rows of data
+> #delrows <- data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****',
+> #'urn:lsid:labkey.org.****'),stringsAsFactors=FALSE))
+> 
+> #labkey.deleteRows(     baseUrl="https://www.labkey.org", 
+> #                                       folderPath="/home/Study/demo", 
+> #                                       schemaName="study",     
+> #                                       queryName="HIV Test Results",   
+> #                                       toDelete=delrows)
 > 
 > 
 > 
@@ -124,15 +130,28 @@ Loading required package: rjson
 > ### ** Examples
 > 
 > 
-> library(Rlabkey)
+> ### Select participants who meet acute status requirements
+> #getacute <- labkey.executeSql(baseUrl="https://www.labkey.org",
+> #                            folderPath="/home/Study/demo",
+> #                            schemaName="study",
+> #                            sql = 'select "Status Assessment".ParticipantId from "Status Assessment" where "Status Asses#sment"."StatusMeetCriteria"=\'yes\'')
+> #
+> #
+> ### Average ages over different gender groups
+> #getage <- labkey.executeSql(baseUrl="https://www.labkey.org",
+> #                            folderPath="/home/Study/demo",
+> #                            schemaName="study",
+> #                            sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics group b#y Demographics.Gender")
+> #
 > 
-> # Retrieve participant id, visit date and hemoglobin from Lab Results table
-> # from www.labkey.org
-> ### NOTE: This won't work until 8.3 is up on www.labkey.org ####
+> ### Select data for participants with partner information 
+> #getpartners <- labkey.executeSql(baseUrl="https://www.labkey.org",
+> #                            folderPath="/home/Study/demo",
+> #                            schemaName="study",
+> #                            sql = 'select "Status Assessment".StatusPartner1 from "Status Assessment" where "Status Asse#ssment".StatusPartner1 is not null')
+> #
 > 
-> #mydata <- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-> # schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
-> # "Lab Results".Labhemo from "Lab Results"')
+> 
 > 
 > 
 > 
@@ -149,11 +168,17 @@ Loading required package: rjson
 > 
 > ### ** Examples
 > 
-> # Example to be modified when 8.3 is on labkey.org
-> # Insert some data:
-> #mydf <- data.frame(SequenceNum=c(2,3), lsid=c("URG345","URG346"), participantId=c(5055, 5056), stringsAsFactors=FALSE)
 > 
-> #mydata <- labkey.insertRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results, toInsert=mydf)
+> ## Insert two rows of data:
+> #newrows <- data.frame(participantID=c(24932540, 24932541), SequenceNum=c(2,3), age=c(40, 25), 
+> #height=c(70,65), gender=c("m","f"), city=c("Boston","New York"), state=c("MA","NY"), 
+> #country=c("USA","USA"), stringsAsFactors=FALSE)
+> 
+> #labkey.insertRows(     baseUrl="https://www.labkey.org",       
+> #                                       folderPath="/home/Study/demo", 
+> #                                       schemaName="study",     
+> #                                       queryName="Demographics", 
+> #                                       toInsert=newrows)
 > 
 > 
 > 
@@ -165,28 +190,29 @@ Loading required package: rjson
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: labkey.selectRows
-> ### Title: Retrieve data from a labkey database using url specifications
+> ### Title: Retrieve data from a labkey database
 > ### Aliases: labkey.selectRows
 > ### Keywords: IO
 > 
 > ### ** Examples
 > 
 > 
-> ## Retrieving data from the Labkey.org web site:
-> 
-> library(Rlabkey)
-> 
 > # Retrieve HIV Test Results and plot Western Blot data
-> getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-+                                 schemaName="study", queryName="HIV Test Results")
-> plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
+> #getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
+> #                                                               folderPath="/home/Study/demo", 
+> #                                                               schemaName="study", 
+> #                                                               queryName="HIV Test Results")
+> #plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
 > 
 > # Select columns and apply filters
-> myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+> #myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 > 
-> getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-+ schemaName="study", queryName="HIV Test Results", 
-+ colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+> #getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
+> #                                                               folderPath="/home/Study/demo", 
+> #                                                               schemaName="study",     
+> #                                                               queryName="HIV Test Results", 
+> #                                                               colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+> #                                                               colFilter=myfilters)
 > 
 > 
 > 
@@ -205,12 +231,25 @@ Loading required package: rjson
 > ### ** Examples
 > 
 > 
-> # Examples to be updated when labkey.org has 8.3
-> #mydf=data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****') , ParticipantId=c(700010040, 700010066), MVdt=c('09-Aug-06','09-Aug-06'), MVcomm=c('y','y'), MVswitch=c(88,99), stringsAsFactors=FALSE)
-> 
-> #mydata <- labkey.updateRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", schemaName="study", queryName="HIV Test Results", toUpdate=mydf)
-> 
-> 
+> ### Retrieve data from the database
+> #getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
+> #                                                               folderPath="/home/Study/demo", 
+> #                                                               schemaName="study", 
+> #                                                               queryName="Demographics")
+> #
+> ### Modify the data
+> #modifyDat <- getdata[2,]
+> #modifyDat$City <- "Tacoma"
+> #
+> ### Will need lsid for rows
+> ### Update the rows in the database with the modified data
+> #labkey.updateRows(     baseUrl="https://www.labkey.org", 
+> #                                       folderPath="/home/Study/demo", 
+> #                                       schemaName="study", 
+> #                                       queryName="HIV Test Results", 
+> #                                       toUpdate=modifyDat)
+> #
+> #
 > 
 > 
 > 
@@ -245,7 +284,7 @@ Loading required package: rjson
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.556 0.016 1.327 0 0 
+Time elapsed:  0.256 0.028 0.597 0 0 
 > grDevices::dev.off()
 null device 
           1 

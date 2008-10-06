@@ -48,24 +48,31 @@ a string containing the <code>sql</code> commands to be executed</td></tr>
 If no value is specified, rows will begin at the start of the result set.</td></tr>
 <tr valign="top"><td><code>stripAllHidden</code></td>
 <td>
-(optional) a logical value indicating whether or not to save data columns that would 
+(optional) a logical value indicating whether or not to return data columns that would 
 normally be hidden from user veiw. If no value is specified, no hidden columns are returned.</td></tr>
 </table>
 
 <h3>Details</h3>
 
 <p>
-Rows returned from the SQL query can be imported into an R data frame using the <code>labkey.executeSql</code>
-function. The function accepts as its arguments components of the url that identify the location of the
-data and what SQL actions should be taken on the data prior to import. Data are returned in a data frame
-with column names as they appear in on the labkey database website.
+Rows returned from the SQL query are imported into an R data frame using the <code>labkey.executeSql</code>
+function. Function arguments are components of the url that identify the location of the
+data and what SQL actions should be taken on the data prior to import.
+</p>
+<p>
+NOTE: Each variable in a dataset has both a column label and a column name. The column label is visable at the top
+of each column on the web page and is longer and more descriptive. The column name is shorter and is
+used &ldquo;behind the scenes&rdquo; for database manipulation. It is the column name that must be used in
+the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
+a web site, use the &ldquo;export to R script&rdquo; option available as a drop down option under the &ldquo;views&rdquo;
+tab for each dataset.
 </p>
 
 
 <h3>Value</h3>
 
 <p>
-The requested data are returned in a data frame.</p>
+The requested data are returned in a data frame with column names as they appear on the website.</p>
 
 <h3>Author(s)</h3>
 
@@ -95,20 +102,33 @@ https://www.labkey.org/project/home/begin.view
 
 <pre>
 
-library(Rlabkey)
+### Select participants who meet acute status requirements
+#getacute &lt;- labkey.executeSql(baseUrl="https://www.labkey.org",
+#                            folderPath="/home/Study/demo",
+#                            schemaName="study",
+#                            sql = 'select "Status Assessment".ParticipantId from "Status Assessment" where "Status Asses#sment"."StatusMeetCriteria"=\'yes\'')
+#
+#
+### Average ages over different gender groups
+#getage &lt;- labkey.executeSql(baseUrl="https://www.labkey.org",
+#                            folderPath="/home/Study/demo",
+#                            schemaName="study",
+#                            sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics group b#y Demographics.Gender")
+#
 
-# Retrieve participant id, visit date and hemoglobin from Lab Results table
-# from www.labkey.org
-### NOTE: This won't work until 8.3 is up on www.labkey.org ####
+### Select data for participants with partner information 
+#getpartners &lt;- labkey.executeSql(baseUrl="https://www.labkey.org",
+#                            folderPath="/home/Study/demo",
+#                            schemaName="study",
+#                            sql = 'select "Status Assessment".StatusPartner1 from "Status Assessment" where "Status Asse#ssment".StatusPartner1 is not null')
+#
 
-#mydata &lt;- labkey.executeSql(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-# schemaName="study", sql= 'select "Lab Results".ParticipantId, "Lab Results".Labdt, 
-# "Lab Results".Labhemo from "Lab Results"')
+
 
 </pre>
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.2 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.3 <a href="00Index.html">Index]</a></div>
 
 </body></html>
