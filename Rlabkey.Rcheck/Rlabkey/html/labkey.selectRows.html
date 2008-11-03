@@ -68,13 +68,13 @@ column name, operator and value of the filter(s) to be applied to the retrieved 
 <h3>Details</h3>
 
 <p>
-A full dataset or user saved view can be imported into an R data frame using the 
+A full dataset or any portion of a dataset can be imported into an R data frame using the 
 <code>labkey.selectRows</code> function. Function arguments are the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
 (ie, sorting, selecting particular columns or maximum number of rows, etc.).
 </p>
 <p>
-NOTE: Each variable in a dataset has both a column label and a column name. The column label is visable at the top
+NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
 of each column on the web page and is longer and more descriptive. The column name is shorter and is
 used &ldquo;behind the scenes&rdquo; for database manipulation. It is the column name that must be used in
 the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
@@ -115,29 +115,31 @@ https://www.labkey.org/project/home/begin.view
 <h3>Examples</h3>
 
 <pre>
+## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-# Retrieve HIV Test Results and plot Western Blot data
-#getdata &lt;- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-#                                                               folderPath="/home/Study/demo", 
-#                                                               schemaName="study", 
-#                                                               queryName="HIV Test Results")
-#plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
+## Retrieve full HIV Test Results dataset
+fulldata &lt;- labkey.selectRows(  
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study", 
+queryName="HIV Test Results")
 
-# Select columns and apply filters
-#myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-
-#getdata &lt;- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-#                                                               folderPath="/home/Study/demo", 
-#                                                               schemaName="study",     
-#                                                               queryName="HIV Test Results", 
-#                                                               colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
-#                                                               colFilter=myfilters)
+## Specifying filters, max rows and selecting columns
+myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+smalldata &lt;- labkey.selectRows( 
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study",     
+queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+maxRows=20,
+colFilter=myfilters)
 
 
 </pre>
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.3 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.4 <a href="00Index.html">Index]</a></div>
 
 </body></html>

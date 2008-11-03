@@ -1,10 +1,8 @@
 \name{labkey.selectRows}
 \alias{labkey.selectRows}
-\title{Retrieve data from a labkey database using url specifications}
+\title{Retrieve data from a labkey database}
 \description{
-Use simple filters and sorts to specify data to be imported into R. Prior to import, 
-the data columns can be sorted, specific columns or number of rows can be requested and
-data filters can be applied.
+Import full datasets or selected rows into R. The data can be sorted and filtered prior to import.
 }
 \usage{
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
@@ -25,25 +23,24 @@ colFilter = NULL, stripAllHidden = TRUE)
 value is specified, the retrieval starts with the first row.}
   \item{colFilter}{(optional) a vector or array object created by the \code{makeFilter} function which contains the
 column name, operator and value of the filter(s) to be applied to the retrieved data.}
-  \item{stripAllHidden}{(optional) a logical value indicating whether or not to save data columns that would normally be hiddenfrom user view. If no value is specified, no hidden columns are returned.}
+  \item{stripAllHidden}{(optional) a logical value indicating whether or not to return data columns that would normally be hiddenfrom user view. If no value is specified, no hidden columns are returned.}
 }
 \details{
-A full dataset or user saved view can be imported into an R data frame using the \code{labkey.selectRows} 
-function. The function accepts as its arguments the components of the url that identify
+A full dataset or any portion of a dataset can be imported into an R data frame using the 
+\code{labkey.selectRows} function. Function arguments are the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
-(ie, sorting, selecting particular columns or maximum number of rows, etc.). Data are returned in a data 
-frame with column names as they appear on the labkey database website. 
+(ie, sorting, selecting particular columns or maximum number of rows, etc.).
 
-Use care when specifying column names for the colSelect or colFilter arguments. Often the column name
-that appears on the web site is not the same as the column caption. The column name is what is needed in
-colselect and colFilter arguments. 
+NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
+of each column on the web page and is longer and more descriptive. The column name is shorter and is
+used \dQuote{behind the scenes} for database manipulation. It is the column name that must be used in
+the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
+a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views}
+tab for each dataset.
 
-When importing data from ATLAS.scharp.org, a quick and simple way to identify the necessary components of the url 
-(i.e., schemaName, queryName, viewName, the correct column names etc.) is to use the \dQuote{export to R script}
-option avaiable as a drop down options under the \dQuote{views} tab for each dataset.
 }
 \value{
-The requested data are returned in a data frame.
+The requested data are returned in a data frame with column names as they appear on the website.
 }
 \references{http://www.omegahat.org/RCurl/,\cr 
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
@@ -55,23 +52,27 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-
-## Retrieving data from the Labkey.org web site:
-
-library(Rlabkey)
-
-# Retrieve HIV Test Results and plot Western Blot data
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-				schemaName="study", queryName="HIV Test Results")
-plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
+## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
 
-# Select columns and apply filters
+## Retrieve full HIV Test Results dataset
+fulldata <- labkey.selectRows(	
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study", 
+queryName="HIV Test Results")
+
+
+## Specifying filters, max rows and selecting columns
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-schemaName="study", queryName="HIV Test Results", 
-colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+smalldata <- labkey.selectRows(	
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study", 	
+queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+maxRows=20,
+colFilter=myfilters)
 
 
 

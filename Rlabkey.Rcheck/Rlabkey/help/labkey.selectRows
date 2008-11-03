@@ -50,15 +50,15 @@ stripAllHidden: (optional) a logical value indicating whether or not to
 
 _D_e_t_a_i_l_s:
 
-     A full dataset or user saved view can be imported into an R data
-     frame using the  'labkey.selectRows' function. Function arguments
-     are the components of the url that identify the location of the
-     data and what actions should be taken on the data prior to import
-     (ie, sorting, selecting particular columns or maximum number of
-     rows, etc.).
+     A full dataset or any portion of a dataset can be imported into an
+     R data frame using the  'labkey.selectRows' function. Function
+     arguments are the components of the url that identify the location
+     of the data and what actions should be taken on the data prior to
+     import (ie, sorting, selecting particular columns or maximum
+     number of rows, etc.).
 
      NOTE: Each variable in a dataset has both a column label and a
-     column name. The column label is visable at the top of each column
+     column name. The column label is visible at the top of each column
      on the web page and is longer and more descriptive. The column
      name is shorter and is used "behind the scenes" for database
      manipulation. It is the column name that must be used in the
@@ -89,20 +89,23 @@ _S_e_e _A_l_s_o:
 
 _E_x_a_m_p_l_e_s:
 
-     # Retrieve HIV Test Results and plot Western Blot data
-     #getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-     #                                                               folderPath="/home/Study/demo", 
-     #                                                               schemaName="study", 
-     #                                                               queryName="HIV Test Results")
-     #plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
+     ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-     # Select columns and apply filters
-     #myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+     ## Retrieve full HIV Test Results dataset
+     fulldata <- labkey.selectRows(  
+     baseUrl="https://www.labkey.org", 
+     folderPath="/home/Study/demo", 
+     schemaName="study", 
+     queryName="HIV Test Results")
 
-     #getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-     #                                                               folderPath="/home/Study/demo", 
-     #                                                               schemaName="study",     
-     #                                                               queryName="HIV Test Results", 
-     #                                                               colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
-     #                                                               colFilter=myfilters)
+     ## Specifying filters, max rows and selecting columns
+     myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+     smalldata <- labkey.selectRows( 
+     baseUrl="https://www.labkey.org", 
+     folderPath="/home/Study/demo", 
+     schemaName="study",     
+     queryName="HIV Test Results", 
+     colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+     maxRows=20,
+     colFilter=myfilters)
 

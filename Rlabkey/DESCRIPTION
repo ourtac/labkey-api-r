@@ -1,11 +1,11 @@
 Package: Rlabkey
-Version: 0.0.2
-Date: 2008-08-20
-Title: Data retrieval from a labkey database
+Version: 0.0.4
+Date: 2008-10-27
+Title: Data retrieval from a Labkey database
 Author: Valerie Obenchain
 SystemRequirements: curl (version 7.12.0 or higher) <http://curl.haxx.se>
 Maintainer: Valerie Obenchain <vobencha@fhcrc.org>
 Description: This package imports data from a labkey database into an R data frame
-License: Apache 2.0
+License: Apache License 2.0
 LazyLoad: true
-Depends: RCurl, rjson
+Depends: RCurl, rjson (>= 0.1.3)

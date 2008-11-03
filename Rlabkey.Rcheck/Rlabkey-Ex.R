@@ -82,16 +82,34 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+## Insert, update and delete
+# Note that users must have the necessary permissions in the database
+# to be able to modify data through the use of these functions
 
-## Delete two rows of data
-#delrows <- data.frame(lsid=c('urn:lsid:labkey.org:****','urn:lsid:labkey.org:****',
-#'urn:lsid:labkey.org.****'),stringsAsFactors=FALSE))
-
-#labkey.deleteRows(     baseUrl="https://www.labkey.org", 
-#                                       folderPath="/home/Study/demo", 
-#                                       schemaName="study",     
-#                                       queryName="HIV Test Results",   
-#                                       toDelete=delrows)
+### Not run
+#newrow <- data.frame(name="Frank", age=11, stringsAsFactors=FALSE)
+#labkey.insertRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toInsert=newrow)
+#
+#updaterow=data.frame(Key=4,name="Patty",age=11, stringsAsFactors=FALSE)
+#mydata <- labkey.updateRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toUpdate=updaterow)
+#
+#deleterow <- data.frame(Key=1, stringsAsFactors=FALSE)
+#mydata <- labkey.deleteRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toDelete=deleterow)
 
 
 
@@ -108,29 +126,31 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-### Select participants who meet acute status requirements
-#getacute <- labkey.executeSql(baseUrl="https://www.labkey.org",
-#                            folderPath="/home/Study/demo",
-#                            schemaName="study",
-#                            sql = 'select "Status Assessment".ParticipantId from "Status Assessment" where "Status Asses#sment"."StatusMeetCriteria"=\'yes\'')
-#
-#
-### Average ages over different gender groups
-#getage <- labkey.executeSql(baseUrl="https://www.labkey.org",
-#                            folderPath="/home/Study/demo",
-#                            schemaName="study",
-#                            sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics group b#y Demographics.Gender")
-#
+## Select participants who meet acute status requirements
+getacute <- labkey.executeSql(
+baseUrl="https://www.labkey.org",
+folderPath="/home/Study/demo",
+schemaName="study",
+sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
+from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
 
-### Select data for participants with partner information 
-#getpartners <- labkey.executeSql(baseUrl="https://www.labkey.org",
-#                            folderPath="/home/Study/demo",
-#                            schemaName="study",
-#                            sql = 'select "Status Assessment".StatusPartner1 from "Status Assessment" where "Status Asse#ssment".StatusPartner1 is not null')
-#
+## Compute average ages over different gender groups, use column alias "Number" to rename the column
+getage <- labkey.executeSql(
+baseUrl="https://www.labkey.org",
+folderPath="/home/Study/demo",
+schemaName="study",
+sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics 
+group by Demographics.Gender")
 
-
+## Get a list of participants with partner information 
+getpartners <- labkey.executeSql(
+baseUrl="https://www.labkey.org",
+folderPath="/home/Study/demo",
+schemaName="study",
+sql = 'select "Status Assessment".ParticipantID, "Status Assessment".StatusPartner1 
+from "Status Assessment" where "Status Assessment".StatusPartner1 is not null')
 
 
 
@@ -148,17 +168,34 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 
-## Insert two rows of data:
-#newrows <- data.frame(participantID=c(24932540, 24932541), SequenceNum=c(2,3), age=c(40, 25), 
-#height=c(70,65), gender=c("m","f"), city=c("Boston","New York"), state=c("MA","NY"), 
-#country=c("USA","USA"), stringsAsFactors=FALSE)
+## Insert, update and delete
+# Note that users must have the necessary permissions in the database
+# to be able to modify data through the use of these functions
 
-#labkey.insertRows(     baseUrl="https://www.labkey.org",       
-#                                       folderPath="/home/Study/demo", 
-#                                       schemaName="study",     
-#                                       queryName="Demographics", 
-#                                       toInsert=newrows)
-
+### Not run
+#newrow <- data.frame(name="Frank", age=11, stringsAsFactors=FALSE)
+#labkey.insertRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toInsert=newrow)
+#
+#updaterow=data.frame(Key=4,name="Patty",age=11, stringsAsFactors=FALSE)
+#mydata <- labkey.updateRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toUpdate=updaterow)
+#
+#deleterow <- data.frame(Key=1, stringsAsFactors=FALSE)
+#mydata <- labkey.deleteRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toDelete=deleterow)
 
 
 
@@ -175,23 +212,25 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-# Retrieve HIV Test Results and plot Western Blot data
-#getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-#                                                               folderPath="/home/Study/demo", 
-#                                                               schemaName="study", 
-#                                                               queryName="HIV Test Results")
-#plot(factor(getdata$"HIV Western Blot"), main="HIV Western Blot")
+## Retrieve full HIV Test Results dataset
+fulldata <- labkey.selectRows(  
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study", 
+queryName="HIV Test Results")
 
-# Select columns and apply filters
-#myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
-
-#getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-#                                                               folderPath="/home/Study/demo", 
-#                                                               schemaName="study",     
-#                                                               queryName="HIV Test Results", 
-#                                                               colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
-#                                                               colFilter=myfilters)
+## Specifying filters, max rows and selecting columns
+myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+smalldata <- labkey.selectRows( 
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study",     
+queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+maxRows=20,
+colFilter=myfilters)
 
 
 
@@ -209,26 +248,35 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+## Insert, update and delete
+# Note that users must have the necessary permissions in the database
+# to be able to modify data through the use of these functions
 
-### Retrieve data from the database
-#getdata <- labkey.selectRows(  baseUrl="https://www.labkey.org", 
-#                                                               folderPath="/home/Study/demo", 
-#                                                               schemaName="study", 
-#                                                               queryName="Demographics")
+### Not run
+#newrow <- data.frame(name="Frank", age=11, stringsAsFactors=FALSE)
+#labkey.insertRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toInsert=newrow)
 #
-### Modify the data
-#modifyDat <- getdata[2,]
-#modifyDat$City <- "Tacoma"
+#updaterow=data.frame(Key=4,name="Patty",age=11, stringsAsFactors=FALSE)
+#mydata <- labkey.updateRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toUpdate=updaterow)
 #
-### Will need lsid for rows
-### Update the rows in the database with the modified data
-#labkey.updateRows(     baseUrl="https://www.labkey.org", 
-#                                       folderPath="/home/Study/demo", 
-#                                       schemaName="study", 
-#                                       queryName="HIV Test Results", 
-#                                       toUpdate=modifyDat)
-#
-#
+#deleterow <- data.frame(Key=1, stringsAsFactors=FALSE)
+#mydata <- labkey.deleteRows(
+#baseUrl="https://atlas-test.scharp.org/cpas", 
+#folderPath="/CHAVI/Analysis/vobencha", 
+#schemaName="lists", 
+#queryName="testlist", 
+#toDelete=deleterow)
+
 
 
 
@@ -238,23 +286,31 @@ cleanEx(); nameEx("makeFilter")
 flush(stderr()); flush(stdout())
 
 ### Name: makeFilter
-### Title: Builds an array of filters
+### Title: Builds filters to be used in labkey.selectRows
 ### Aliases: makeFilter
 ### Keywords: file
 
 ### ** Examples
 
+## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-# Specify two filters:
-myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+## Two filters:
+filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
-# Filter using "equals one of" operator:
-myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
+## Using "equals one of" operator:
+filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
-# Use in labkey.selectRows function
-getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-schemaName="study", queryName="HIV Test Results", 
-colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+## Using "is not missing" operator:
+filter3 <- makeFilter(c("HIVRapidTest","IS_NOT_MISSING","")) 
+
+## Apply a filter in labkey.selectRows function
+getdata <- labkey.selectRows(
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study", 
+queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+colFilter=filter3)
 
 
 

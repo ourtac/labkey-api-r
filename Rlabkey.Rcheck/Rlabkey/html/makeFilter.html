@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><title>R: Builds an array of filters</title>
+<html><head><title>R: Builds filters to be used in labkey.selectRows</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="../../R.css">
 </head><body>
 
 <table width="100%" summary="page for makeFilter {Rlabkey}"><tr><td>makeFilter {Rlabkey}</td><td align="right">R Documentation</td></tr></table>
-<h2>Builds an array of filters</h2>
+<h2>Builds filters to be used in labkey.selectRows</h2>
 
 
 <h3>Description</h3>
@@ -19,36 +19,38 @@ returns an array of filters to be used in <code>labkey.selectRows</code>.
 <h3>Usage</h3>
 
 <pre>
-makeFilter(c(colname, operator,value))
+makeFilter(...)
 </pre>
 
 
 <h3>Arguments</h3>
 
 <table summary="R argblock">
-<tr valign="top"><td><code>colname</code></td>
+<tr valign="top"><td><code>...</code></td>
 <td>
-a string specifying the name of the column to be filtered</td></tr>
-<tr valign="top"><td><code>operator</code></td>
-<td>
-a string specifying what operator should be used in the filter (see options below)</td></tr>
-<tr valign="top"><td><code>value</code></td>
-<td>
-an integer or string specifying the value the columns should be filtered on</td></tr>
+Arguments in c("colname","operator","value") form, used to create a filter.</td></tr>
 </table>
 
 <h3>Details</h3>
 
 <p>
-These filters are applied to the data prior to import into R. Currently this function
-allows the user to specify up to five filters. Multiple filters can be entered named or
-un-named vectors (see examples below).
-</p>
+These filters are applied to the data prior to import into R. The user can specify as many 
+filters as desired. The format for specifying a filter is a vector of characters including
+the column name, operator and value.
+<dt>colname</dt><dd>a string specifying the name of the column to be filtered</dd> 
+<dt>operator</dt><dd>a string specifying what operator should be used in the filter (see options below)</dd>
+<dt>value</dt><dd>an integer or string specifying the value the columns should be filtered on</dd>
+
 <p>
 Possible operator values are as follows:
-"EQUALS", "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN",
-"LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL",
-"IS_MISSING", "IS_NOT_MISSING", "CONTAINS", "DOES_NOT_CONTAIN", "STARTS_WITH", and "DOES_NOT_START_WITH".
+"EQUALS", "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", 
+"LESS_THAN", "LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL", 
+"NOT_EQUAL_OR_NULL", "IS_MISSING", "IS_NOT_MISSING", "CONTAINS", "DOES_NOT_CONTAIN", 
+"STARTS_WITH", and "DOES_NOT_START_WITH".
+</p>
+<p>
+When using the "IS_MISSING" or "IS_NOT_MISSING" operators, an empty string should be supplied as the value.
+See example below.
 </p>
 
 
@@ -84,23 +86,31 @@ https://www.labkey.org/project/home/begin.view
 <h3>Examples</h3>
 
 <pre>
+## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-# Specify two filters:
-myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+## Two filters:
+filter1&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
-# Filter using "equals one of" operator:
-myfilter2 &lt;- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
+## Using "equals one of" operator:
+filter2 &lt;- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
-# Use in labkey.selectRows function
-getdata &lt;- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-schemaName="study", queryName="HIV Test Results", 
-colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+## Using "is not missing" operator:
+filter3 &lt;- makeFilter(c("HIVRapidTest","IS_NOT_MISSING","")) 
+
+## Apply a filter in labkey.selectRows function
+getdata &lt;- labkey.selectRows(
+baseUrl="https://www.labkey.org", 
+folderPath="/home/Study/demo", 
+schemaName="study", 
+queryName="HIV Test Results", 
+colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+colFilter=filter3)
 
 
 </pre>
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.3 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.4 <a href="00Index.html">Index]</a></div>
 
 </body></html>

@@ -1,11 +1,12 @@
 * using log directory '/home/vobencha/work/peter/labkey/Rlabkey.Rcheck'
-* using R version 2.7.2 (2008-08-25)
+* using R version 2.8.0 (2008-10-20)
 * using session charset: UTF-8
 * checking for file 'Rlabkey/DESCRIPTION' ... OK
-* this is package 'Rlabkey' version '0.0.3'
+* this is package 'Rlabkey' version '0.0.4'
 * checking package name space information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
+* checking for executable files ... OK
 * checking whether package 'Rlabkey' can be installed ... OK
 * checking package directory ... OK
 * checking for portable file names ... OK
@@ -28,7 +29,6 @@ labkey.deleteRows: no visible binding for global variable
   ‘labkey.sessionCookieName’
 labkey.deleteRows: no visible binding for global variable
   ‘labkey.sessionCookieContents’
-labkey.deleteRows: no visible binding for global variable ‘mydata’
 labkey.executeSql: no visible binding for global variable
   ‘labkey.sessionCookieName’
 labkey.executeSql: no visible binding for global variable
@@ -37,7 +37,6 @@ labkey.insertRows: no visible binding for global variable
   ‘labkey.sessionCookieName’
 labkey.insertRows: no visible binding for global variable
   ‘labkey.sessionCookieContents’
-labkey.insertRows: no visible binding for global variable ‘mydata’
 labkey.selectRows: no visible binding for global variable
   ‘labkey.sessionCookieName’
 labkey.selectRows: no visible binding for global variable
@@ -46,34 +45,11 @@ labkey.updateRows: no visible binding for global variable
   ‘labkey.sessionCookieName’
 labkey.updateRows: no visible binding for global variable
   ‘labkey.sessionCookieContents’
-labkey.updateRows: no visible binding for global variable ‘mydata’
 * checking Rd files ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... WARNING
-Warning in names(y)[ind] <- sapply(y[ind], as.character) :
-  number of items to replace is not a multiple of replacement length
-Codoc mismatches from documentation object 'makeFilter':
-makeFilter
-  Code: function(filter1, filter2 = NULL, filter3 = NULL, filter4 =
-                 NULL, filter5 = NULL)
-  Docs: function(c)
-  Argument names in code not in docs:
-    filter1 filter2 filter3 filter4 filter5
-  Argument names in docs not in code:
-    c
-  Mismatches in argument names:
-    Position: 1 Code: filter1 Docs: c
-
-* checking Rd \usage sections ... WARNING
-Undocumented arguments in documentation object 'makeFilter'
-  c(colname, operator, value)
-
-Functions with \usage entries need to have the appropriate \alias entries,
-and all their arguments documented.
-The \usage entries must correspond to syntactically valid R code.
-See the chapter 'Writing R documentation files' in manual 'Writing R
-Extensions'.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
 * creating Rlabkey-Ex.R ... OK
 * checking examples ... OK
 * creating Rlabkey-manual.tex ... OK

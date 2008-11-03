@@ -1,6 +1,6 @@
 makeFilter              package:Rlabkey              R Documentation
 
-_B_u_i_l_d_s _a_n _a_r_r_a_y _o_f _f_i_l_t_e_r_s
+_B_u_i_l_d_s _f_i_l_t_e_r_s _t_o _b_e _u_s_e_d _i_n _l_a_b_k_e_y._s_e_l_e_c_t_R_o_w_s
 
 _D_e_s_c_r_i_p_t_i_o_n:
 
@@ -10,31 +10,37 @@ _D_e_s_c_r_i_p_t_i_o_n:
 
 _U_s_a_g_e:
 
-     makeFilter(c(colname, operator,value))
+     makeFilter(...)
 
 _A_r_g_u_m_e_n_t_s:
 
- colname: a string specifying the name of the column to be filtered
-
-operator: a string specifying what operator should be used in the
-          filter (see options below)
-
-   value: an integer or string specifying the value the columns should
-          be filtered on
+     ...: Arguments in c("colname","operator","value") form, used to
+          create a filter.
 
 _D_e_t_a_i_l_s:
 
-     These filters are applied to the data prior to import into R.
-     Currently this function allows the user to specify up to five
-     filters. Multiple filters can be entered named or un-named vectors
-     (see examples below).
+     These filters are applied to the data prior to import into R. The
+     user can specify as many  filters as desired. The format for
+     specifying a filter is a vector of characters including the column
+     name, operator and value.
+
+_c_o_l_n_a_m_e a string specifying the name of the column to be filtered 
+
+_o_p_e_r_a_t_o_r a string specifying what operator should be used in the filter
+     (see options below)
+
+_v_a_l_u_e an integer or string specifying the value the columns should be
+     filtered on
 
      Possible operator values are as follows: "EQUALS",
      "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN",
-     "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_THAN_OR_EQUAL_TO",
-     "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_MISSING",
-     "IS_NOT_MISSING", "CONTAINS", "DOES_NOT_CONTAIN", "STARTS_WITH",
-     and "DOES_NOT_START_WITH".
+     "GREATER_THAN_OR_EQUAL_TO",  "LESS_THAN", "LESS_THAN_OR_EQUAL_TO",
+     "DATE_EQUAL", "DATE_NOT_EQUAL",  "NOT_EQUAL_OR_NULL",
+     "IS_MISSING", "IS_NOT_MISSING", "CONTAINS", "DOES_NOT_CONTAIN", 
+     "STARTS_WITH", and "DOES_NOT_START_WITH".
+
+     When using the "IS_MISSING" or "IS_NOT_MISSING" operators, an
+     empty string should be supplied as the value. See example below.
 
 _V_a_l_u_e:
 
@@ -58,14 +64,23 @@ _S_e_e _A_l_s_o:
 
 _E_x_a_m_p_l_e_s:
 
-     # Specify two filters:
-     myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+     ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
 
-     # Filter using "equals one of" operator:
-     myfilter2 <- makeFilter(filter1=c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
+     ## Two filters:
+     filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
 
-     # Use in labkey.selectRows function
-     getdata <- labkey.selectRows(baseUrl="https://www.labkey.org", folderPath="/home/Study/demo", 
-     schemaName="study", queryName="HIV Test Results", 
-     colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), colFilter=myfilters)
+     ## Using "equals one of" operator:
+     filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
+
+     ## Using "is not missing" operator:
+     filter3 <- makeFilter(c("HIVRapidTest","IS_NOT_MISSING","")) 
+
+     ## Apply a filter in labkey.selectRows function
+     getdata <- labkey.selectRows(
+     baseUrl="https://www.labkey.org", 
+     folderPath="/home/Study/demo", 
+     schemaName="study", 
+     queryName="HIV Test Results", 
+     colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
+     colFilter=filter3)
 
