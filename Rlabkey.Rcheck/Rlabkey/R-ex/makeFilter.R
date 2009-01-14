@@ -5,10 +5,12 @@
 
 ### ** Examples
 
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Two filters:
-filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+c("HIVRapidTest","EQUALS","Positive"))
 
 ## Using "equals one of" operator:
 filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))

@@ -4,9 +4,9 @@
 Loading required package: RCurl
 Loading required package: rjson
 ** help
-Note: removing empty section \examples
  >>> Building/Updating help pages for package 'Rlabkey'
      Formats: text html latex example 
+Note: removing empty section \examples in file 'Rlabkey-package.Rd'
   Rlabkey-package                   text    html    latex
   labkey.deleteRows                 text    html    latex   example
   labkey.executeSql                 text    html    latex   example

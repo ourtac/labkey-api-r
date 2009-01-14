@@ -5,7 +5,8 @@
 
 ### ** Examples
 
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Select participants who meet acute status requirements
 getacute <- labkey.executeSql(
@@ -15,7 +16,8 @@ schemaName="study",
 sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
 from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
 
-## Compute average ages over different gender groups, use column alias "Number" to rename the column
+## Compute average ages over different gender groups, 
+## use column alias "Number" to rename the column
 getage <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",

@@ -37,10 +37,11 @@ Arguments in c("colname","operator","value") form, used to create a filter.</td>
 These filters are applied to the data prior to import into R. The user can specify as many 
 filters as desired. The format for specifying a filter is a vector of characters including
 the column name, operator and value.
+<dl>
 <dt>colname</dt><dd>a string specifying the name of the column to be filtered</dd> 
 <dt>operator</dt><dd>a string specifying what operator should be used in the filter (see options below)</dd>
 <dt>value</dt><dd>an integer or string specifying the value the columns should be filtered on</dd>
-
+</dl>
 <p>
 Possible operator values are as follows:
 "EQUALS", "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", 
@@ -86,10 +87,12 @@ https://www.labkey.org/project/home/begin.view
 <h3>Examples</h3>
 
 <pre>
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Two filters:
-filter1&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+filter1&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+c("HIVRapidTest","EQUALS","Positive"))
 
 ## Using "equals one of" operator:
 filter2 &lt;- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
@@ -111,6 +114,6 @@ colFilter=filter3)
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.4 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.5 <a href="00Index.html">Index]</a></div>
 
 </body></html>

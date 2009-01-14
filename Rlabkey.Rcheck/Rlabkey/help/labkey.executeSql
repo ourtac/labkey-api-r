@@ -71,11 +71,13 @@ _R_e_f_e_r_e_n_c_e_s:
 _S_e_e _A_l_s_o:
 
      'labkey.selectRows', 'makeFilter', 'labkey.insertRows', 
-     'labkey.updateRows', 'labkey.deleteRows'
+     'labkey.updateRows', 
+      'labkey.deleteRows'
 
 _E_x_a_m_p_l_e_s:
 
-     ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+     ## These example datasets are located at 
+     ## https://www.labkey.org/project/home/Study/demo/begin.view?
 
      ## Select participants who meet acute status requirements
      getacute <- labkey.executeSql(
@@ -85,7 +87,8 @@ _E_x_a_m_p_l_e_s:
      sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
      from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
 
-     ## Compute average ages over different gender groups, use column alias "Number" to rename the column
+     ## Compute average ages over different gender groups, 
+     ## use column alias "Number" to rename the column
      getage <- labkey.executeSql(
      baseUrl="https://www.labkey.org",
      folderPath="/home/Study/demo",

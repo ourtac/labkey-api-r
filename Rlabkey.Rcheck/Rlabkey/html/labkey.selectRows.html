@@ -108,14 +108,16 @@ https://www.labkey.org/project/home/begin.view
 
 <p>
 <code><a href="labkey.executeSql.html">labkey.executeSql</a></code>, <code><a href="makeFilter.html">makeFilter</a></code>, <code><a href="labkey.insertRows.html">labkey.insertRows</a></code>, 
-<code><a href="labkey.updateRows.html">labkey.updateRows</a></code>, <code><a href="labkey.deleteRows.html">labkey.deleteRows</a></code>
+<code><a href="labkey.updateRows.html">labkey.updateRows</a></code>, <br>
+<code><a href="labkey.deleteRows.html">labkey.deleteRows</a></code>
 </p>
 
 
 <h3>Examples</h3>
 
 <pre>
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Retrieve full HIV Test Results dataset
 fulldata &lt;- labkey.selectRows(  
@@ -125,7 +127,8 @@ schemaName="study",
 queryName="HIV Test Results")
 
 ## Specifying filters, max rows and selecting columns
-myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+                                           c("HIVRapidTest","EQUALS","Positive"))
 smalldata &lt;- labkey.selectRows( 
 baseUrl="https://www.labkey.org", 
 folderPath="/home/Study/demo", 
@@ -140,6 +143,6 @@ colFilter=myfilters)
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.4 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.5 <a href="00Index.html">Index]</a></div>
 
 </body></html>

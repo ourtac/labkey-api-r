@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  27 OCT 2008 16:30
+This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  13 JAN 2009 18:19
 entering extended mode
 **\nonstopmode{}\input{Rlabkey-manual.tex}
 (./Rlabkey-manual.tex (/usr/share/texmf/tex/latex/base/book.cls
@@ -289,191 +289,114 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--53
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-Overfull \hbox (93.36096pt too wide) in paragraph at lines 66--68
-[][][]\T1/pcr/m/n/10 labkey.selectRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 l
-abkey.executeSql[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 makeFilter[][]\T1/ptm/m
-/n/10 , [][]\T1/pcr/m/n/10 labkey.insertRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/
-n/10 labkey.updateRows[][]\T1/ptm/m/n/10 ,
- []
-
-
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 77--77
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 78--78
  []\T1/pcr/m/n/10 labkey.deleteRows(baseUrl, folderPath, schemaName, queryName,
  toDelete,[] 
  []
 
-[2]
-Overfull \hbox (90.86096pt too wide) in paragraph at lines 122--124
-[][][]\T1/pcr/m/n/10 labkey.selectRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 l
-abkey.executeSql[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 makeFilter[][]\T1/ptm/m
-/n/10 , [][]\T1/pcr/m/n/10 labkey.insertRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/
-n/10 labkey.updateRows[][] 
- []
-
-[3]
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 167--167
+[2] [3]
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 169--169
  []\T1/pcr/m/n/10 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRo
 ws = NULL,[] 
  []
 
 
-Overfull \hbox (48.77663pt too wide) in paragraph at lines 185--189
+Overfull \hbox (48.77663pt too wide) in paragraph at lines 187--191
 []\T1/ptm/m/n/10 A full dataset or any por-tion of a dataset can be im-ported i
 nto an R data frame us-ing the \T1/pcr/m/n/10 labkey.executeSql
  []
 
 [4]
-Overfull \hbox (90.86096pt too wide) in paragraph at lines 210--212
-[][][]\T1/pcr/m/n/10 labkey.selectRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 m
-akeFilter[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 labkey.insertRows[][]\T1/ptm/m
-/n/10 , [][]\T1/pcr/m/n/10 labkey.updateRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/
-n/10 labkey.deleteRows[][] 
- []
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 226.
 
-
-Overfull \hbox (139.38028pt too wide) in paragraph at lines 215--215
- []\T1/pcr/m/n/9 ## These example datasets are located at https://www.labkey.or
-g/project/home/Study/demo/begin.view?[] 
- []
-
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 222.
-
-(/usr/share/texmf/tex/latex/psnfss/ts1pcr.fd
+ (/usr/share/texmf/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
-Overfull \hbox (74.58035pt too wide) in paragraph at lines 222--222
+Overfull \hbox (74.58035pt too wide) in paragraph at lines 226--226
  []\T1/pcr/m/n/9 sql = \TS1/pcr/m/n/9 '\T1/pcr/m/n/9 select "Status Assessment"
 .ParticipantId, "Status Assessment".StatusMeetCriteria[] 
  []
 
 
-Overfull \hbox (31.3804pt too wide) in paragraph at lines 223--223
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 227--227
  []\T1/pcr/m/n/9 from "Status Assessment" where "Status Assessment".StatusMeetC
 riteria=\\TS1/pcr/m/n/9 '\T1/pcr/m/n/9 Yes\\TS1/pcr/m/n/9 ''\T1/pcr/m/n/9 )[] 
  []
 
 
-Overfull \hbox (144.78027pt too wide) in paragraph at lines 225--225
- []\T1/pcr/m/n/9 ## Compute average ages over different gender groups, use colu
-mn alias "Number" to rename the column[] 
- []
-
-
-Overfull \hbox (58.38037pt too wide) in paragraph at lines 230--230
+Overfull \hbox (58.38037pt too wide) in paragraph at lines 235--235
  []\T1/pcr/m/n/9 sql = "select Demographics.Gender, avg(Demographics.Age) as Nu
 mber from Demographics[] 
  []
 
 [5]
-Overfull \hbox (52.98038pt too wide) in paragraph at lines 238--238
+Overfull \hbox (52.98038pt too wide) in paragraph at lines 243--243
  []\T1/pcr/m/n/9 sql = \TS1/pcr/m/n/9 '\T1/pcr/m/n/9 select "Status Assessment"
 .ParticipantID, "Status Assessment".StatusPartner1[] 
  []
 
 
-Overfull \hbox (31.3804pt too wide) in paragraph at lines 239--239
+Overfull \hbox (31.3804pt too wide) in paragraph at lines 244--244
  []\T1/pcr/m/n/9 from "Status Assessment" where "Status Assessment".StatusPartn
 er1 is not null\TS1/pcr/m/n/9 '\T1/pcr/m/n/9 )[] 
  []
 
 
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 251--251
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 256--256
  []\T1/pcr/m/n/10 labkey.insertRows(baseUrl, folderPath, schemaName, queryName,
  toInsert,[] 
  []
 
-[6]
-Overfull \hbox (90.86096pt too wide) in paragraph at lines 296--298
-[][][]\T1/pcr/m/n/10 labkey.selectRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 l
-abkey.executeSql[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 makeFilter[][]\T1/ptm/m
-/n/10 , [][]\T1/pcr/m/n/10 labkey.updateRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/
-n/10 labkey.deleteRows[][] 
- []
-
-[7]
-Overfull \hbox (72.78088pt too wide) in paragraph at lines 341--341
+[6] [7]
+Overfull \hbox (72.78088pt too wide) in paragraph at lines 347--347
  []\T1/pcr/m/n/10 labkey.selectRows(baseUrl, folderPath, schemaName, queryName,
  viewName = NULL,[] 
  []
 
 
-Overfull \hbox (6.78088pt too wide) in paragraph at lines 342--342
+Overfull \hbox (6.78088pt too wide) in paragraph at lines 348--348
  []\T1/pcr/m/n/10 colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort =
  NULL,[] 
  []
 
 
-Overfull \hbox (48.77663pt too wide) in paragraph at lines 365--369
+Overfull \hbox (48.77663pt too wide) in paragraph at lines 371--375
 []\T1/ptm/m/n/10 A full dataset or any por-tion of a dataset can be im-ported i
 nto an R data frame us-ing the \T1/pcr/m/n/10 labkey.selectRows
  []
 
 [8]
-Overfull \hbox (90.86096pt too wide) in paragraph at lines 389--391
-[][][]\T1/pcr/m/n/10 labkey.executeSql[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 m
-akeFilter[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 labkey.insertRows[][]\T1/ptm/m
-/n/10 , [][]\T1/pcr/m/n/10 labkey.updateRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/
-n/10 labkey.deleteRows[][] 
- []
-
-
-Overfull \hbox (139.38028pt too wide) in paragraph at lines 394--394
- []\T1/pcr/m/n/9 ## These example datasets are located at https://www.labkey.or
-g/project/home/Study/demo/begin.view?[] 
- []
-
-
-Overfull \hbox (139.38028pt too wide) in paragraph at lines 404--404
- []\T1/pcr/m/n/9 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c
-("HIVRapidTest","EQUALS","Positive"))[] 
+Overfull \hbox (42.18039pt too wide) in paragraph at lines 413--413
+ []                                           \T1/pcr/m/n/9 c("HIVRapidTest","E
+QUALS","Positive"))[] 
  []
 
 [9]
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 425--425
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 434--434
  []\T1/pcr/m/n/10 labkey.updateRows(baseUrl, folderPath, schemaName, queryName,
  toUpdate,[] 
  []
 
-[10]
-Overfull \hbox (90.86096pt too wide) in paragraph at lines 470--472
-[][][]\T1/pcr/m/n/10 labkey.selectRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 l
-abkey.executeSql[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/n/10 makeFilter[][]\T1/ptm/m
-/n/10 , [][]\T1/pcr/m/n/10 labkey.insertRows[][]\T1/ptm/m/n/10 , [][]\T1/pcr/m/
-n/10 labkey.deleteRows[][] 
- []
-
-[11]
-Overfull \hbox (72.07913pt too wide) in paragraph at lines 531--536
+[10] [11]
+Overfull \hbox (72.07913pt too wide) in paragraph at lines 542--547
 \T1/ptm/m/n/10 "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_T
 HAN_OR_EQUAL_TO",
  []
 
 
-Overfull \hbox (62.59929pt too wide) in paragraph at lines 531--536
+Overfull \hbox (62.59929pt too wide) in paragraph at lines 542--547
 \T1/ptm/m/n/10 "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_MISSING
 ", "IS_NOT_MISSING",
  []
 
 
-Overfull \hbox (4.05927pt too wide) in paragraph at lines 531--536
+Overfull \hbox (4.05927pt too wide) in paragraph at lines 542--547
 \T1/ptm/m/n/10 "CON-TAINS", "DOES_NOT_CONTAIN", "STARTS_WITH", and "DOES_NOT_ST
 ART_WITH". 
  []
 
-
-Overfull \hbox (139.38028pt too wide) in paragraph at lines 557--557
- []\T1/pcr/m/n/9 ## These example datasets are located at https://www.labkey.or
-g/project/home/Study/demo/begin.view?[] 
- []
-
 [12]
-Overfull \hbox (128.58029pt too wide) in paragraph at lines 560--560
- []\T1/pcr/m/n/9 filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("
-HIVRapidTest","EQUALS","Positive"))[] 
- []
-
-
-Overfull \hbox (15.18042pt too wide) in paragraph at lines 563--563
+Overfull \hbox (15.18042pt too wide) in paragraph at lines 576--576
  []\T1/pcr/m/n/9 filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals 
 ; Less than"))[] 
  []
@@ -486,13 +409,13 @@ Here is how much of TeX's memory you used:
  6706 multiletter control sequences out of 10000+50000
  21499 words of font info for 38 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
- 35i,5n,27p,264b,600s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 35i,5n,27p,264b,598s stack positions out of 5000i,500n,6000p,200000b,5000s
 {/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</us
 r/share/texmf/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf/fonts/type1/
 urw/times/utmb8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmr8a.pfb></usr/s
 hare/texmf/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on Rlabkey-manual.pdf (13 pages, 116391 bytes).
+Output written on Rlabkey-manual.pdf (13 pages, 116760 bytes).
 PDF statistics:
  212 PDF objects out of 1000 (max. 8388607)
  89 named destinations out of 1000 (max. 131072)

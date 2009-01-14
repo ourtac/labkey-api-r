@@ -85,11 +85,13 @@ _R_e_f_e_r_e_n_c_e_s:
 _S_e_e _A_l_s_o:
 
      'labkey.executeSql', 'makeFilter', 'labkey.insertRows', 
-     'labkey.updateRows', 'labkey.deleteRows'
+     'labkey.updateRows', 
+      'labkey.deleteRows'
 
 _E_x_a_m_p_l_e_s:
 
-     ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+     ## These example datasets are located at 
+     ## https://www.labkey.org/project/home/Study/demo/begin.view?
 
      ## Retrieve full HIV Test Results dataset
      fulldata <- labkey.selectRows(  
@@ -99,7 +101,8 @@ _E_x_a_m_p_l_e_s:
      queryName="HIV Test Results")
 
      ## Specifying filters, max rows and selecting columns
-     myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+     myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+                                                c("HIVRapidTest","EQUALS","Positive"))
      smalldata <- labkey.selectRows( 
      baseUrl="https://www.labkey.org", 
      folderPath="/home/Study/demo", 

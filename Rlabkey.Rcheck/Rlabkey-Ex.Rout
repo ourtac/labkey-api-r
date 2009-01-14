@@ -1,5 +1,5 @@
 
-R version 2.8.0 (2008-10-20)
+R version 2.8.1 (2008-12-22)
 Copyright (C) 2008 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -147,7 +147,8 @@ Loading required package: rjson
 > 
 > ### ** Examples
 > 
-> ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+> ## These example datasets are located at 
+> ## https://www.labkey.org/project/home/Study/demo/begin.view?
 > 
 > ## Select participants who meet acute status requirements
 > getacute <- labkey.executeSql(
@@ -157,7 +158,8 @@ Loading required package: rjson
 + sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
 + from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
 > 
-> ## Compute average ages over different gender groups, use column alias "Number" to rename the column
+> ## Compute average ages over different gender groups, 
+> ## use column alias "Number" to rename the column
 > getage <- labkey.executeSql(
 + baseUrl="https://www.labkey.org",
 + folderPath="/home/Study/demo",
@@ -233,7 +235,8 @@ Loading required package: rjson
 > 
 > ### ** Examples
 > 
-> ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+> ## These example datasets are located at 
+> ## https://www.labkey.org/project/home/Study/demo/begin.view?
 > 
 > ## Retrieve full HIV Test Results dataset
 > fulldata <- labkey.selectRows(  
@@ -243,7 +246,8 @@ Loading required package: rjson
 + queryName="HIV Test Results")
 > 
 > ## Specifying filters, max rows and selecting columns
-> myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+> myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
++                                            c("HIVRapidTest","EQUALS","Positive"))
 > smalldata <- labkey.selectRows( 
 + baseUrl="https://www.labkey.org", 
 + folderPath="/home/Study/demo", 
@@ -313,10 +317,12 @@ Loading required package: rjson
 > 
 > ### ** Examples
 > 
-> ## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+> ## These example datasets are located at 
+> ## https://www.labkey.org/project/home/Study/demo/begin.view?
 > 
 > ## Two filters:
-> filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+> filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
++ c("HIVRapidTest","EQUALS","Positive"))
 > 
 > ## Using "equals one of" operator:
 > filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
@@ -340,7 +346,7 @@ Loading required package: rjson
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.784 0.036 2.309 0 0 
+Time elapsed:  0.74 0.024 2.259 0 0 
 > grDevices::dev.off()
 null device 
           1 

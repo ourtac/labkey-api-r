@@ -19,8 +19,8 @@ these functions.
 \Tabular{ll}{
 Package: & Rlabkey\\
 Type: & Package\\
-Version: & 0.0.4\\
-Date: & 2008-10-27\\
+Version: & 0.0.5\\
+Date: & 2009-01-09\\
 License: & Apache License 2.0\\
 LazyLoad: & yes\\
 }
@@ -64,7 +64,8 @@ https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
 \code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
-\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
+\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \\
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 
 \HeaderA{labkey.deleteRows}{Delete rows of data from a labkey database}{labkey.deleteRows}
@@ -90,9 +91,9 @@ normally be hidden from user veiw. If no value is specified, no hidden columns a
 \end{ldescription}
 \end{Arguments}
 \begin{Details}\relax
-A single row or multiple rows of data can be deleted.  The \code{toDelete} data frame should consist of a single 
-column of data containing the data identifiers of the rows to be deleted (e.g., key or lsid).
-The name of the data in the data frame must be the column name from the labkey database.
+A single row or multiple rows of data can be deleted.  For the \code{toDelete} data frame, version 0.0.5 or later accepts either a single column 
+of data containing the data identifiers  (e.g., key or lsid) or the entire row of data to be deleted.
+The names of the data in the data frame must be the column names from the labkey database.
 The data frame must be created with the \code{stringsAsFactors} set to FALSE.
 
 NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
@@ -120,7 +121,8 @@ https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
 \code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
-\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \code{\LinkA{labkey.updateRows}{labkey.updateRows}}
+\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \\
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -208,11 +210,13 @@ https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
 \code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{makeFilter}{makeFilter}}, \code{\LinkA{labkey.insertRows}{labkey.insertRows}}, 
-\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \\
+\code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Select participants who meet acute status requirements
 getacute <- labkey.executeSql(
@@ -222,7 +226,8 @@ schemaName="study",
 sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
 from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
 
-## Compute average ages over different gender groups, use column alias "Number" to rename the column
+## Compute average ages over different gender groups, 
+## use column alias "Number" to rename the column
 getage <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
@@ -294,7 +299,8 @@ https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
 \code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
-\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \\
+\code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -387,11 +393,13 @@ https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
 \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, \code{\LinkA{labkey.insertRows}{labkey.insertRows}}, 
-\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
+\code{\LinkA{labkey.updateRows}{labkey.updateRows}}, \\
+\code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Retrieve full HIV Test Results dataset
 fulldata <- labkey.selectRows(  
@@ -401,7 +409,8 @@ schemaName="study",
 queryName="HIV Test Results")
 
 ## Specifying filters, max rows and selecting columns
-myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+                                           c("HIVRapidTest","EQUALS","Positive"))
 smalldata <- labkey.selectRows( 
 baseUrl="https://www.labkey.org", 
 folderPath="/home/Study/demo", 
@@ -468,7 +477,8 @@ https://www.labkey.org/project/home/begin.view
 \end{References}
 \begin{SeeAlso}\relax
 \code{\LinkA{labkey.selectRows}{labkey.selectRows}}, \code{\LinkA{labkey.executeSql}{labkey.executeSql}}, \code{\LinkA{makeFilter}{makeFilter}}, 
-\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
+\code{\LinkA{labkey.insertRows}{labkey.insertRows}}, \\
+\code{\LinkA{labkey.deleteRows}{labkey.deleteRows}}
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
@@ -524,10 +534,11 @@ makeFilter(...)
 These filters are applied to the data prior to import into R. The user can specify as many 
 filters as desired. The format for specifying a filter is a vector of characters including
 the column name, operator and value.
+\describe{
 \item[colname] a string specifying the name of the column to be filtered 
 \item[operator] a string specifying what operator should be used in the filter (see options below)
 \item[value] an integer or string specifying the value the columns should be filtered on
-
+}
 Possible operator values are as follows:
 "EQUALS", "EQUALS\_ONE\_OF", "NOT\_EQUALS", "GREATER\_THAN", "GREATER\_THAN\_OR\_EQUAL\_TO", 
 "LESS\_THAN", "LESS\_THAN\_OR\_EQUAL\_TO", "DATE\_EQUAL", "DATE\_NOT\_EQUAL", 
@@ -554,10 +565,12 @@ https://www.labkey.org/project/home/begin.view
 \end{SeeAlso}
 \begin{Examples}
 \begin{ExampleCode}
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 ## Two filters:
-filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+c("HIVRapidTest","EQUALS","Positive"))
 
 ## Using "equals one of" operator:
 filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))

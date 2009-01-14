@@ -22,8 +22,8 @@ _D_e_t_a_i_l_s:
 
        Package:   Rlabkey
        Type:      Package
-       Version:   0.0.4
-       Date:      2008-10-27
+       Version:   0.0.5
+       Date:      2009-01-09
        License:   Apache License 2.0
        LazyLoad:  yes
 
@@ -75,5 +75,6 @@ _R_e_f_e_r_e_n_c_e_s:
 _S_e_e _A_l_s_o:
 
      'labkey.selectRows', 'labkey.executeSql', 'makeFilter', 
-     'labkey.insertRows', 'labkey.updateRows', 'labkey.deleteRows'
+     'labkey.insertRows', 
+      'labkey.updateRows', 'labkey.deleteRows'
 
