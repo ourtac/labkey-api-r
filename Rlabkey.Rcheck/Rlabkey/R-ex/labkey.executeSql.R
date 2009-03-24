@@ -13,8 +13,9 @@ getacute <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
-from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
+sql = 'select "Status Assessment".ParticipantId, 
+"Status Assessment".StatusMeetCriteria from "Status Assessment" where 
+"Status Assessment".StatusMeetCriteria=\'Yes\'')
 
 ## Compute average ages over different gender groups, 
 ## use column alias "Number" to rename the column
@@ -22,16 +23,17 @@ getage <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics 
-group by Demographics.Gender")
+sql = "select Demographics.Gender, avg(Demographics.Age) as Number from 
+Demographics group by Demographics.Gender")
 
 ## Get a list of participants with partner information 
 getpartners <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = 'select "Status Assessment".ParticipantID, "Status Assessment".StatusPartner1 
-from "Status Assessment" where "Status Assessment".StatusPartner1 is not null')
+sql = 'select "Status Assessment".ParticipantID, 
+"Status Assessment".StatusPartner1 from "Status Assessment" where 
+"Status Assessment".StatusPartner1 is not null')
 
 
 

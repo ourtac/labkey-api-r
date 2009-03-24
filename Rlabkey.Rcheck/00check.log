@@ -1,8 +1,8 @@
-* using log directory '/home/vobencha/work/peter/labkey/Rlabkey.Rcheck'
+* using log directory '/mnt/phs_home/vobencha/work/peter/labkey/Rlabkey.Rcheck'
 * using R version 2.8.1 (2008-12-22)
 * using session charset: UTF-8
 * checking for file 'Rlabkey/DESCRIPTION' ... OK
-* this is package 'Rlabkey' version '0.0.5'
+* this is package 'Rlabkey' version '0.0.6'
 * checking package name space information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -25,25 +25,9 @@
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... NOTE
-labkey.deleteRows: no visible binding for global variable
+ifcookie: no visible binding for global variable
   ‘labkey.sessionCookieName’
-labkey.deleteRows: no visible binding for global variable
-  ‘labkey.sessionCookieContents’
-labkey.executeSql: no visible binding for global variable
-  ‘labkey.sessionCookieName’
-labkey.executeSql: no visible binding for global variable
-  ‘labkey.sessionCookieContents’
-labkey.insertRows: no visible binding for global variable
-  ‘labkey.sessionCookieName’
-labkey.insertRows: no visible binding for global variable
-  ‘labkey.sessionCookieContents’
-labkey.selectRows: no visible binding for global variable
-  ‘labkey.sessionCookieName’
-labkey.selectRows: no visible binding for global variable
-  ‘labkey.sessionCookieContents’
-labkey.updateRows: no visible binding for global variable
-  ‘labkey.sessionCookieName’
-labkey.updateRows: no visible binding for global variable
+ifcookie: no visible binding for global variable
   ‘labkey.sessionCookieContents’
 * checking Rd files ... OK
 * checking Rd cross-references ... OK

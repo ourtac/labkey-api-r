@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.10.3)  13 JAN 2009 18:19
+This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.6.7)  24 MAR 2009 12:48
 entering extended mode
 **\nonstopmode{}\input{Rlabkey-manual.tex}
 (./Rlabkey-manual.tex (/usr/share/texmf/tex/latex/base/book.cls
@@ -150,7 +150,7 @@ Package: times 2005/04/12 PSNFSS-v9.2a (SPQR)
 (/usr/share/texmf/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-(/usr/share/texmf/tex/latex/config/color.cfg
+(/usr/lib/texmf/tex/latex/config/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
@@ -173,7 +173,7 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 (/usr/share/texmf/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
 )
-(/usr/share/texmf/tex/latex/config/hyperref.cfg
+(/usr/lib/texmf/tex/latex/config/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 (/usr/share/texmf/tex/latex/oberdiek/kvoptions.sty
@@ -291,11 +291,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--53
 ]
 Overfull \hbox (30.78088pt too wide) in paragraph at lines 78--78
  []\T1/pcr/m/n/10 labkey.deleteRows(baseUrl, folderPath, schemaName, queryName,
- toDelete,[] 
+ toDelete)[] 
  []
 
 [2] [3]
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 169--169
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 168--168
  []\T1/pcr/m/n/10 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRo
 ws = NULL,[] 
  []
@@ -311,111 +311,45 @@ LaTeX Font Info:    Try loading font information for TS1+pcr on input line 226.
 
  (/usr/share/texmf/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-)
-Overfull \hbox (74.58035pt too wide) in paragraph at lines 226--226
- []\T1/pcr/m/n/9 sql = \TS1/pcr/m/n/9 '\T1/pcr/m/n/9 select "Status Assessment"
-.ParticipantId, "Status Assessment".StatusMeetCriteria[] 
- []
-
-
-Overfull \hbox (31.3804pt too wide) in paragraph at lines 227--227
- []\T1/pcr/m/n/9 from "Status Assessment" where "Status Assessment".StatusMeetC
-riteria=\\TS1/pcr/m/n/9 '\T1/pcr/m/n/9 Yes\\TS1/pcr/m/n/9 ''\T1/pcr/m/n/9 )[] 
- []
-
-
-Overfull \hbox (58.38037pt too wide) in paragraph at lines 235--235
- []\T1/pcr/m/n/9 sql = "select Demographics.Gender, avg(Demographics.Age) as Nu
-mber from Demographics[] 
- []
-
-[5]
-Overfull \hbox (52.98038pt too wide) in paragraph at lines 243--243
- []\T1/pcr/m/n/9 sql = \TS1/pcr/m/n/9 '\T1/pcr/m/n/9 select "Status Assessment"
-.ParticipantID, "Status Assessment".StatusPartner1[] 
- []
-
-
-Overfull \hbox (31.3804pt too wide) in paragraph at lines 244--244
- []\T1/pcr/m/n/9 from "Status Assessment" where "Status Assessment".StatusPartn
-er1 is not null\TS1/pcr/m/n/9 '\T1/pcr/m/n/9 )[] 
- []
-
-
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 256--256
+) [5]
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 258--258
  []\T1/pcr/m/n/10 labkey.insertRows(baseUrl, folderPath, schemaName, queryName,
- toInsert,[] 
+ toInsert)[] 
  []
 
 [6] [7]
-Overfull \hbox (72.78088pt too wide) in paragraph at lines 347--347
- []\T1/pcr/m/n/10 labkey.selectRows(baseUrl, folderPath, schemaName, queryName,
- viewName = NULL,[] 
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 350--350
+ []\T1/pcr/m/n/10 rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidde
+n = FALSE)[] 
  []
 
-
-Overfull \hbox (6.78088pt too wide) in paragraph at lines 348--348
- []\T1/pcr/m/n/10 colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort =
- NULL,[] 
- []
-
-
-Overfull \hbox (48.77663pt too wide) in paragraph at lines 371--375
-[]\T1/ptm/m/n/10 A full dataset or any por-tion of a dataset can be im-ported i
-nto an R data frame us-ing the \T1/pcr/m/n/10 labkey.selectRows
- []
-
-[8]
-Overfull \hbox (42.18039pt too wide) in paragraph at lines 413--413
- []                                           \T1/pcr/m/n/9 c("HIVRapidTest","E
-QUALS","Positive"))[] 
- []
-
-[9]
-Overfull \hbox (30.78088pt too wide) in paragraph at lines 434--434
+[8] [9]
+Overfull \hbox (30.78088pt too wide) in paragraph at lines 435--435
  []\T1/pcr/m/n/10 labkey.updateRows(baseUrl, folderPath, schemaName, queryName,
- toUpdate,[] 
+ toUpdate)[] 
  []
 
-[10] [11]
-Overfull \hbox (72.07913pt too wide) in paragraph at lines 542--547
-\T1/ptm/m/n/10 "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "LESS_T
-HAN_OR_EQUAL_TO",
- []
-
-
-Overfull \hbox (62.59929pt too wide) in paragraph at lines 542--547
-\T1/ptm/m/n/10 "DATE_EQUAL", "DATE_NOT_EQUAL", "NOT_EQUAL_OR_NULL", "IS_MISSING
-", "IS_NOT_MISSING",
- []
-
-
-Overfull \hbox (4.05927pt too wide) in paragraph at lines 542--547
-\T1/ptm/m/n/10 "CON-TAINS", "DOES_NOT_CONTAIN", "STARTS_WITH", and "DOES_NOT_ST
-ART_WITH". 
- []
-
-[12]
-Overfull \hbox (15.18042pt too wide) in paragraph at lines 576--576
+[10] [11] [12]
+Overfull \hbox (15.18042pt too wide) in paragraph at lines 589--589
  []\T1/pcr/m/n/9 filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals 
 ; Less than"))[] 
  []
 
 [13] (./Rlabkey-manual.aux) ) 
 Here is how much of TeX's memory you used:
- 3539 strings out of 94079
- 47497 string characters out of 1165775
+ 3539 strings out of 94070
+ 47487 string characters out of 1165710
  98065 words of memory out of 3500000
- 6706 multiletter control sequences out of 10000+50000
+ 6711 multiletter control sequences out of 10000+50000
  21499 words of font info for 38 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
- 35i,5n,27p,264b,598s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 35i,6n,27p,488b,598s stack positions out of 5000i,500n,6000p,200000b,5000s
 {/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</us
 r/share/texmf/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf/fonts/type1/
 urw/times/utmb8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmr8a.pfb></usr/s
 hare/texmf/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on Rlabkey-manual.pdf (13 pages, 116760 bytes).
+Output written on Rlabkey-manual.pdf (13 pages, 116686 bytes).
 PDF statistics:
  212 PDF objects out of 1000 (max. 8388607)
  89 named destinations out of 1000 (max. 131072)

@@ -18,9 +18,9 @@ Import full datasets or selected rows into R. The data can be sorted and filtere
 <h3>Usage</h3>
 
 <pre>
-labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
-colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
-colFilter = NULL, stripAllHidden = TRUE)
+labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
+viewName = NULL, colSelect = NULL, maxRows = NULL, 
+rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE)
 </pre>
 
 
@@ -60,15 +60,15 @@ value is specified, the retrieval starts with the first row.</td></tr>
 <td>
 (optional) a vector or array object created by the <code>makeFilter</code> function which contains the
 column name, operator and value of the filter(s) to be applied to the retrieved data.</td></tr>
-<tr valign="top"><td><code>stripAllHidden</code></td>
+<tr valign="top"><td><code>showHidden</code></td>
 <td>
-(optional) a logical value indicating whether or not to return data columns that would normally be hiddenfrom user view. If no value is specified, no hidden columns are returned.</td></tr>
+(optional) a logical value indicating whether or not to return data columns that would normally be hidden from user view. If no value is specified, the hidden columns are not returned. In versions 0.0.5 and earlier, this argument was called <code>stripAllHidden</code>. The <code>stripAllHidden</code> argument performed the same function as <code>showHidden</code> but with different logic. The change was made for clarity.</td></tr>
 </table>
 
 <h3>Details</h3>
 
 <p>
-A full dataset or any portion of a dataset can be imported into an R data frame using the 
+A full dataset or any portion of a dataset can be imported into an R data frame using the<br> 
 <code>labkey.selectRows</code> function. Function arguments are the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
 (ie, sorting, selecting particular columns or maximum number of rows, etc.).
@@ -128,7 +128,7 @@ queryName="HIV Test Results")
 
 ## Specifying filters, max rows and selecting columns
 myfilters&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-                                           c("HIVRapidTest","EQUALS","Positive"))
+c("HIVRapidTest","EQUAL","Positive"))
 smalldata &lt;- labkey.selectRows( 
 baseUrl="https://www.labkey.org", 
 folderPath="/home/Study/demo", 
@@ -143,6 +143,6 @@ colFilter=myfilters)
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.5 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.6 <a href="00Index.html">Index]</a></div>
 
 </body></html>

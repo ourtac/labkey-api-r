@@ -134,8 +134,9 @@ getacute <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
-from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
+sql = 'select "Status Assessment".ParticipantId, 
+"Status Assessment".StatusMeetCriteria from "Status Assessment" where 
+"Status Assessment".StatusMeetCriteria=\'Yes\'')
 
 ## Compute average ages over different gender groups, 
 ## use column alias "Number" to rename the column
@@ -143,16 +144,17 @@ getage <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics 
-group by Demographics.Gender")
+sql = "select Demographics.Gender, avg(Demographics.Age) as Number from 
+Demographics group by Demographics.Gender")
 
 ## Get a list of participants with partner information 
 getpartners <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = 'select "Status Assessment".ParticipantID, "Status Assessment".StatusPartner1 
-from "Status Assessment" where "Status Assessment".StatusPartner1 is not null')
+sql = 'select "Status Assessment".ParticipantID, 
+"Status Assessment".StatusPartner1 from "Status Assessment" where 
+"Status Assessment".StatusPartner1 is not null')
 
 
 
@@ -226,7 +228,7 @@ queryName="HIV Test Results")
 
 ## Specifying filters, max rows and selecting columns
 myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-                                           c("HIVRapidTest","EQUALS","Positive"))
+c("HIVRapidTest","EQUAL","Positive"))
 smalldata <- labkey.selectRows( 
 baseUrl="https://www.labkey.org", 
 folderPath="/home/Study/demo", 
@@ -301,13 +303,13 @@ flush(stderr()); flush(stdout())
 
 ## Two filters:
 filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-c("HIVRapidTest","EQUALS","Positive"))
+c("HIVRapidTest","EQUAL","Positive"))
 
 ## Using "equals one of" operator:
 filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
-## Using "is not missing" operator:
-filter3 <- makeFilter(c("HIVRapidTest","IS_NOT_MISSING","")) 
+## Using "not missing" operator:
+filter3 <- makeFilter(c("HIVRapidTest","NOT_MISSING","")) 
 
 ## Apply a filter in labkey.selectRows function
 getdata <- labkey.selectRows(

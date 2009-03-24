@@ -42,15 +42,28 @@ the column name, operator and value.
 <dt>operator</dt><dd>a string specifying what operator should be used in the filter (see options below)</dd>
 <dt>value</dt><dd>an integer or string specifying the value the columns should be filtered on</dd>
 </dl>
+
 <p>
-Possible operator values are as follows:
-"EQUALS", "EQUALS_ONE_OF", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO", 
-"LESS_THAN", "LESS_THAN_OR_EQUAL_TO", "DATE_EQUAL", "DATE_NOT_EQUAL", 
-"NOT_EQUAL_OR_NULL", "IS_MISSING", "IS_NOT_MISSING", "CONTAINS", "DOES_NOT_CONTAIN", 
-"STARTS_WITH", and "DOES_NOT_START_WITH".
+Operator values:<br>
+EQUAL<br>
+NOT_EQUAL<br> 
+NOT_EQUAL_OR_MISSING<br>
+DATE_EQUAL<br>
+DATE_NOT_EQUAL<br>
+MISSING<br>
+NOT_MISSING<br>
+GREATER_THAN<br>
+GREATER_THAN_OR_EQUAL<br>
+LESS_THAN<br>
+LESS_THAN_OR_EQUAL<br>
+CONTAINS<br>
+DOES_NOT_CONTAIN<br>
+STARTS_WITH<br>
+DOES_NOT_START_WITH<br>
+EQUALS_ONE_OF 
 </p>
 <p>
-When using the "IS_MISSING" or "IS_NOT_MISSING" operators, an empty string should be supplied as the value.
+When using the MISSING or NOT_MISSING operators, an empty string should be supplied as the value.
 See example below.
 </p>
 
@@ -92,13 +105,13 @@ https://www.labkey.org/project/home/begin.view
 
 ## Two filters:
 filter1&lt;- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-c("HIVRapidTest","EQUALS","Positive"))
+c("HIVRapidTest","EQUAL","Positive"))
 
 ## Using "equals one of" operator:
 filter2 &lt;- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 
-## Using "is not missing" operator:
-filter3 &lt;- makeFilter(c("HIVRapidTest","IS_NOT_MISSING","")) 
+## Using "not missing" operator:
+filter3 &lt;- makeFilter(c("HIVRapidTest","NOT_MISSING","")) 
 
 ## Apply a filter in labkey.selectRows function
 getdata &lt;- labkey.selectRows(
@@ -114,6 +127,6 @@ colFilter=filter3)
 
 
 
-<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.5 <a href="00Index.html">Index]</a></div>
+<hr><div align="center">[Package <em>Rlabkey</em> version 0.0.6 <a href="00Index.html">Index]</a></div>
 
 </body></html>

@@ -9,9 +9,9 @@ _D_e_s_c_r_i_p_t_i_o_n:
 
 _U_s_a_g_e:
 
-     labkey.selectRows(baseUrl, folderPath, schemaName, queryName, viewName = NULL, 
-     colSelect = NULL, maxRows = NULL, rowOffset = NULL, colSort = NULL, 
-     colFilter = NULL, stripAllHidden = TRUE)
+     labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
+     viewName = NULL, colSelect = NULL, maxRows = NULL, 
+     rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE)
 
 _A_r_g_u_m_e_n_t_s:
 
@@ -43,19 +43,23 @@ colFilter: (optional) a vector or array object created by the
           operator and value of the filter(s) to be applied to the
           retrieved data.
 
-stripAllHidden: (optional) a logical value indicating whether or not to
-          return data columns that would normally be hiddenfrom user
-          view. If no value is specified, no hidden columns are
-          returned.
+showHidden: (optional) a logical value indicating whether or not to
+          return data columns that would normally be hidden from user
+          view. If no value is specified, the hidden columns are not
+          returned. In versions 0.0.5 and earlier, this argument was
+          called 'stripAllHidden'. The 'stripAllHidden' argument
+          performed the same function as 'showHidden' but with
+          different logic. The change was made for clarity.
 
 _D_e_t_a_i_l_s:
 
      A full dataset or any portion of a dataset can be imported into an
-     R data frame using the  'labkey.selectRows' function. Function
-     arguments are the components of the url that identify the location
-     of the data and what actions should be taken on the data prior to
-     import (ie, sorting, selecting particular columns or maximum
-     number of rows, etc.).
+     R data frame using the
+       'labkey.selectRows' function. Function arguments are the
+     components of the url that identify the location of the data and
+     what actions should be taken on the data prior to import (ie,
+     sorting, selecting particular columns or maximum number of rows,
+     etc.).
 
      NOTE: Each variable in a dataset has both a column label and a
      column name. The column label is visible at the top of each column
@@ -102,7 +106,7 @@ _E_x_a_m_p_l_e_s:
 
      ## Specifying filters, max rows and selecting columns
      myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-                                                c("HIVRapidTest","EQUALS","Positive"))
+     c("HIVRapidTest","EQUAL","Positive"))
      smalldata <- labkey.selectRows( 
      baseUrl="https://www.labkey.org", 
      folderPath="/home/Study/demo", 
