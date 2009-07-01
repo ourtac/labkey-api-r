@@ -1,7 +1,0 @@
-Rlabkey-package         Import data from a labkey data base into an R
-                        data frame
-labkey.executeSql       Retrieve data from a labkey database using Sql
-                        commands
-labkey.selectRows       Retrieve data from a labkey database using url
-                        specifications
-makeFilter              Builds an array of filters
