@@ -1,6 +1,6 @@
 Package: Rlabkey
-Version: 0.0.8
-Date: 2009-07-02
+Version: 0.0.9
+Date: 2009-12-01
 Title: Data retrieval from a Labkey database
 Author: Valerie Obenchain
 SystemRequirements: curl (version 7.12.0 or higher)
