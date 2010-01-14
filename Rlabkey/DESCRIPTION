@@ -1,8 +1,8 @@
 Package: Rlabkey
-Version: 0.0.9
-Date: 2009-12-01
+Version: 0.0.96
+Date: 2010-01-14
 Title: Data retrieval from a Labkey database
-Author: Valerie Obenchain
+Author: Valerie Obenchain 
 SystemRequirements: curl (version 7.12.0 or higher)
         <http://curl.haxx.se>
 Maintainer: Karl Lum <klum@labkey.com>

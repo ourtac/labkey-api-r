@@ -47,9 +47,10 @@ http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{
-\code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, \code{\link{labkey.insertRows}}, 
-\code{\link{labkey.updateRows}}, \cr
-\code{\link{labkey.deleteRows}}
+{Retrieve data:  } \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
+{Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
+{List available data: } \code{\link{labkey.getSchemas}}, \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}},
+\code{\link{labkey.getQueryDetails}},\code{\link{labkey.getDefaultViewDetails}},\code{\link{labkey.getLookupDetails}},
 
 }
 \examples{

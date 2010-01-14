@@ -2,8 +2,8 @@
 {
     ## substitute null literals for NA so the data frame gets constructed properly
     rawdata <- gsub("null", "\"NA\"", rawdata)
-
     decode <- fromJSON(rawdata)
+
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){
@@ -35,24 +35,39 @@
 		warning("Empty data frame was returned. Query may be too restrictive.", call.=FALSE)}
 		return(emptydf)}
 		
-	if(length(decode$rows)>0)
-		{hold.dat <- NULL
-    	hold.dat <- matrix(sapply(decode$rows,rbind), nrow=length(decode$rows), byrow=TRUE)
-    	hold.dat <- as.data.frame(hold.dat)
-    	names(hold.dat) <- names(decode$rows[[1]])}
+	if(length(decode$rows)>0) {
+		hold.dat <- NULL
+##    		hold.dat <- matrix(sapply(decode$rows,rbind), nrow=length(decode$rows), byrow=TRUE)
+    		hold.dat <- matrix(sapply(sapply(decode$rows,filterrow),rbind), nrow=length(decode$rows), byrow=TRUE)
+    		hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
+    	##	tmpnames1 <- names(decode$rows[[1]])
+		tmprow <- filterrow(decode$rows[[1]])
+	## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
+	##	for (x in 1:length(tmpnames1)) {
+	##		valName <- tmpnames1[[x]]				
+	##		if ((nchar(valName)>11) && (substr(valName,1,11) == as.character("_labkeyurl_"))) {
+	##			next
+	##		}
+	##		tmpnames2 <- c(tmpnames2, tmpnames1[x])
+	##	}	
+		names(hold.dat) <- names(tmprow)   			
+	}
 
 	## Order data
 	oindex <- NULL
-  	for(k in 1:length(names(hold.dat))){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+##  	for(k in 1:length(names(hold.dat))){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+  	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+
   	refdf$oindex <- oindex
   	refdf$type <- NULL
-  	for(p in 1:dim(refdf)[1])
-  	    {   ind <- which(refdf$hindex==decode$metaData$fields[[p]]$name)
-  	        refdf$type[ind] <- decode$metaData$fields[[p]]$type}
+  	for(p in 1:dim(refdf)[1]) {   
+  	    ind <- which(refdf$hindex==decode$metaData$fields[[p]]$name)
+  	    refdf$type[ind] <- decode$metaData$fields[[p]]$type
+  	}
 
-	newdat <- NULL  	
-	for(i in 1:length(cnames)){ newdat <- cbind(newdat, hold.dat[,refdf$oindex[i]])}
-	newdat <- as.data.frame(newdat)
+	newdat <- matrix(ncol=0, nrow=length(decode$rows))
+	for(i in 1:length(cnames)){ newdat <- cbind(newdat, as.data.frame(hold.dat[,refdf$oindex[i]], stringsAsFactors=FALSE) )}
+	newdat <- as.data.frame(newdat,stringsAsFactors=FALSE)
 
   	## Delete hidden column(s) unless showHidden=TRUE
       if(showHidden==TRUE)   {} else {
@@ -96,3 +111,17 @@
 return(newdat)
 }
 
+filterrow<-function(row)
+{
+	## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
+	filtered <- NULL
+	for (x in 1:length(row)) {		
+		valname <- names(row[x])
+		if ((nchar(valname)>11) && (substr(valname,1,11) == as.character("_labkeyurl_"))) {
+			next
+		}
+		filtered <- c(filtered, row[x])
+	}	
+return(filtered)
+
+}
