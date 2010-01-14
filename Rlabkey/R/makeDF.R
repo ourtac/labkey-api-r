@@ -37,26 +37,16 @@
 		
 	if(length(decode$rows)>0) {
 		hold.dat <- NULL
-##    		hold.dat <- matrix(sapply(decode$rows,rbind), nrow=length(decode$rows), byrow=TRUE)
     		hold.dat <- matrix(sapply(sapply(decode$rows,filterrow),rbind), nrow=length(decode$rows), byrow=TRUE)
     		hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
-    	##	tmpnames1 <- names(decode$rows[[1]])
 		tmprow <- filterrow(decode$rows[[1]])
-	## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
-	##	for (x in 1:length(tmpnames1)) {
-	##		valName <- tmpnames1[[x]]				
-	##		if ((nchar(valName)>11) && (substr(valName,1,11) == as.character("_labkeyurl_"))) {
-	##			next
-	##		}
-	##		tmpnames2 <- c(tmpnames2, tmpnames1[x])
-	##	}	
 		names(hold.dat) <- names(tmprow)   			
 	}
 
 	## Order data
 	oindex <- NULL
-##  	for(k in 1:length(names(hold.dat))){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
-  	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+  	for(k in 1:length(names(hold.dat))){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+##  	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
 
   	refdf$oindex <- oindex
   	refdf$type <- NULL
@@ -111,9 +101,11 @@
 return(newdat)
 }
 
+## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
+## problem is that a null value entry doesn't have a url name/value pair.  so the rows were ending up
+## with an inconsistent number of cols.
 filterrow<-function(row)
 {
-	## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
 	filtered <- NULL
 	for (x in 1:length(row)) {		
 		valname <- names(row[x])
