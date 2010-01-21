@@ -71,25 +71,20 @@ if(status>=400)
       {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-    ## substitute null literals for NA so the data frame gets constructed properly
-mydata <- gsub("null", "\"NA\"", mydata)
 decode <- fromJSON(mydata)
-
 
 ## If querying the default view, the metadata is in a differnt object in the json stream 
 qcs <- decode$columns
 if (showDefaultView==TRUE) {qcs<-decode$defaultView$columns}
-
-if (length(qcs)==0) {stop(paste("No results found.  Check the queryName parameter.", sep=""))}
 
 ## if looking for the potential fields to add via lookups, the name returned has a different meaning
 fieldNameCol <- "fieldName"
 if(is.null(lookupKey)==FALSE) {fieldNameCol <- "relativeKey"}
 
 dmall <- matrix(nrow=0, ncol=19, byrow=TRUE)
-
-for (j in 1:length(qcs))
+if(length(qcs)>0)
 {
+	for (j in 1:length(qcs))
 	{
 		dmqrow<- matrix(data=cbind(decode$name[[1]], qcs[[j]]$name, qcs[[j]]$caption, qcs[[j]]$fieldKey, qcs[[j]]$type, qcs[[j]]$isNullable, qcs[[j]]$isKeyField, 
 			qcs[[j]]$isAutoIncrement, qcs[[j]]$isVersionField, qcs[[j]]$isHidden, qcs[[j]]$isSelectable, 

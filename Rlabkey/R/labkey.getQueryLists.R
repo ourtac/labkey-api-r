@@ -1,3 +1,4 @@
+
 ## public function getQueries, returns all queries associated with a specified schema
 labkey.getQueries <- function(baseUrl, folderPath, schemaName)
 {
@@ -74,26 +75,25 @@ if(status>=400)
       {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-	## substitute null literals for NA so the data frame gets constructed properly
-	mydata <- gsub("null", "\"NA\"", mydata)
-
 decode <- fromJSON(mydata)
 qs <- decode[[queryObjType]]
-if (length(qs)==0) {stop(paste("No results found.  Check the queryName parameter.", sep=""))}
 	
 dmall <- matrix(nrow=0, ncol=3, byrow=TRUE)
 
-for (j in 1:length(qs))
+if (length(qs)>0)
 {
-	dmq <- matrix(nrow=0, ncol=3, byrow=TRUE)
-	nc <- length(qs[[j]]$columns)
-	for (k in 1:nc) 
+	for (j in 1:length(qs))
 	{
-		dmqrow<- matrix( cbind(qs[[j]]$name, qs[[j]]$columns[[k]]$name, qs[[j]]$columns[[k]][[columnNames[3]]]), ncol=3, byrow=FALSE)
-		dmq<-rbind(dmq, dmqrow)
+		dmq <- matrix(nrow=0, ncol=3, byrow=TRUE)
+		nc <- length(qs[[j]]$columns)
+		for (k in 1:nc) 
+		{
+			dmqrow<- matrix( cbind(qs[[j]]$name, qs[[j]]$columns[[k]]$name, qs[[j]]$columns[[k]][[columnNames[3]]]), ncol=3, byrow=FALSE)
+			dmq<-rbind(dmq, dmqrow)
+		}
+		dmall <- rbind(dmall,dmq)
 	}
-	dmall <- rbind(dmall,dmq)
-}
+}	
 dfall <- as.data.frame(dmall, stringsAsFactors=FALSE)
 colnames(dfall)<- columnNames
 

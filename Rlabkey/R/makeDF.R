@@ -1,9 +1,8 @@
+
  makeDF <- function(rawdata, colSelect=NULL, showHidden)
 {
-    ## substitute null literals for NA so the data frame gets constructed properly
-    rawdata <- gsub("null", "\"NA\"", rawdata)
-    decode <- fromJSON(rawdata)
 
+    decode <- fromJSON(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){
@@ -45,8 +44,8 @@
 
 	## Order data
 	oindex <- NULL
-  	for(k in 1:length(names(hold.dat))){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
-##  	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+	## number of cols selected may be more or less than described in metadata
+  	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
 
   	refdf$oindex <- oindex
   	refdf$type <- NULL
@@ -92,18 +91,12 @@
 	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames[1]}
 
 
-	## Replace string "NA" with NA in character columns
-	for(k in 1:ncol(newdat))
-		{if(mode(newdat[,k])=="character") {na.ind <- which(newdat[,k]=="NA")
-											ifelse(na.ind>0, newdat[na.ind,k] <- NA, )}}    
-
-  	
+	
 return(newdat)
 }
 
 ## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
-## problem is that a null value entry doesn't have a url name/value pair.  so the rows were ending up
-## with an inconsistent number of cols.
+## also consolidate null handling here
 filterrow<-function(row)
 {
 	filtered <- NULL
@@ -112,6 +105,7 @@ filterrow<-function(row)
 		if ((nchar(valname)>11) && (substr(valname,1,11) == as.character("_labkeyurl_"))) {
 			next
 		}
+		if (is.null(row[x][[valname]])) { row[x][[valname]]<-NA }
 		filtered <- c(filtered, row[x])
 	}	
 return(filtered)

@@ -50,8 +50,6 @@ if(status>=400)
       {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-    ## substitute null literals for NA so the data frame gets constructed properly
-mydata <- gsub("null", "\"NA\"", mydata)
 decode <- fromJSON(mydata)
 cn<-names(decode)
 newdata<- as.data.frame(cn)
