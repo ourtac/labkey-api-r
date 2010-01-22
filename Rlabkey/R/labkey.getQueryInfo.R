@@ -100,8 +100,8 @@ if(length(qcs)>0)
 			qcs[[j]]$lookup$queryName,qcs[[j]]$lookup$isPublic), ncol=5, byrow=FALSE)
 		}
 		dmqrow<-cbind(dmqrow, lookupinfo)
+		dmall <- rbind(dmall,dmqrow)		
 	}
-	dmall <- rbind(dmall,dmqrow)
 }
 dfall <- as.data.frame(dmall, stringsAsFactors=FALSE)
 colnames(dfall)<-c("queryName", fieldNameCol, "caption", "fieldKey", "type", "isNullable","isKeyField",
