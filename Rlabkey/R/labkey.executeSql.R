@@ -1,5 +1,5 @@
 labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL,
-rowOffset=NULL, showHidden=FALSE)
+rowOffset=NULL, showHidden=FALSE, colNameOpt='caption')
 {
 ## If maxRows and/or rowOffset are specified, set showAllRows=FALSE
 showAllRows=TRUE
@@ -53,7 +53,7 @@ if(status>=400)
     {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
 
-newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden)
+newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden, colNameOpt=colNameOpt)
 
 return(newdata)
 }

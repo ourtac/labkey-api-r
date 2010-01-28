@@ -14,13 +14,11 @@ labkey.getLookupDetails(baseUrl, folderPath, schemaName, queryName, lookupKey)
   \item{lookupKey}{a string specifying the qualified name of a lookup field (foreign key) relative to the query specified by queryName }
 }
 \details{
-When \code{getQueryDetails} returns non-NA values for the lookupKeyField and other lookup information, the \code{getLookupDetails} can be called
+When \code{getQueryDetails} returns non-NA values for the lookupQueryName, the \code{getLookupDetails} function can be called
 to enumerate the fields from the query referenced by the lookup.  These lookup fields can be added to the \code{colSelect} list of \code{selectRows}.
 }
 \value{
-The available schemas are returned as a data frame, with the same columns as detailed in \code{\link{labkey.getQueryDetails}}.EXCEPT
-the "fieldName" column is replaced by "relativeFieldKey" and is the string used to incorporate the field in a query on the
-object specified in queryName.See the examples below.
+The available schemas are returned as a data frame, with the same columns as detailed in \code{\link{labkey.getQueryDetails}}
 
 }
 \references{http://www.omegahat.org/RCurl/,\cr 

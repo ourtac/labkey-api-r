@@ -13,21 +13,36 @@ labkey.getQueryDetails(baseUrl, folderPath, schemaName, queryName)
   \item{queryName}{a string specifying the name of the query}
 }
 \details{
-Queries have a defined output list of fields.  To retrieve that set of fields with their detailed properties such as type and nullability, use
+Queries have a default output list of fields defined by the "default view" of the query.  
+To retrieve that set of fields with their detailed properties such as type and nullability, use
 \code{labkey.getQueryDetails} function. Function arguments are the components of the url that identify
 the location of the server, the folder path, the schema, and the name of the query.
 \cr \cr
-Each column in a dataset corresponsds to a field in a query.  Each field has a \dQuote{label} (also called a \dQuote{caption}), 
-a name, and a key. The field label is visible at the top
-of each column on a LabKey grid page, and is longer and more descriptive. The field name is the name as defined in the query.
-The field key is the same as the name except for fields from other queries that have a defined 1-M relationship with the 
-table designated by the queryName.  Such fields in related tables are referred to as \dQuote{lookup} fields and have fieldKeys of the format 
+The results from getQueryDetails describe the \dQuote{field names} that are used to build the colSelect, 
+colFilter and colSort parameters to selectRows.  Each column in the data frame returned from selectRows 
+corresponsds to a field in the colSelect list.  
+\cr \cr
+In this call, the \dQuote{colnames} of the returned data frame uses the \dQuote{caption}
+attribute of the corresponding field,  instead of the \dQuote{fieldName} used to request the column. 
+Using the caption instead of the name is easier to read and consistent with what you would see in the LabKey grid page on 
+the same query. See the  \code{\link{getRows}} function for a way to get back the data frame with the names as the 
+column headers.  
+\cr \cr
+There are two types of fieldNames that will be reported by the server in the output of this function.  For fields that are 
+directly defined in the query corresponding the queryName parameter for this function, the fieldName 
+is simply the name assigned by the query.  Because selectRows returns the results specified by the default view, however,
+there are many cases where this default viwe incorporated data from fields from other queries that have a defined 1-M relationship 
+with the table designated by the queryName.  Such fields in related tables are referred to as \dQuote{lookup} fields.
+Lookup fields have multi-part names using a forward slash as the delmiter:
 \cr
 \cr
-lookupkey/displayedfield
+lookupField/displayedField
 \cr
 \cr
-These lookup fieldKey strings can be added to the output column list of \code{labkey.selectRows}.  Lookup fields have the semantics of a LEFT JOIN in SQL, such that 
+These lookup fieldNames can appear in the default view and show up in the selectRows result.  If a field from a lookup table
+is not in the default view, it can still be added to the output column list of \code{labkey.selectRows}.  Use the 
+labkey.getLookups to discover what additonal fields are available via lookups, and then put their multipart fieldName values
+into the colSelect list.  Lookup fields have the semantics of a LEFT JOIN in SQL, such that 
 every record from the  target queryName apprears in the output whether or not there is a matching lookup field value.
 
 }
@@ -35,9 +50,9 @@ every record from the  target queryName apprears in the output whether or not th
 The available schemas are returned as a data frame,
 
 \code{queryName} {the name of the query, repeated n times, where n is the number of output fields from the query} \cr
-\code{fieldName} {the output name of a field as defined in the query} \cr 
+\code{fieldName} {the fully qualified name of the field, relative to the specified queryName.  } \cr 
 \code{caption}  {a more readable label for the data field, appears as a column header in grids} \cr 
-\code{fieldKey} {the fully qualified name of the field, same as the name except for fields defined in queries referenced by lookup fields}\cr 
+\code{fieldKey} {the name part that identifies this field within its containing table, independent of its use as a lookup target.}\cr 
 \code{type} {a string specifying the field type, e.g. Text, Number, Date, Integer}\cr 
 \code{isNullable} {TRUE if the field can be left empty (null)} \cr
 \code{isKeyField} {TRUE if the field is part of the primary key} \cr
@@ -51,7 +66,7 @@ The available schemas are returned as a data frame,
 \code{lookupKeyField}  {for a field defined as a lookup the primary key column of the query referenced by the lookup field;  NA for non-lookup fields} \cr
 \code{lookupSchemaName} {the schema of the query referenced by the lookup field;  NA for non-lookup fields} \cr
 \code{lookupDisplayField} {the field from the query referenced by the lookup field that is shown by default in place of the lookup field;  NA for non-lookup fields} \cr 
-\code{lookupQueryName} {the query referenced by the lookup field;  NA for non-lookup fields} \cr 
+\code{lookupQueryName} {the query referenced by the lookup field;  NA for non-lookup fields.  A non-NA value indicates that you can use this field in a call to getLookups} \cr 
 \code{lookupIsPublic}) {  }\cr
 
 }

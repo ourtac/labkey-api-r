@@ -1,5 +1,5 @@
 
- makeDF <- function(rawdata, colSelect=NULL, showHidden)
+ makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 {
 
     decode <- fromJSON(rawdata)
@@ -15,7 +15,23 @@
   	hindex <- NULL
   	hide <- NULL
   	for(j in 1:length(decode$columnModel))
-  	    {   cnames <- c(cnames, decode$columnModel[[j]]$header)
+  	{   	
+		## three different ways to refer to columns exist today
+		## selectRows and executeSQL by default return the field caption (also called the  "label")
+		## When sepcifying colSelect, colFilter, or ExecuteSql, you must use field names.
+		## when running R "views"  at the server, the field_name is modified to use underscores and lower cased.  
+		## This also makes it a legal name in R, which can be useful.
+
+  		if (colNameOpt=="caption")
+  			{cname <- decode$columnModel[[j]]$header}
+  		else if (colNameOpt == "fieldname")
+  			{cname <- decode$columnModel[[j]]$dataIndex}
+  		else if (colNameOpt == "rname" )
+  			{cname <- .getRNameFromName(decode$columnModel[[j]]$dataIndex, existing=cnames) }
+  		else
+  			{ stop("Invalid colNameOpt option.  Valid values are caption, fieldname, and rname.") }
+  			
+		cnames <- c(cnames, cname)
   	        hindex <- c(hindex, decode$columnModel[[j]]$dataIndex)
   	        hide <- c(hide, decode$columnModel[[j]]$hidden)}
   	refdf <- data.frame(cnames,hindex,hide)
@@ -89,7 +105,7 @@
   	if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
   	{print("MetaData field type not recognized.")}
 	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames[1]}
-
+	
 
 	
 return(newdat)
@@ -110,4 +126,21 @@ filterrow<-function(row)
 	}	
 return(filtered)
 
+}
+
+.getRNameFromName <- function(lkname, existing=NULL)
+{
+	rname <- tolower(chartr(" /", "__", lkname))
+	
+	if (length(existing)>0) 
+	{ 
+		for (i in 1:99)
+		{
+			if(length(existing[rname == existing]) ==0 )
+				{break;}
+			else 
+				{rname<- c(rname + as.character(i))}
+  	    	} 
+  	}    	
+  	return (rname)
 }

@@ -74,39 +74,56 @@ if(status>=400)
 decode <- fromJSON(mydata)
 
 ## If querying the default view, the metadata is in a differnt object in the json stream 
-qcs <- decode$columns
 if (showDefaultView==TRUE) {qcs<-decode$defaultView$columns}
+else {qcs <- decode$columns}
 
-## if looking for the potential fields to add via lookups, the name returned has a different meaning
-fieldNameCol <- "fieldName"
-if(is.null(lookupKey)==FALSE) {fieldNameCol <- "relativeKey"}
+## parsed JSON stream has two types of problems related to nulls:  
+## the value NULL as as named element of the parent node
+## the absence of either a value or a name for some columns on some records
+## etiher one can be detected by checking for is.null on a row-by row basis against the total set of column names
 
-dmall <- matrix(nrow=0, ncol=19, byrow=TRUE)
+baseColumns <- c("name", "caption", "fieldKey", "type", "isNullable","isKeyField",
+			"isAutoIncrement", "isVersionField","isHidden","isSelectable",
+			"isUserEditable", "isReadOnly", "isMvEnabled","description")
+lookupColumns <- c("keyColumn", "schemaName", "displayColumn", "queryName", "isPublic")
+
+dmall <- matrix(nrow=0, ncol=20, byrow=TRUE)
 if(length(qcs)>0)
 {
 	for (j in 1:length(qcs))
 	{
-		dmqrow<- matrix(data=cbind(decode$name[[1]], qcs[[j]]$name, qcs[[j]]$caption, qcs[[j]]$fieldKey, qcs[[j]]$type, qcs[[j]]$isNullable, qcs[[j]]$isKeyField, 
-			qcs[[j]]$isAutoIncrement, qcs[[j]]$isVersionField, qcs[[j]]$isHidden, qcs[[j]]$isSelectable, 
-			qcs[[j]]$isUserEditable, qcs[[j]]$isReadOnly, qcs[[j]]$isMvEnabled
-			), ncol=14, byrow=FALSE)
+		dmqrow<- matrix(data=decode$name[[1]], nrow=1, ncol=1, byrow=FALSE)
+		for (nm in baseColumns) {
+			if (is.null(qcs[[j]][[nm]])) {qcs[[j]][[nm]] <- NA}
+			
+			dmqrow<- matrix(data=cbind(dmqrow, qcs[[j]][[nm]]), nrow=1, byrow=FALSE)
+		}			
+
+		
 		if (is.null(qcs[[j]]$lookup))
 		{
 			lookupinfo <- matrix(data=cbind(NA,NA,NA,NA,NA), ncol=5, byrow=FALSE)
 		}			
 		else
 		{
-			lookupinfo <- matrix(data=cbind(qcs[[j]]$lookup$keyColumn,qcs[[j]]$lookup$schemaName,qcs[[j]]$lookup$displayColumn,
-			qcs[[j]]$lookup$queryName,qcs[[j]]$lookup$isPublic), ncol=5, byrow=FALSE)
-		}
+			for (nm in lookupColumns) {
+				if (is.null(qcs[[j]]$lookup[[nm]])) {qcs[[j]]$lookup[[nm]] <- NA}
+			}			
+			nm <- lookupColumns[1]
+			lookupinfo<- as.matrix(qcs[[j]]$lookup[[nm]], nrow=1, byrow=FALSE)
+			for (nm in lookupColumns[-1]) {
+				lookupinfo<- matrix(data=cbind(lookupinfo, qcs[[j]]$lookup[[nm]]), nrow=1, byrow=FALSE)
+			}			
+		}		
+		
 		dmqrow<-cbind(dmqrow, lookupinfo)
 		dmall <- rbind(dmall,dmqrow)		
 	}
 }
 dfall <- as.data.frame(dmall, stringsAsFactors=FALSE)
-colnames(dfall)<-c("queryName", fieldNameCol, "caption", "fieldKey", "type", "isNullable","isKeyField",
+colnames(dfall)<-c("queryName", "fieldName", "caption", "fieldKey", "type", "isNullable","isKeyField",
 			"isAutoIncrement", "isVersionField","isHidden","isSelectable",
-			"isUserEditable", "isReadOnly", "isMvEnabled", 
+			"isUserEditable", "isReadOnly", "isMvEnabled", "description",
 			"lookupKeyField","lookupSchemaName","lookupDisplayField", "lookupQueryName", "lookupIsPublic")
 
 return(dfall)

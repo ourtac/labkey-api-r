@@ -1,5 +1,5 @@
 labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
-        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE)
+        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption')
 {
 ## Empty string/NULL checking
 if(is.null(viewName)==FALSE) {char <- nchar(viewName); if(char<1){viewName<-NULL}}
@@ -67,7 +67,7 @@ if(status>=400)
       {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-newdata <- makeDF(mydata, colSelect, showHidden)
+newdata <- makeDF(mydata, colSelect, showHidden, colNameOpt )
 
 
 ## Check for less columns returned than requested
@@ -76,3 +76,4 @@ if(is.null(colSelect)==FALSE){if(ncol(newdata)<lencolSel)warning("Fewer columns 
 
 return(newdata)
 }
+

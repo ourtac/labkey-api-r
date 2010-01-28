@@ -1,13 +1,12 @@
 Package: Rlabkey
-Version: 0.0.97
-Date: 2010-01-14
+Version: 2.1.99
+Date: 2010-01-25
 Title: Data retrieval from a Labkey database
-Author: Valerie Obenchain 
+Author: Peter Hussey 
 SystemRequirements: curl (version 7.12.0 or higher)
         <http://curl.haxx.se>
 Maintainer: Karl Lum <klum@labkey.com>
-Description: This package imports data from a labkey database into an R
-        data frame
+Description: This package allows an R user to discover, query and modify data in LaaKey Server
 License: Apache License 2.0
 LazyLoad: true
 Depends: RCurl, rjson (>= 0.1.3)

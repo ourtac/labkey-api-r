@@ -7,7 +7,7 @@ be manipulated through standard SQL commands supported in labkey SQL.
 }
 \usage{
 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL,
-rowOffset = NULL, showHidden = FALSE)
+rowOffset = NULL, showHidden = FALSE, colNameOpt='caption')
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -20,6 +20,8 @@ If no value is specified, rows will begin at the start of the result set.}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would
 normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.
 In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
+  \item{colNameOpt}{(optional) Determines the source of the colnames in the returned data frame.  
+  See \code{\link{labkey.selectRows}} for an explanation.}
 }
 \details{
 A full dataset or any portion of a dataset can be imported into an R

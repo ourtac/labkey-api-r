@@ -7,7 +7,7 @@ Import full datasets or selected rows into R. The data can be sorted and filtere
 \usage{
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
 viewName = NULL, colSelect = NULL, maxRows = NULL, 
-rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE)
+rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE, colNameOpt='caption')
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -24,19 +24,32 @@ value is specified, the retrieval starts with the first row.}
   \item{colFilter}{(optional) a vector or array object created by the \code{makeFilter} function which contains the
 column name, operator and value of the filter(s) to be applied to the retrieved data.}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would normally be hidden from user view. If no value is specified, the hidden columns are not returned. In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
+  \item{colNameOpt}{(optional) Determines the source of the column names in the returned data frame See discussion below.}
+
 }
 \details{
-A full dataset or any portion of a dataset can be imported into an R data frame using the\cr 
+A full dataset or any portion of a dataset can be downloaded  into an R data frame using the 
 \code{labkey.selectRows} function. Function arguments are the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
 (ie, sorting, selecting particular columns or maximum number of rows, etc.).
 
-NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
-of each column on the web page and is longer and more descriptive. The column name is shorter and is
-used \dQuote{behind the scenes} for database manipulation. It is the column name that must be used in
-the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
-a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views}
-tab for each dataset.
+NOTE: Each field returned by a query has both a field name and a caption (also refered to as a label).  
+The caption is visible at the top of a column in a LabKey data grid and is longer and more descriptive. 
+The field name is shorter and is used \dQuote{behind the scenes} for database manipulation. It is the field name 
+that must be used in the Rlabkey functions when a column name is expected. 		
+
+In the returned data frame, there are three different ways to have the columns named:  
+\code{colNameOpt='caption'} uses the caption value, and is the default option for backward compatibility.  
+It may be the best option for displaying to another user.
+
+\code{colNameOpt='fieldname'} uses the field name value, so that the data frame colnames are the same names
+that are used as arguments to labkey function calls.  It is the default for the new \code{\link{getRows}} shortcut
+function over labkey.selectRows.
+
+\code{colNameOpt='rname'} transforms the field name value into valid R names by substituting an underscore for both
+spaces and forward slach (/) characters, and the lower casing the entire name.  It is the way a data frame is passed to a
+script running at the LabKey server in the R View feature of the data grid.  If you are writing scripts for running in an 
+R view on the server, or if you prefer to work with legal r names in the returned grid, this option may be useful.
 
 }
 \value{
