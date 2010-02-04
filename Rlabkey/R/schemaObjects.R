@@ -21,162 +21,87 @@
 ##########################################
 ##  public functions
 ##
-## a session holds current selected values of site, folderpath, schema and query
-## 
+## a session holds current selected values of the site schema root and the user's currnt folder / container
+## These are put in two different environment spaces, the schema root is keyed by the URL because the schema is not going to be 
+## different if the URL is the same.  
+## The session holds pointers to the site and session variables and holds the baseUrl and current folder path
+##
+## Two option buckets are created at the session root so that they  can be read by network-level code without having to pass
+## them down through all the calls.
 
 lkCreateSession <-
-    function(baseUrl, folderPath="/", schemaName=NULL, queryName=NULL, ...)
+    function(baseUrl, folderPath="/Home", curlOptions=NULL, lkOptions=NULL)
 {																					
-		
 	lks<- .LabkeySession(baseUrl)
+
 	lks[["lksite"]]<-.lksite
+	
 	lks[["skey"]] <-  gsub("[ :]*", "", as.character(date()))
-	.lksession[[lks$skey]]<- list("baseUrl"=baseUrl, "folderPath"=folderPath, 
-					"curSchemaName"=as.character(NULL), "curQueryName"=as.character(NULL), "validSchemas"=NA )
+
+	
+	.lksession[[lks$skey]]<- list("baseUrl"=baseUrl, "folderPath"=folderPath, "validSchemas"=NA, "lkOptions" = NA)
+	
+	## Why doesn't this work?
 	lks[["session"]] <- .lksession[[lks$skey]]
+
+	if (missing(lkOptions)) {lkOptions <- list(NA)}	
+	.lksession[[lks$skey]]$lkOptions <- lkOptions
+		
+	# put curlOptions on a package-wide environment so we don't need to pass them everywhere
+	.lksession[["curlOptions"]] <- curlOptions 
 	
 	.setupSchemas(lks, folderPath)	
 
-	if (!missing(schemaName)) {
-		curSchema(lks) <- schemaName
-	}
-	if (!missing(queryName)) {
-		curQuery(lks) <- queryName
-	}	
 	lks
 }
 
 
 ##  getter and setters for the folderPath 
-curFolderPath <-
-    function(lks, ...)
+getFolderPath <-
+    function(lks)
 {
    	return(as.character(lks$session$folderPath))
 }
 
-curFolder <-
-    function(lks, ...)
+
+getSchema <-
+    function(lks,schemaIndex)
 {
-	##nyi
-	fld <- list("root"="/", "Home"="/Home")
-   	return(fld)
-}
-
-
-`curFolder<-` <-
-    function(lks, ..., value)
-{
-	## recheck schemas
-	lks$session$folderPath <- as.character(value)
-	.setupSchemas(lks, value)	
-	
-	sname <- curSchemaName(lks)
-	if (length(sname)>0 && (.validateSchemaName(lks, sname) == FALSE))  {
-	   	lks$session$curSchemaName <- as.character(NULL)
-	   	lks$session$curQueryName <- as.character(NULL)
-		cat("Current schema and query have been reset.   \n")		
-	}
-	lks
-}
-
-####  getters and setter for the current schema.  
-##   Two getters, one for the name and one for the object.  
-##  only onoe method to set (takes a name)
-
-curSchemaName <-
-	function(lks)
-{
-	sname <-lks$session$curSchemaName
-	return(sname)
-}
-
-curSchema <-
-    function(lks, ...)
-{
-    sname <- curSchemaName(lks)
-    if (length(sname)==0) {
-		stop("Current schema has not been set.  \n")    	    
-    }
-	if (!.validateSchemaName (lks, sname)) {    
-		lks$session$curSchemaName <- as.character(NULL)
-		lks$session$curQueryName <- as.character(NULL)
-		stop("Current schema and query have been reset. \n")
-	}
-	sch	<- lks$lksite[[sname]]
-   	return (sch)     	
-}
-
-`curSchema<-` <-
-    function(lks, ..., value)
-{
-	if (!.validateSchemaName (lks, value)) {    
-		stop("Not a valid schema in the current folder context.\n")	
-	}
-	else {
-		## if new queriesList comes back empty, don't use it-- the cache will remain as it was
-		newQueriesList <- .getQueriesList(lks, value)
-		if (length(newQueriesList)>0) {		
-			lks$lksite[[value]]<- .LabkeySchema(newQueriesList)
-		}
-		lks$session$curSchemaName <- as.character(value)
-	}	
-##	invisible(TRUE)	
-	lks
-}
-
-####  getters and setter for the current query.  
-
-curQueryName <-
-	function(lks)
-{
-	qname<- as.character(lks$session$curQueryName)
-	if (length(qname)==0) {
-	  #  	cat("No current query assigned.  \n")
-	}
-##	invisible(TRUE)	
-	return (qname)
-}
-
-curQuery <-
-    function(lks, ...)
-{
-	qname <- curQueryName(lks)
-	cs<- curSchema(lks)
-	cq<- cs[[qname]]
-	if (length(cq) == 0) {
-		lks$session$curQueryName <- as.character(NULL)
-		cat("Current query not valid.  Resetting.\n")
-	}	   		
-   invisible(TRUE)
-   return(cq)
-}
-
-`curQuery<-` <-
-    function(lks, ..., value)
-{	
-	csname <- curSchemaName(lks)
-	
-	cs <- curSchema(lks)
-	if (length(cs[[value]])> 0) {
-	## valid name, fill in column details if needed
-		if((length(cs[[value]])==1) && is.na(cs[[value]])) {
-			lks$lksite[[csname]][[value]]<- .LabkeyQuery(.getQueryDetails(lks, csname, value))
-		}
-		lks$session$curQueryName<- value
-	}	
-	else 
-		{ stop(cat(csname, "." , value, " not found in folder ", curFolderPath(lks), " \n", sep=""))	}
+	if (is.integer(schemaIndex) )
+		{sname <- lsSchemas(lks)[schemaIndex, 1]}
+	else	
+		{sname <- schemaIndex}
 		
-##	invisible(TRUE)			
-	lks
+	if (!.validateSchemaName (lks, sname)) {    
+		stop("Can't find that schema. \n")
+	}
+	## if new queriesList comes back empty, don't use it-- the cache will remain as it was
+	newQueriesList <- .getQueriesList(lks, sname)
+	if (length(newQueriesList)>0) 
+	{		
+		lks$lksite[[sname]]<- .LabkeySchema(newQueriesList)
+	}
+
+
+
+	return(lks$lksite[[sname]])
+   			
 }
+
 
 ##   returns the set of fields accessible through a lookup col.  these are not cached
+##
 getLookups<-
-	function(lks, lookupField, ...)
+	function(lks, query, lookupField)
 {
-	.checkSession(lks)
-	out <- labkey.getLookupDetails(lks$baseUrl, curFolderPath(lks), curSchemaName(lks), curQueryName(lks), lookupField)	
+	if(!inherits(lks, "LabkeySession") || !inherits(query, "LabkeyQuery"))
+		{stop("getLookups() requires a session and a schema$query object")}	
+	
+	if (is.character(lookupField))
+		{luName <- lookupField}
+	else
+		{luName <- lookupField$fieldName}
+	out <- labkey.getLookupDetails(lks$baseUrl, getFolderPath(lks), query$.schemaName, query$.name, luName )	
 	fieldList <- list()
 	for (r in row.names(out))
 	{				
@@ -189,15 +114,28 @@ getLookups<-
 #########################
 ###  wrapper on labkey.selectRows that makes all these objects worthwhile
 getRows<-
-	function(lks, viewName=NULL, colSelect=NULL,
-        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='fieldname')
+	function(lks, query, maxRows=NULL, colNameOpt='fieldname', ...)
 {
-	.checkSession(lks)	
-	lkdata <- labkey.selectRows(lks$baseUrl, curFolderPath(lks), curSchemaName(lks), curQueryName(lks), 
-					viewName=viewName, colSelect=colSelect, maxRows=maxRows, rowOffset=rowOffset, 
-					colSort=colSort, colFilter=colFilter, showHidden=showHidden, colNameOpt=colNameOpt)
-		
-	return (lkdata)
+	if(!inherits(lks, "LabkeySession") && inherits(query, "LabkeyQuery"))
+		{stop("getRows() requires a session and a schema$query object")}
+	if (length(query$.schemaName)==0 || length(query$.name)==0)
+		{stop("Invalid query object")}
+	
+	## support session defaults
+	dflt <- .lksession[[lks$skey]]$lkOptions
+	
+	if (length(dflt)>0 && !is.na(dflt))
+	{
+		for (nm in names(dflt) )
+		{
+			if ((nm=="colNameOpt") && missing(colNameOpt)) {colNameOpt <- dflt$colNameOpt}
+			if ((nm=="maxRows") && missing(maxRows)) {maxRows <- dflt$maxRows}
+		}
+	}
+	lkdata <- labkey.selectRows(baseUrl=lks$baseUrl, folderPath=getFolderPath(lks), schemaName=query$.schemaName
+			, queryName=query$.name, maxRows=maxRows, colNameOpt=colNameOpt, ...)	
+	return(lkdata)			
+						
 }
 
 
@@ -205,25 +143,10 @@ getRows<-
 ##  list available schemas (given base Url and current folder path) 
 ##
 lsSchemas <-
-	function(lks, ...)
+	function(lks)
 {
-	return(as.array(.lksession[[lks$skey]]$validSchemas[,1] ))
-}
-
-
-############################################
-##  list available queries (given base Url, current folder path, and current schema)
-##
-lsQueries <-
-	function(lks, ...)
-{
-	sname<- curSchemaName(lks)
-	if (length(sname)==0) {
-		stop("Must set a current schema via curSchema(lks)<- \"schema name\"  first. \n")
-	}		
-	else {
-		return (names(curSchema(lks)))		
-	}	
+	schemas <- as.array(.lksession[[lks$skey]]$validSchemas[,1] )
+	return(schemas)
 }
 
 
@@ -231,10 +154,17 @@ lsQueries <-
 ##  list available folders (given base Url and current folder path) 
 ##
 lsFolders <-
-	function(lks, subfolders=TRUE, ...)
+	function(lks)
 {
-	##NYI
-	return(c("/", "/Home", "/MyProject"))
+	## find the project name part
+	path <- gsub("[\\]", "/", getFolderPath(lks))
+	pathParts <- strsplit(path,"/")[[1]]
+	pathParts <- pathParts[pathParts!=""]
+	if (length(pathParts)==0) {projectName<- "/"} else {projectName<-pathParts[1]}
+		
+	folders <- labkey.getFolders(lks$baseUrl, projectName, includeSubfolders=TRUE)
+	return (sort(as.array(folders$folderPath)))	
+
 }
 
 
@@ -242,16 +172,19 @@ lsFolders <-
 ##############################################
 ##  Private functions
 ##
-## load schemas from labkey server.  don't load queries until curSchema is set
+## load schemas from labkey server.  don't load queries until a specific schema is requested
+
 .setupSchemas <-
     function(lks, folderPath)
 {
+	
 	out <- labkey.getSchemas(lks$baseUrl, folderPath)
 	## build a list of valid scheas for this folder context
-	validSchemas <- cbind (out, date())
-	colnames(validSchemas) <- c("schemaName", "timestamp")
+	validSchemasDF <- cbind (out, date())
+	validSchemasDF <- data.frame(validSchemasDF[order(validSchemasDF[,1]), ], stringsAsFactors=FALSE)
+	colnames(validSchemasDF) <- c("schemaName", "timestamp")
 	
-	.lksession[[lks$skey]][["validSchemas"]] <- validSchemas		
+	.lksession[[lks$skey]][["validSchemas"]] <- validSchemasDF	
 	
 	for (sn in out$schemaName)
 	{		
@@ -263,31 +196,33 @@ lsFolders <-
 }
 
 
-.getQueriesList <- function(lks, schemaName,...)
+.getQueriesList <- function(lks, schemaName)
 {		
-	out <- labkey.getQueries(lks$baseUrl, curFolderPath(lks), schemaName)
+	out <- labkey.getQueries(lks$baseUrl, getFolderPath(lks), schemaName)
 	## if the existing cached schema passes the checks in .checkValid, then we return an empty queries list
 	queriesList <- NULL	
 	if (.checkValid(lks, schemaName, out)==FALSE) {
 		queries <- unique(out$queryName)	
 
 		for (q in queries)
-		{			
-			queriesList[[as.character(q)]]<-.LabkeyQuery(list(NA))			
+		{	
+			queryObjName <- as.character(q)
+			queriesList[[queryObjName]]<-.LabkeyQuery(c(.getQueryDetails(lks, schemaName, q), ".name"=q, ".schemaName"=schemaName))
 		}
 	}		
 	return(queriesList)
 }
 
-.getQueryDetails <- function(lks, schemaName, queryName, ...)
+.getQueryDetails <- function(lks, schemaName, queryName)
 {	
 	## get the default view info as this is what selectRows returns
-	out <- labkey.getDefaultViewDetails(lks$baseUrl, curFolderPath(lks), schemaName, queryName)	
+	out <- labkey.getDefaultViewDetails(lks$baseUrl, getFolderPath(lks), schemaName, queryName)	
 	fieldList <- list()
 	for (r in row.names(out))
 	{				
 		rowList <- as.list(out[r,-1])
 		fieldList[[as.character(rowList$fieldName)]]<- .LabkeyField(rowList)
+		
 	}
 	return(fieldList)
 }
@@ -318,10 +253,12 @@ lsFolders <-
 		if (length(qnames)==0) {}
 		else {
 			for (qn in qnames) 
-			{
+			{				
 				currentflds <- queriesDF[queriesDF$queryName==qn, 2]
-				cachedflds <- names(sch[[qn]])
-				if (length(currentflds) == length(cachedflds) && all.equal(currentflds, cachedflds)) {
+				cachedflds <- grep(".", names(sch[[qn]]), fixed=TRUE, invert=TRUE, value=TRUE)
+				
+				if (  (length(currentflds) == length(cachedflds)) && length(all.equal(currentflds, cachedflds))==0) 
+				{
 					retval <- TRUE
 				} 
 			}	
@@ -330,18 +267,6 @@ lsFolders <-
 	return (retval)
 }
 
-.checkSession <-
-	function(lks)
-{
-	if (length(lks$baseUrl)==0 ||
-		length(curFolderPath(lks))==0 ||
-		length(curSchema(lks))==0 ||
-		length(curQueryName(lks))==0 )
-	{
-		stop("You must set curSchema and curQuery first")
-	}
-			
-}
 
 
 ###########################################################################
@@ -357,29 +282,17 @@ print.LabkeySession <-
     function(x, ..., pad="")
 {
 	cat("Base Url:  "	, x$baseUrl, "\n")
-	cat("Folder Path:  ", curFolderPath(x), "\n")
-	cat("Current Schema:  ", curSchemaName(x), "\n")
-	cat("Current Query:  ", curQueryName(x), "\n")
-	
-	csname <- curSchemaName(x)
-	cqname <- curQueryName(x)
-	
-	if (length(csname)>0) {
-		if (length(cqname)==0) {
-			cat("Available schemas: \n\t")			
-			for (i in lsSchemas(x)) {
-				cat(as.character(i),"\n\t",sep="")
-			}	
-			cat("\n")
-		}
-		else {
-			cat("Available queries: \n\t")			
-			for (i in lsQueries(x)) {
-				cat(as.character(i),"\n\t",sep="")
-			}	
-			cat("\n")			
-		}
+	cat("Folder Path:  ", getFolderPath(x), "\n")
+	cat("Available schemas: \n\t")			
+	for (i in lsSchemas(x)) {
+		cat(as.character(i),"\n\t",sep="")
 	}	
+	cat("\n\n")
+	cat("Folders in project:  \n\t")
+	for (i in lsFolders(x)) {
+		cat(as.character(i),"\n\t",sep="")
+	}	
+
 }
 
 .LabkeySchema <-
@@ -402,20 +315,29 @@ print.LabkeySchema <-
 .LabkeyQuery <-
     function(...)
 {
-    structure(as.list(...), class="LabkeyQuery")
+     structure(as.list(...), class="LabkeyQuery")
 }
+#			fnames <- grep(".", names(query), fixed=TRUE, invert=TRUE, value=TRUE)
+#			colSelect <- fnames[1]
+#			for (n in fnames[-1])
+#			{
+#				colSelect <- paste(colSelect, query[[n]]$fieldName, sep=", ")	
+#			}
 
 print.LabkeyQuery <-
     function(x, ..., pad="")
-{
-	if (length(names(x)) == 0) {
-		cat("Get field information on a query by making it current using curQuery()<-\"query name\" \n")
+{		
+    	alldf <- as.data.frame(NULL, nrow=1, ncol=3)
+    	for (i in grep(".", names(x), fixed=TRUE, invert=TRUE, value=TRUE)) {    		
+    		luinfo <- " "
+		if (!is.na(x[[i]]$lookupQueryName) ) 
+			{luinfo<- paste("  lookup to ",x[[i]]$lookupSchemaName,".", x[[i]]$lookupQueryName, sep="") }
+    		
+		outdf <- data.frame(cbind(x[[i]]$fieldName, x[[i]]$caption, x[[i]]$type, luinfo))
+		alldf <- rbind(alldf, outdf)		
 	}
-    	cat("Available fields: \n")
-    	for (i in names(x)) {
-	  	cat(i, "\t")
-		print(x[[i]])
-	}
+	colnames(alldf) <- c("fieldName", "caption", "type", "related queries")
+	print(alldf)
 }
 
 .LabkeyField <-
@@ -425,16 +347,9 @@ print.LabkeyQuery <-
               class="LabkeyField")
 }
 
-print.LabkeyField <-
-    function(x, ..., pad="")
-{
-    with(x, {
-		cat(" caption: ", caption 
-#		, " name: ", fieldName
-		, " type: ", type
-		, pad="\t")
-	if (!is.na(lookupQueryName) ) {cat ("  lookup to ",lookupSchemaName,"$", lookupQueryName, sep="") }	
-	cat("\n")
-    })
-}
+#print.LabkeyField <-
+#    function(x, ..., pad="")
+#{
+#	print(x)
+#}
 

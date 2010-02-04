@@ -4,11 +4,10 @@
 \description{ Lists the available schemas given the current folder path for a Labkey session }
 
 \usage{
-lsSchemas(lks, ...) 
+lsSchemas(lks) 
 }
 \arguments{
   \item{lks}{the session key returned from lkCreateSession}
-  \item{...}{}
 }
 
 \details{ Lists the available schemas given the current folder path for a Labkey session 

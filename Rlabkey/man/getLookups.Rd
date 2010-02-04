@@ -4,11 +4,12 @@
 \description{ Retrieve a query object based on the values of folder, schema and query AND a name of a lookup column in that query }
 
 \usage{
-getLookups(lks, lookupField, ...) 
+getLookups(lks, query, lookupField) 
 }
 \arguments{
   \item{lks}{the session key returned from lkCreateSession}
-  \item{lookupField}{the fieldKey value from a field object that has a non-NA value of the lookupQueryName }
+  \item{query}{an object representing a query on LabKey Server, a child object of the object returned by \code{getSchema()}}
+  \item{lookupField}{the fieldKey value from a field object that has a non-NA value of the lookupQueryName, see example }
   \item{...}{ }
 }
 
@@ -26,20 +27,26 @@ https://www.labkey.org/project/home/begin.view}
 
 ## Not run:
 ##
-#library(Rlabkey)
+#LIbrary(Rlabkey)
+#s<-lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+#s  # shows schemas
 
-#s<- lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists",queryName="AllTypes")
+#scobj <- getSchema(s, "lists")
+#scobj   # shows available queries
 
-#q<- curQuery(s)
-#q$Category          # can walk down the populataed schema tree from schema node or query node
-#q$Category$caption
-#q$Category$type
+#scobj$AllTypes  ## this is the query object
 
-#lucols <- getLookups(s, "Category")  # can add fields from related queries
+#lkdata<- getRows(s, scobj$AllTypes)  # shorthand for labkey.selectRows, all the same args apply
+#lkdata
 
-#cols <- c(names(curQuery(s)[2:6]), names(lucols)[2:4], names())
+#lucols <- getLookups(s, scobj$AllTypes, "Category")  # can add fields from related queries
+#lucols
 
-#alltypesDF <- getLookups(s, colSelect=cols)
+#lucols2 <- getLookups(s, scobj$AllTypes, "Category/Group")  # keep going to other tables
+
+#cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
+
+#getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
 
 }
 \keyword{file}

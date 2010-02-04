@@ -53,6 +53,14 @@ reader <- basicTextGatherer()
 header <- basicTextGatherer()
 myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, netrc=1, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE, followlocation=TRUE)
 
+## Support user-settable options for debuggin and setting proxies etc
+if(exists(".lksession"))
+{
+	userOpt <- .lksession[["curlOptions"]] 
+	if (!is.null(userOpt))
+		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
+}
+
 ## Http get
 handle <- getCurlHandle()
 clist <- ifcookie()

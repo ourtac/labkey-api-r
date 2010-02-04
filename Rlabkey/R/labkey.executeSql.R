@@ -26,14 +26,23 @@ myurl <- paste(baseUrl,"query",folderPath,"executeSql.api",sep="")
 ## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
+
+
 handle <- getCurlHandle()
 clist <- ifcookie()
 if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont,sep=""),
                         writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
                         ssl.verifypeer=FALSE, followlocation=TRUE)} else
-{myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
+{myopts <- curlOptions(netrc=1, httpauth=1L, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
                         ssl.verifypeer=FALSE, followlocation=TRUE)}
 
+## Support user-settable options for debuggin and setting proxies etc
+if(exists(".lksession"))
+{
+	userOpt <- .lksession[["curlOptions"]] 
+	if (!is.null(userOpt))
+		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
+}
 
 ## Post form
 postForm(uri=myurl, "schemaName"=schemaName, "sql"=sql, "apiVersion"="8.3", .opts=myopts, curl=handle)

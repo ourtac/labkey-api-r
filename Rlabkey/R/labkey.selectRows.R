@@ -49,10 +49,27 @@ reader <- basicTextGatherer()
 header <- basicTextGatherer()
 myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, netrc=1, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE, followlocation=TRUE)
 
+## Support user-settable options for debuggin and setting proxies etc
+if(exists(".lksession"))
+{
+	userOpt <- .lksession[["curlOptions"]] 
+	if (!is.null(userOpt))
+		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
+}
+
 ## Http get
 handle <- getCurlHandle()
 clist <- ifcookie()
-if(clist$Cvalue==1) {mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))} else {mydata <- getURI(myurl, .opts=myopts, curl=handle)}
+if(clist$Cvalue==1) 
+{	
+	mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))
+} 
+else 
+{
+	myopts <-curlOptions(.opts=c(myopts, httpauth=1L))
+	mydata <- getURI(myurl, .opts=myopts, curl=handle)
+}
+
 
 ## Error checking, decode data and return data frame
 h <- parseHeader(header$value())
@@ -67,7 +84,7 @@ if(status>=400)
       {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-newdata <- makeDF(mydata, colSelect, showHidden, colNameOpt )
+newdata <- makeDF(mydata, colSelect, showHidden, colNameOpt)
 
 
 ## Check for less columns returned than requested

@@ -18,11 +18,11 @@ rowOffset = NULL, showHidden = FALSE, colNameOpt='caption')
   \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval.
 If no value is specified, rows will begin at the start of the result set.}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would
-normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.
-In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
-  \item{colNameOpt}{(optional) Determines the source of the colnames in the returned data frame.  
-  See \code{\link{labkey.selectRows}} for an explanation.}
+normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.}
+  \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'
+  See labkey.selectRows for more details.}
 }
+
 \details{
 A full dataset or any portion of a dataset can be imported into an R
 data frame using the \code{labkey.executeSql}
@@ -35,7 +35,7 @@ of each column on the web page and is longer and more descriptive. The column na
 used \dQuote{behind the scenes} for database manipulation. It is the column name that must be used in
 the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
 a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views}
-tab for each dataset.
+tab for each dataset.See getRows() for new column naming options.
 
 }
 \value{

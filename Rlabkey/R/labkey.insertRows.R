@@ -41,6 +41,13 @@ if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Cc
 {myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
                         ssl.verifypeer=FALSE, followlocation=TRUE)}
 
+## Support user-settable options for debuggin and setting proxies etc
+if(exists(".lksession"))
+{
+	userOpt <- .lksession[["curlOptions"]] 
+	if (!is.null(userOpt))
+		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
+}
 
 ## Post form
 myurl <- paste(baseUrl,"query",folderPath,"insertRows.api",sep="")

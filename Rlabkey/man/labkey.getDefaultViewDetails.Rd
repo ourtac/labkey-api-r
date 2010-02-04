@@ -15,10 +15,10 @@ labkey.getDefaultViewDetails(baseUrl, folderPath, schemaName, queryName)
 \details{
 Queries have a default \dQuote{views} associeated with them.  A query view can describe a subset or superset of the fields defined by the query.  
 A query view is defined by using the \dQuote{Customize View} button option on a LabKey data grid page.  \code{getDefaultViewDetails} has the same arguments 
-and returns the same shape of result data frame as \code{getQueryDetails}.
+and returns the same shape of result data frame as \code{getQueryDetails}.The default view is the what you will get back on calling getrows().
 }
 \value{
-The available schemas are returned as a data frame.  See \code{\link{labkey.getQueryDetails}} for a description.
+The output field attributes of the default view are returned as a data frame.  See \code{\link{labkey.getQueryDetails}} for a description.
 }
 \references{http://www.omegahat.org/RCurl/,\cr 
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
