@@ -5,7 +5,7 @@
 Builds field lists to be used in \code{labkey.selectRows}.
 }
 \usage{
-lkCreateSession(baseUrl, folderPath="/Home", curlOptions=NULL, lkOptions=NULL)
+lkCreateSession(baseUrl, folderPath="/home", curlOptions=NULL, lkOptions=NULL)
 }
 \arguments{
   \item{baseUrl}{a string specifying the address of the LabKey Server, including the context root}
@@ -38,49 +38,46 @@ https://www.labkey.org/project/home/begin.view}
 \seealso{\code{\link{labkey.selectRows}}}
 \examples{
 
-## Not run:
-##
+\dontrun{
 
-#library(Rlabkey)
-#s<-lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
-#s  # shows schemas
+library(Rlabkey)
+s<-lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+s   shows schemas
 
-#scobj <- getSchema(s, "lists")
-#scobj   # shows available queries
+scobj <- getSchema(s, "lists")
+scobj    shows available queries
 
-#scobj$AllTypes  ## this is the query object
+scobj$AllTypes   this is the query object
 
-#lkdata<- getRows(s, scobj$AllTypes)  # shorthand for labkey.selectRows, all the same args apply
-#lkdata
+lkdata<- getRows(s, scobj$AllTypes)   #shorthand for labkey.selectRows, all the same args apply
+lkdata
 
-#lucols <- getLookups(s, scobj$AllTypes, "Category")  # can add fields from related queries
-#lucols
+lucols <- getLookups(s, scobj$AllTypes, "Category")   #can add fields from related queries
+lucols
 
-#lucols2 <- getLookups(s, scobj$AllTypes, "Category/Group")  # keep going to other tables 
+lucols2 <- getLookups(s, scobj$AllTypes, "Category/Group")   #keep going to other tables 
 
-#cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
+cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
 
-#getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
+getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
 	
 ## using lkOptions
 ## change the default column naming to be the same as used in the default labkey.data data frame in R views
 ## with rname, spaces and slashes are replace with underscores, and the whole name is lower cased
 
-# lkOptions<-list("colNameOpt"="rname")
-#srname <-lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", lkOptions=lkOptions)
-#getRows(srname, scobj$AllTypes)
-
-
-
+lkOptions<-list("colNameOpt"="rname")
+srname <-lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", lkOptions=lkOptions)
+getRows(srname, scobj$AllTypes)
 
 ## using the curlOptions for generating debug tracesof network traffic
-#d<- debugGatherer()
-#copt <- curlOptions(debugfunction=d$update, verbose=TRUE, cookiefile='/cooks.txt')
-#sdbg<- lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", 
-#	 curlOptions=copt)
-#getRows(sdbg, scobj$AllTypes)
-#strwrap(d$value(), 100)
+d<- debugGatherer()
+copt <- curlOptions(debugfunction=d$update, verbose=TRUE, cookiefile='/cooks.txt')
+sdbg<- lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", 
+	 curlOptions=copt)
+getRows(sdbg, scobj$AllTypes)
+strwrap(d$value(), 100)
 
-## End(Not run)
+}
+
 }
 \keyword{file}

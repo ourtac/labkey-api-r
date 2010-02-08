@@ -1,11 +1,12 @@
 export(labkey.selectRows, labkey.executeSql, makeFilter, labkey.insertRows, labkey.updateRows, labkey.deleteRows, 
 	labkey.getSchemas, labkey.getQueries, labkey.getQueryViews, labkey.getQueryDetails, labkey.getDefaultViewDetails, labkey.getFolders,
-	labkey.getLookupDetails,lkCreateSession, getRows, getLookups, lsSchemas, lsFolders)
+	labkey.getLookupDetails,lkCreateSession, getRows, getLookups, lsSchemas, lsFolders, lsProjects)
 export("getSchema")
 export("getFolderPath")
 
 
 S3method(print, LabkeySession)
+S3method(print, LabkeySchemaList)
 S3method(print, LabkeySchema)
 S3method(print, LabkeyQuery)
 #S3method(print, LabkeyField)
