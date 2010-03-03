@@ -33,47 +33,41 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-## These example datasets are located at 
-## https://isalmon.fhcrc.org/labkey/home/SharedData/begin.view?
 
 ## Details  of fields of a query referenced by a lookup field
-## Not run
-#queryDF  <- labkey.getLookupDetails(
-#baseUrl="https://isalmon.fhcrc.org/labkey",
-#folderPath="/home/SharedData",
-#schemaName="lists",
-#queryName="Ovarian_SomaticMutations_Level3",
-#lookupKey="sample_Id"
-#)
+library(Rlabkey)
 
-## When a lookup field points to a query object that itself has a lookup field, use the returned "relativeFieldKey" to keep going
-## The first query shows field of list Ovarian_Samples, pointed to by lookup field BCRSAMPLEBARCODE in Ovarian_Aliquots list
-# lu1<- labkey.getLookupDetails(
-#	baseUrl="http://isalmon.fhcrc.org/labkey",
-#	folderPath="/home/SharedData",
-#	schemaName="lists",queryName="Ovarian_Aliquots", 
-#	lookupKey="BCRSAMPLEBARCODE"
-#)
+lu1  <- labkey.getLookupDetails(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	queryName="AllTypes",
+	lookupKey="Category"
+)
+lu1
 
-## This query uses the relativeFieldKey returned for the BCRPATIENTBARCODE field in the previous query 
-## to get a second set of fields. Relative to the base query (Ovarian_Aliquots) the key is BCRSAMPLEBARCODE/BCRPATIENTBARCODE
-# lu2<- labkey.getLookupDetails(
-#	baseUrl="http://isalmon.fhcrc.org/labkey",
-#	folderPath="/home/SharedData",
-#	schemaName="lists",queryName="Ovarian_Aliquots", 
-#	lookupKey="BCRSAMPLEBARCODE/BCRPATIENTBARCODE"
-#)
+## When a lookup field points to a query object that itself has a lookup field, use a compound fieldkey 
+## consisting of the lookup fields from the base query object to the target lookupDetails, separated by forward slashes
+lu2<- labkey.getLookupDetails(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	queryName="AllTypes",
+	lookupKey="Category/Group"
+)
+lu2
 
 ## Now select a result set containing a field from the base query, a field from the 1st level of lookup, and one from the 2nd
-# row<- labkey.selectRows(
-#	baseUrl="http://isalmon.fhcrc.org/labkey",
-#	folderPath="/home/SharedData",
-#	schemaName="lists",
-#	queryName="Ovarian_Aliquots", 
-#	colSelect=c("BCRALIQUOTBARCODE","BCRSAMPLEBARCODE/Type","BCRSAMPLEBARCODE/BCRPATIENTBARCODE/TUMORTISSUESITE"), 
-#	colFilter = makeFilter(c("BCRSAMPLEBARCODE/BCRPATIENTBARCODE/TUMORTISSUESITE", "NOT_MISSING",""))
-#	, maxRows=20
-# )
+rows<- labkey.selectRows(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	queryName="AllTypes",
+	colSelect=c("DisplayFld","Category/Category","Category/Group/GroupName"), 
+	colFilter = makeFilter(c("Category/Group/GroupName", "NOT_EQUALS","TypeRange"))
+	, maxRows=20
+ )
+ rows
 
 }
 \keyword{IO}

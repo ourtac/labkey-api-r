@@ -20,22 +20,18 @@ lsProjects(baseUrl)
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{lkCreateSession}}}
+\seealso{\code{\link{getSession}}}
 \examples{
-\dontrun{
 
-## Not run:
-##
+## get list of projects on server, connect a session in one project, then list the folders in that project
 library(Rlabkey)
 lsProjects("http://www.labkey.org")
 
-lkorg <- lkCreateSession("http://www.labkey.org", "/home")
+lkorg <- getSession("http://www.labkey.org", "/home")
 lsFolders(lkorg)
 
-lkorg <- lkCreateSession("http://www.labkey.org", "/home/Study/ListDemo")
+lkorg <- getSession("http://www.labkey.org", "/home/Study/ListDemo")
 lsSchemas(lkorg)
-
-}
 
 }
 \keyword{file}

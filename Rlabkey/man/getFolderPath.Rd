@@ -4,10 +4,10 @@
 \description{ Returns the current folder path for a Labkey session }
 
 \usage{
-getFolderPath(lks) 
+getFolderPath(session) 
 }
 \arguments{
-  \item{lks}{the session key returned from lkCreateSession}
+  \item{session}{the session key returned from getSession}
 }
 
 \details{  Returns a string containing the current folder path for the passed in Labkey session 
@@ -19,18 +19,17 @@ getFolderPath(lks)
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{lkCreateSession}}}
+\seealso{\code{\link{getSession}}}
 \examples{
 
-## Not run:
-##
-#library(Rlabkey)
 
-#s<- lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists",queryName="AllTypes")
+## list available folders
+library(Rlabkey)
 
-#getFolderPath(lks)  #returns "/apisamples"
+lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+getFolderPath(lks)  #returns "/apisamples"
 
-#lsFolders(lks) #returns values "/apisamples" , "/apisamples/sub1" ,"/apisamples/sub1/child" ,"/apisamples/sub2"  
+lsFolders(lks) #returns values "/apisamples" , "/apisamples/sub1" ,"/apisamples/sub1/child" ,"/apisamples/sub2"  
 
 }
 \keyword{file}

@@ -4,10 +4,10 @@
 \description{ Lists the available schemas given the current folder path for a Labkey session }
 
 \usage{
-lsSchemas(lks) 
+lsSchemas(session) 
 }
 \arguments{
-  \item{lks}{the session key returned from lkCreateSession}
+  \item{session}{the session key returned from getSession}
 }
 
 \details{ Lists the available schemas given the current folder path for a Labkey session 
@@ -19,18 +19,15 @@ lsSchemas(lks)
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{lkCreateSession}}}
+\seealso{\code{\link{getSession}}}
 \examples{
 
-## Not run:
-##
-#library(Rlabkey)
+##  get a list of schemas available in the current session context
+library(Rlabkey)
 
-#s<- lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists",queryName="AllTypes")
+lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 
-#curSchema(lks)  #returns "lists"
-
-#lsSchemas(lks) #returns several schema names, e.g. "lists", "core", "MS1", etc.
+lsSchemas(lks) #returns several schema names, e.g. "lists", "core", "MS1", etc.
 
 }
 \keyword{file}

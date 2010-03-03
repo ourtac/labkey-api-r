@@ -39,11 +39,11 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
+
 ## List of folders 
-## Not run
-#library(Rlabkey)
-#folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",	folderPath="/apisamples")
-#folders
+library(Rlabkey)
+folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",	folderPath="/apisamples")
+folders
 
 }
 \keyword{IO}

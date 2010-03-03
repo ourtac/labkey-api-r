@@ -1,52 +1,45 @@
 \name{getLookups}
 \alias{getLookups}
-\title{ Get related data fields from Labkey server based on session values }
+\title{ Get related data fields that are available to include in a query on a given query object}
 \description{ Retrieve a query object based on the values of folder, schema and query AND a name of a lookup column in that query }
 
 \usage{
-getLookups(lks, query, lookupField) 
+getLookups(session, lookupField) 
 }
 \arguments{
-  \item{lks}{the session key returned from lkCreateSession}
-  \item{query}{an object representing a query on LabKey Server, a child object of the object returned by \code{getSchema()}}
-  \item{lookupField}{the fieldKey value from a field object that has a non-NA value of the lookupQueryName, see example }
-  \item{...}{ }
+  \item{session}{the session key returned from getSession}
+  \item{lookupField}{an object representing a lookup field on LabKey Server, a named member of a query object. }
 }
 
 \details{  Lookup fields in LabKey server are the equivalent of declared foreign keys
 }
 
-\value{ A query object of the same shape as returned by curQuery()
+\value{ A query object of the same columns as a query object that is aa member of a schema object, A lookup query
+object, however, is not a member of a schema object, it is only returned by getLookups.  The fields of a lookup query object 
+are usually added to the colSelect parameter in getRows, If a lookup query object is used as the query parameter in
+getRows, the call will return all of the base query columns and all of the lookup query columns.
 }
 \references{http://www.omegahat.org/RCurl/, \cr
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{lkCreateSession}}, \code{\link{labkey.selectRows}}}
+\seealso{\code{\link{getSession}}, \code{\link{getRows}} \code{\link{getSchema}}}
 \examples{
 
-## Not run:
-##
-#LIbrary(Rlabkey)
-#s<-lkCreateSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
-#s  # shows schemas
+##  get fields from lookup tables and add to query
 
-#scobj <- getSchema(s, "lists")
-#scobj   # shows available queries
+library(Rlabkey)
+s<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+ 
+scobj <- getSchema(s, "lists")
 
-#scobj$AllTypes  ## this is the query object
+lucols <- getLookups(s, scobj$AllTypes$Category)  # can add fields from related queries
 
-#lkdata<- getRows(s, scobj$AllTypes)  # shorthand for labkey.selectRows, all the same args apply
-#lkdata
+lucols2 <- getLookups(s, scobj$AllTypes$`Category/Group`)  # keep going to other tables
 
-#lucols <- getLookups(s, scobj$AllTypes, "Category")  # can add fields from related queries
-#lucols
+cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
 
-#lucols2 <- getLookups(s, scobj$AllTypes, "Category/Group")  # keep going to other tables
-
-#cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
-
-#getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
+getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
 
 }
 \keyword{file}

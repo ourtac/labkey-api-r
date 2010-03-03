@@ -50,14 +50,12 @@ https://www.labkey.org/project/home/begin.view}
 }
 \examples{
 
-\dontrun{
 
 ## Insert, update and delete
 ## Note that users must have the necessary permissions in the database
 ## to be able to modify data through the use of these functions
+library(Rlabkey)
 
-### Not run
-## insert, update and delete functions
 newrow <- data.frame(
 	DisplayFld="Inserted from R"
 	, TextFld="how its done"
@@ -94,8 +92,6 @@ selectedRow
 deleterow <- data.frame(RowId=newRowId, stringsAsFactors=FALSE)
 result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists", queryName="AllTypes",  toDelete=deleterow)
 str(result)
-
-}
 
 }
 \keyword{IO}

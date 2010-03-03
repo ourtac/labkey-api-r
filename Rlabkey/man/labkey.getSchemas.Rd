@@ -33,14 +33,16 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-## These example datasets are located at 
-## https://www.labkey.org/project/home/Study/demo/begin.view?
-## List of schemas
-## Not run
-#schemasDF <- labkey.getSchemas(
-#baseUrl="https://isalmon.fhcrc.org/labkey",
-#folderPath="/home/SharedData"
-#)
+\dontrun{
 
+## List of schemas
+library(Rlabkey)
+
+schemasDF <- labkey.getSchemas(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples"
+)
+
+}
 }
 \keyword{IO}

@@ -25,23 +25,24 @@ http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{
-{Retrieve data:  } \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
+{Retrieve data:} \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
 {Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
 {List available data: } \code{\link{labkey.getSchemas}}, \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}}, 
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getLookupDetails}}
 
 }
 \examples{
-## These example datasets are located at 
-## https://isalmon.fhcrc.org/labkey/home/SharedData/begin.view?
-
 
 ## Details  of fields of a default query view
-## Not run
-#queryDF <- labkey.getDefaultViewDetails(
-#baseUrl="https://isalmon.fhcrc.org/labkey",
-#folderPath="/home/SharedData",
-#schemaName="lists",
-#queryName="Ovarian_SomaticMutations_Level3")
+library(Rlabkey)
+
+queryDF <- labkey.getDefaultViewDetails(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	queryName="AllTypes")
+	
+queryDF
+
 }
 \keyword{IO}

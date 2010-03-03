@@ -53,41 +53,26 @@ https://www.labkey.org/project/home/begin.view}
 }
 
 \examples{
-## These example datasets are located at 
-## https://www.labkey.org/project/home/Study/demo/begin.view?
+
+## Example of an expicit join and use of group by and aggregates
+library(Rlabkey)
+
+sql<- "SELECT AllTypesCategories.Category AS Category, 
+	SUM(AllTypes.IntFld) AS SumOfIntFld,
+	AVG(AllTypes.DoubleFld) AS AvgOfDoubleFld
+
+	FROM AllTypes LEFT JOIN AllTypesCategories ON (AllTypes.Category = AllTypesCategories.TextKey)
+	WHERE AllTypes.Category IS NOT NULL
+	GROUP BY AllTypesCategories.Category"
 
 
-## Select participants who meet acute status requirements
-### Not run
-#getacute <- labkey.executeSql(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#sql = 'select "Status Assessment".ParticipantId,
-#"Status Assessment".MeetsCriteria from "Status Assessment" where
-#"Status Assessment".MeetsCriteria=\'Yes\'')
+sqlResults <- labkey.executeSql(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	sql = sql)
 
-
-## Compute average ages over different gender groups, 
-## use column alias "Number" to rename the column
-### Not run
-#getage <- labkey.executeSql(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#sql = "select Demographics.Gender, avg(Demographics.Age) as Number from
-#Demographics group by Demographics.Gender")
-
-
-## Get a list of participants with partner information 
-### Not run
-#getpartners <- labkey.executeSql(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#sql = 'select "Status Assessment".ParticipantID,
-#"Status Assessment".Partner1 from "Status Assessment" where
-#"Status Assessment".Partner1 is not null')
+sqlResults
 
 }
 \keyword{IO}

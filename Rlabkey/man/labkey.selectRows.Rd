@@ -63,33 +63,24 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-## These example datasets are located at 
-## https://www.labkey.org/project/home/Study/demo/begin.view?
 
+## select from a list named AllTypes
+library(Rlabkey)
+rows <- NULL
+rows <- labkey.selectRows(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists", 
+	queryName="AllTypes")
+rows
 
-## Retrieve full HIV Test Results dataset
-## Not run
-#fulldata <- labkey.selectRows(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#queryName="HIV Test Results")
+## select from a view on that list
+rows <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples", schemaName="Lists", queryName="AllTypes", viewName="rowbyrow")
+rows
 
-
-## Specifying filters, max rows and selecting columns
-## Not run
-#myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500),
-#c("HIVRapidTest","EQUAL","Positive"))
-#smalldata <- labkey.selectRows(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#queryName="HIV Test Results",
-#colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"),
-#maxRows=20,
-#colFilter=myfilters)
-
-
+## select a subset of columns
+rows <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples",schemaName="lists", queryName="AllTypes", colSelect=c("TextFld", "IntFld"))
+rows
 
 }
 \keyword{IO}

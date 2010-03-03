@@ -82,14 +82,18 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
+
+\dontrun{
+
 ## Details  of fields of a query
-## These example datasets are located at 
-## https://isalmon.fhcrc.org/labkey/home/SharedData/begin.view?
-## Not run
-#queryDF <- labkey.getQueryDetails(
-#baseUrl="https://isalmon.fhcrc.org/labkey",
-#folderPath="/home/SharedData",
-#schemaName="lists",
-#queryName="Ovarian_SomaticMutations_Level3")
+library(Rlabkey)
+
+queryDF<-labkey.getQueryDetails(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	queryName="AllTypes")
+
+}
 }
 \keyword{IO}

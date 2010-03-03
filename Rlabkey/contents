@@ -85,3 +85,10 @@ Aliases: labkey.getLookupDetails
 Keywords: IO
 Description: List all field attributes for the query referenced by a lookup field in LabKey Server 
 URL: ../../../library/Rlabkey/html/labkey.getLookupDetails.html
+
+
+Entry: labkey.saveBatch
+Aliases: labkey.saveBatch
+Keywords: IO
+Description: Save an assay object to labkey server 
+URL: ../../../library/Rlabkey/html/labkey.saveBatch.html

@@ -40,16 +40,16 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-## These example datasets are located at 
-## https://isalmon.fhcrc.org/labkey/home/SharedData/begin.view?
 
 ## List of views defined for a query in a schema
-## Not run
-#viewsDF <- labkey.getQueryViews(
-#baseUrl="https://isalmon.fhcrc.org/labkey",
-#folderPath="/home/SharedData",
-#queryName="Ovarian_SomaticMutations_Level3"
-#)
+library(Rlabkey)
+
+viewsDF <- labkey.getQueryViews(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists",
+	queryName="AllTypes"
+)
 
 }
 \keyword{IO}
