@@ -1,0 +1,48 @@
+<!--
+
+ * Copyright (c) 2005-2010 LabKey Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+
+ -->
+<project name="test" default="usage" basedir=".">
+
+    <property environment="env"/>
+    <property name="test.dir" value="${basedir}" />
+    <property name="project.root" value="${test.dir}/../.." />
+
+    <target name="usage">
+        <echo message="Valid Targets:" />
+        <echo message="check        run validation checks on the Rlabkey package (builds first)" />
+        <echo message="build        build the Rlabkey binary package that can be installed and tested in R" />
+    </target>
+
+    <target name="check">
+        <exec executable="R">
+            <arg line="CMD check Rlabkey"/>
+        </exec>
+    </target>
+
+    <target name="build">
+        <delete dir="${project.root}/remoteapi/r/latest" />
+        <mkdir dir="${project.root}/remoteapi/r/latest"/>
+        <exec executable="R" dir="${project.root}/remoteapi/r/latest">
+            <arg line="CMD build -binary ../Rlabkey"/>
+        </exec>
+        <copy todir="build" overwrite="true">
+            <fileset dir="latest"/>
+            <mapper type="merge" to="Rlabkey_latest.zip"/>
+        </copy>
+    </target>
+</project>
+
