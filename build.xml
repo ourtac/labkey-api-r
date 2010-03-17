@@ -37,11 +37,11 @@
         <delete dir="${project.root}/remoteapi/r/latest" />
         <mkdir dir="${project.root}/remoteapi/r/latest"/>
         <exec executable="R" dir="${project.root}/remoteapi/r/latest">
-            <arg line="CMD build -binary ../Rlabkey"/>
+            <arg line="CMD build ../Rlabkey"/>
         </exec>
         <copy todir="build" overwrite="true">
             <fileset dir="latest"/>
-            <mapper type="merge" to="Rlabkey_latest.zip"/>
+            <mapper type="merge" to="Rlabkey_latest.tar.gz"/>
         </copy>
     </target>
 </project>
