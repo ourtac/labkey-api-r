@@ -15,33 +15,26 @@ labkey.getFolders(baseUrl, folderPath, includeSubfolders=FALSE, depth=50)
 }
 \details{
 Folders are a hierarchy of containers for data and files.   The are the place where permissions are set 
-in LabKey Server.  The first level in a folder hierarchy is the project.  Below the project is an arbitrary 
-hierarchy of folders that can be used to partition data for reasons of security, visibility, and organization
+in LabKey Server.  The top level in a folder hierarchy is the project.  Below the project is an arbitrary 
+hierarchy of folders that can be used to partition data for reasons of security, visibility, and organization.
 
 Folders cut across schemas.  Some schemas, like the lists schema are not visible in a folder that has no list objects 
-defined in it. Other schemas are visible in all folders, sometimes with queries that are always visible but have no
-rows, and sometimes with no queries defined in them.  (Issue 9600)
-
-
+defined in it. Other schemas are visible in all folders.
 }
 \value{
 The available schemas are returned as a single-column data frame..
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{
 {Retrieve data:  } \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
 {Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
 {List available data: } \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}}, 
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}}, \code{\link{labkey.getLookupDetails}},
-
 }
 \examples{
 
 ## List of folders 
-library(Rlabkey)
+# library(Rlabkey)
 folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",	folderPath="/apisamples")
 folders
 

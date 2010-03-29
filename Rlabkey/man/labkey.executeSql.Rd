@@ -1,9 +1,9 @@
 \name{labkey.executeSql}
 \alias{labkey.executeSql}
-\title{Retrieve data from a labkey database using SQL commands}
+\title{Retrieve data from a LabKey Server using SQL commands}
 \description{
 Use Sql commands to specify data to be imported into R. Prior to import, data can
-be manipulated through standard SQL commands supported in labkey SQL.
+be manipulated through standard SQL commands supported in LabKey SQL.
 }
 \usage{
 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL,
@@ -29,33 +29,19 @@ data frame using the \code{labkey.executeSql}
 function. Function arguments are components of the url that identify the location of the
 data and the SQL actions that should be taken on the data prior to import.
 
-
-NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
-of each column on the web page and is longer and more descriptive. The column name is shorter and is
-used \dQuote{behind the scenes} for database manipulation. It is the column name that must be used in
-the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
-a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views}
-tab for each dataset.See getRows() for new column naming options.
-
+See \code{\link{labkey.selectRows}} for a discussion of the valid options and defaults for \code{colNameOpt}.
 }
-\value{
-The requested data are returned in a data frame with column names as they appear on the website.
+\value{The requested data are returned in a data frame with stringsAsFactors set to FALSE.  Column names are set as determined by the colNameOpt parameter.
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
-
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.insertRows}}, 
 \code{\link{labkey.updateRows}}, \cr
-\code{\link{labkey.deleteRows}}
+\code{\link{labkey.deleteRows}}, \code{\link{getRows}}
 }
-
 \examples{
-
 ## Example of an expicit join and use of group by and aggregates
-library(Rlabkey)
+# library(Rlabkey)
 
 sql<- "SELECT AllTypesCategories.Category AS Category, 
 	SUM(AllTypes.IntFld) AS SumOfIntFld,

@@ -21,24 +21,16 @@ the location of the server, the folder path, the schema, and the name of the que
 The results from getQueryDetails describe the \dQuote{field names} that are used to build the colSelect, 
 colFilter and colSort parameters to selectRows.  Each column in the data frame returned from selectRows 
 corresponsds to a field in the colSelect list.  
-\cr \cr
-In this call, the \dQuote{colnames} of the returned data frame uses the \dQuote{caption}
-attribute of the corresponding field,  instead of the \dQuote{fieldName} used to request the column. 
-Using the caption instead of the name is easier to read and consistent with what you would see in the LabKey grid page on 
-the same query. See the  \code{\link{getRows}} function for a way to get back the data frame with the names as the 
-column headers.  
-\cr \cr
+\cr
 There are two types of fieldNames that will be reported by the server in the output of this function.  For fields that are 
 directly defined in the query corresponding the queryName parameter for this function, the fieldName 
 is simply the name assigned by the query.  Because selectRows returns the results specified by the default view, however,
-there are many cases where this default viwe incorporated data from fields from other queries that have a defined 1-M relationship 
+there may be cases where this default view incorporats data from other queries that have a defined 1-M relationship 
 with the table designated by the queryName.  Such fields in related tables are referred to as \dQuote{lookup} fields.
-Lookup fields have multi-part names using a forward slash as the delmiter:
-\cr
-\cr
-lookupField/displayedField
-\cr
-\cr
+Lookup fields have multi-part names using a forward slash as the delmiter.  For example, in a samples data set, if the ParticipantId 
+identifies the source of the sample, \code{ParticipantId/CohortId/CohortName} could be a reference to a \code{CohortName} field 
+in a \code{Cohorts} data set.
+
 These lookup fieldNames can appear in the default view and show up in the selectRows result.  If a field from a lookup table
 is not in the default view, it can still be added to the output column list of \code{labkey.selectRows}.  Use the 
 labkey.getLookups to discover what additonal fields are available via lookups, and then put their multipart fieldName values
@@ -59,34 +51,26 @@ The available schemas are returned as a data frame,
 \code{isAutoIncrement} {TRUE if the system will automatically assign a sequential integer in this on inserting a record}\cr 
 \code{isVersionField} {TRUE if the field isused to detect changes since last read} \cr
 \code{isHidden} {TRUE if the field is not displayed by default} \cr
-\code{isSelectable} { }\cr
-\code{isUserEditable} { }\cr 
-\code{isReadOnly} { }\cr 
-\code{isMvEnabled} { }\cr 
+\code{isSelectable} {reserved for futre  use. }\cr
+\code{isUserEditable} {reserved for futre  use.}\cr 
+\code{isReadOnly} {reserved for futre  use}\cr 
+\code{isMvEnabled} {reserved for futre  use}\cr 
 \code{lookupKeyField}  {for a field defined as a lookup the primary key column of the query referenced by the lookup field;  NA for non-lookup fields} \cr
 \code{lookupSchemaName} {the schema of the query referenced by the lookup field;  NA for non-lookup fields} \cr
 \code{lookupDisplayField} {the field from the query referenced by the lookup field that is shown by default in place of the lookup field;  NA for non-lookup fields} \cr 
 \code{lookupQueryName} {the query referenced by the lookup field;  NA for non-lookup fields.  A non-NA value indicates that you can use this field in a call to getLookups} \cr 
-\code{lookupIsPublic}) {  }\cr
-
+\code{lookupIsPublic} {reserved for futre  use}\cr
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{
 {Retrieve data:  } \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
 {Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}} \cr
 {List available data: } \code{\link{labkey.getSchemas}}, \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}}, 
 \code{\link{labkey.getDefaultViewDetails}}, \code{\link{labkey.getLookupDetails}}
-
 }
 \examples{
-
-\dontrun{
-
 ## Details  of fields of a query
-library(Rlabkey)
+# library(Rlabkey)
 
 queryDF<-labkey.getQueryDetails(
 	baseUrl="http://localhost:8080/labkey",
@@ -94,6 +78,5 @@ queryDF<-labkey.getQueryDetails(
 	schemaName="lists",
 	queryName="AllTypes")
 
-}
 }
 \keyword{IO}

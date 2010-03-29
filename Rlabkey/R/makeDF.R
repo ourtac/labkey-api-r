@@ -14,10 +14,10 @@
 #  limitations under the License.
 ##
 
-makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
+ makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 {
 
-    decode <- fromJSON(rawdata)
+    decode <- fromJSON2(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){

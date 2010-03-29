@@ -74,15 +74,15 @@ curlPerform(url=myurl, postFields=pbody, httpheader=headerFields, .opts=myopts, 
 h <- parseHeader(header$value())
 status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
-if(status==500) {decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+if(status==500) {decode <- fromJSON2(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 
 if(status>=400)
     {contTypes <- which(names(h)=='Content-Type')
     if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
-        {decode <- fromJSON(reader$value()); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
+        {decode <- fromJSON2(reader$value()); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
     {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-newdata <- fromJSON(reader$value())
+newdata <- fromJSON2(reader$value())
 
 
 return(newdata)

@@ -70,14 +70,14 @@ status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 
 if(status==500)
-{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON2(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
   {contTypes <- which(names(h)=='Content-Type')
   if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
-      {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
+      {decode <- fromJSON2(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-decode <- fromJSON(mydata)
+decode <- fromJSON2(mydata)
 curfld <- decode
 allpaths <- matrix(data=c(curfld$name, curfld$path, paste(curfld$effectivePermissions, collapse=",")), nrow=1, ncol=3, byrow=TRUE)
 todo <- curfld$children[]

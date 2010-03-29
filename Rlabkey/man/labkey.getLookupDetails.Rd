@@ -19,23 +19,17 @@ to enumerate the fields from the query referenced by the lookup.  These lookup f
 }
 \value{
 The available schemas are returned as a data frame, with the same columns as detailed in \code{\link{labkey.getQueryDetails}}
-
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{
 {Retrieve data:  } \code{\link{labkey.selectRows}},\code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
 {Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
 {List available data: } \code{\link{labkey.getSchemas}}, \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}}, 
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}}
-
 }
 \examples{
-
 ## Details  of fields of a query referenced by a lookup field
-library(Rlabkey)
+# library(Rlabkey)
 
 lu1  <- labkey.getLookupDetails(
 	baseUrl="http://localhost:8080/labkey",

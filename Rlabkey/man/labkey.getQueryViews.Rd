@@ -16,7 +16,6 @@ labkey.getQueryViews(baseUrl, folderPath, schemaName, queryName)
 \details{
 Queries have a default \dQuote{view} associeated with them, and can also have any number of named views.
 A named query view is created by using the \dQuote{Customize View} button option on a LabKey data grid page.  
-
 Use \code{getDefaultViewDetails} to get inforation about the default (unnamed) view.
 }
 \value{
@@ -24,12 +23,10 @@ The available views for a query are returned as a three-column data frame, with 
 
 \code{viewName} {The name of the view, or NA for the default view.}\cr
 \code{fieldName} {The name of a field within the view, as defined in the query object to which the field belongs}\cr 
-\code{key} {The name of the field relative to the base query,  use this value in the colSelect parameter of \code{labkey.selectRows()} .}\cr 
+\code{key} {The name of the field relative to the base query,  Use this value in the colSelect parameter of \code{labkey.selectRows()} .}\cr 
 
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+\references{https://www.labkey.org/wiki/home/Documentation/page.view?name=savingViews}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{
 {Retrieve data:  } \code{\link{labkey.selectRows}},\code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
@@ -42,7 +39,7 @@ https://www.labkey.org/project/home/begin.view}
 \examples{
 
 ## List of views defined for a query in a schema
-library(Rlabkey)
+# library(Rlabkey)
 
 viewsDF <- labkey.getQueryViews(
 	baseUrl="http://localhost:8080/labkey",
@@ -50,6 +47,5 @@ viewsDF <- labkey.getQueryViews(
 	schemaName="lists",
 	queryName="AllTypes"
 )
-
 }
 \keyword{IO}

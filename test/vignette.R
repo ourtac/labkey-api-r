@@ -14,10 +14,7 @@
 #  limitations under the License.
 ##
 
-unloadNamespace("Rlabkey")
-
 library(Rlabkey)
-##debug(lkCreateSession)
 s<-getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 s  # shows schemas
 

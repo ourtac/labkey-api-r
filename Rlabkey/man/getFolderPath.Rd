@@ -15,21 +15,14 @@ getFolderPath(session)
 
 \value{ A character array containing the folder path, relative to the root. 
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+\references{https://www.labkey.org/wiki/home/Documentation/page.view?name=projects}
 \author{Peter Hussey}
-\seealso{\code{\link{getSession}}}
+\seealso{\code{\link{getSession}}  \code{\link{lsFolders}}}
 \examples{
-
-
-## list available folders
-library(Rlabkey)
+# library(Rlabkey)
 
 lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 getFolderPath(lks)  #returns "/apisamples"
-
-lsFolders(lks) #returns values "/apisamples" , "/apisamples/sub1" ,"/apisamples/sub1/child" ,"/apisamples/sub2"  
 
 }
 \keyword{file}

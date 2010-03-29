@@ -24,22 +24,23 @@ This can be very useful for debugging problems or setting proxy server propertie
 
 \code{lkOptions}  
 
-The lkOptions parameter gives a mechanism to change default naming behavior in the objects returned by Rlabkey.  
+The lkOptions parameter gives a mechanism to change default behavior in the objects returned by Rlabkey.  
 Currently the only available options are \code{colNameOpt}, which affects the names of columns in the data frames returned
 by getRows(), and \code{maxRows}, which sets a default value for this parameter when calling getRows() 
 }
 
 \value{
-getSession returns a session object that represents a specific user with a specific current folder and the associated security context within the LabKey Server identified by the baseUrl. 
+getSession returns a session object that represents a specific user within a specific project folder within the LabKey Server identified by the baseUrl.  
+The combination of user, server and project/folder determines the security context of the client program.  See the Rlabkey Users Guide for more
+discussion of how the user identity is established.
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{labkey.selectRows}}}
+\seealso{\code{\link{getRows}}, \code{\link{getSchema}}, \code{\link{getLookups}} \code{\link{saveResults}}\cr
+The Rlabkey Users Guide is available by typing RlabkeyUsersGuide().
+}
 \examples{
 
-library(Rlabkey)
+# library(Rlabkey)
 s<-getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 s   #shows schemas
 
@@ -54,7 +55,7 @@ lkdata
 lucols <- getLookups(s, scobj$AllTypes$Category)   #can add fields from related queries
 lucols
 
-lucols2 <- getLookups(s, scobj$AllTypes$`Category/Group`)   #keep going to other tables 
+lucols2 <- getLookups(s, lucols[["Category/Group"]])  # keep going to other tables
 
 cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
 

@@ -8,23 +8,23 @@ getSchema(session, schemaIndex)
 }
 \arguments{
   \item{session}{the session key returned from getSession}
-  \item{schemaIndex}{the name of the schema that contains the table on which you want to base a query}
+  \item{schemaIndex}{the name of the schema that contains the table on which you want to base a query, or the number of that schema as displayed by print(session)}
 }
-\details{  Creates and returns an object representing a Labkey schema, containing child objects representing Labkey queries
+\details{Creates and returns an object representing a Labkey schema, containing child objects representing Labkey queries.  This compound object is created 
+by calling \code{labkey.getQueries} on the requested schema and \code{labkey.getQueryDetails} on each returned query.  The information returned in the
+schema objects is essentially the same as the schema and query objects shown in the Schema Browser on LabKey Server.
 }
 
-\value{an object representing the schema
+\value{an object representing the schema.  The named elements of a schema are the queries within that schema.  
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+\references{https://www.labkey.org/wiki/home/Documentation/page.view?name=querySchemaBrowser}
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}}
 \examples{
 
 ## the basics of using session, schema, and query objects
 
-library(Rlabkey)
+# library(Rlabkey)
 
 s<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 

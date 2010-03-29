@@ -15,15 +15,12 @@ lsFolders(session)
 
 \value{ A character array containing the available folder paths, relative to the root.  These values can be set on a session usiig curFolder<-
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+\references{https://www.labkey.org/wiki/home/Documentation/page.view?name=projects}
 \author{Peter Hussey}
-\seealso{\code{\link{getSession}}}
+\seealso{\code{\link{getSession}}, \code{\link{lsProjects}}, \code{\link{lsSchemas}}}
 \examples{
-
 ##get a list if projects and folders
-library(Rlabkey)
+# library(Rlabkey)
 
 lsProjects(baseUrl="http://localhost:8080/labkey")  # returns "/apisamples", "/home", ...
 

@@ -1,2 +1,6 @@
 Documentation for the Rlabkey package is writen in a latex-type language and located in
 Rlabkey/man/. A final pdf of the documentation can be found in Rlabkey.Rcheck/Rlabkey-manual.pdf.
+
+The Users Guide directory contains the source document (MSWord 2007 format) and the associated image
+files for the userguide.pdf found in Rlabkey/inst/doc.  PDFCreator is Windows-based driver used to 
+render the Word document into a pdf file.

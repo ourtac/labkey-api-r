@@ -33,16 +33,16 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-\dontrun{
+
 
 ## List of schemas
-library(Rlabkey)
+# library(Rlabkey)
 
 schemasDF <- labkey.getSchemas(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples"
 )
 
-}
+
 }
 \keyword{IO}

@@ -25,19 +25,16 @@ To see the save result on LabKey server, click on the "SimpleMeans" assay in the
 
 \value{an object representing the assay.
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
+\references{
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{getSession}}}
+\seealso{\code{\link{getSession}}, \code{\link{getSchema}}, \code{\link{getLookups}} \code{\link{getRows}}}
 \examples{
-
-
 ## Very simple example of an analysis flow:  query some data, calculate some stats,
 ## then save the calculations as an assay result set in LabKey Server
 
-library(Rlabkey)
-s<-getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+# library(Rlabkey)
+s<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 scobj <- getSchema(s, "lists")
 simpledf <- getRows(s, scobj$AllTypes)
 
@@ -51,8 +48,9 @@ results <- rbind(results, as.vector(row))
 
 bprops <- list(LabNotes="this is a simple demo")
 bpl<- list(name=paste("Batch ", as.character(date())),properties=bprops) 
+rpl<- list(name=paste("Assay Run ", as.character(date())))
 
-assayInfo<- saveResults(s, "SimpleMeans", results, batchPropertyList=bpl)
+assayInfo<- saveResults(s, "SimpleMeans", results, batchPropertyList=bpl, runPropertyList=rpl)
 
 }
 \keyword{file}

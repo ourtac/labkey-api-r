@@ -17,44 +17,33 @@ labkey.saveBatch(baseUrl, folderPath, assayName, resultDataFrame, batchPropertyL
   
 }
 \details{
-to save an R data.frame an assay results sets, you must create a named assay using the "General" assay provider.  
-To customize the general assay that hold your data frame, first use write.table to create a tab-separated text file 
-    with the same column names as the results data frame(s) you intend to save.  Include up to 100 rows of data 
-    in the output file, if you have them.  Then create a new assay based on the "General" type. 
-    Use the "Infer Fields from File" button in the Results Fields section and point it to your tsv text file.  
-    You may also add custom properties at the batch or run level, which is appropriate if there are elements of 
-    metadata that you want to capture that are not part of the result data frame.
-    
-    Note that saveBatch currently supports only a single run with one result set per batch.
+To save an R data.frame an assay results sets, you must create a named assay using the "General" assay provider.  Detailed 
+instructions are avaialable in the Rlabkey Users Guide, accessible by entering RlabkeyUsersGuide() at the R command prompt.
+Note that saveBatch currently supports only a single run with one result set per batch.
 }
 
 \value{
  Returns the object representation of the Assay batch.
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+\references{https://www.labkey.org/wiki/home/Documentation/page.view?name=createDatasetViaAssay}
 
 \author{Peter Hussey}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
 \code{\link{labkey.updateRows}}, \cr
 \code{\link{labkey.deleteRows}}
-
 }
 \examples{
 
 ## Very simple example of an analysis flow:  query some data, calculate some stats,
 ## then save the calculations as an assay result set in LabKey Server
 ##  Note this example expects to find an assay named "SimpleMeans" in the apisamples project
-
-library(Rlabkey)
-simpledf  <- labkey.selectRows(
+# library(Rlabkey)
+simpledf <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",
 	schemaName="lists", 
 	queryName="AllTypes")
-
 
 ## some dummy calculations to produce and example analysis result
 testtable <- simpledf[,3:4]
@@ -65,14 +54,16 @@ row <- c(list("Measure"="colSums"), colSums(testtable, na.rm=TRUE))
 results <- rbind(results, as.vector(row))
 
 bprops <- list(LabNotes="this is a simple demo")
-bpl<- list(name=paste("Batch ", as.character(date())),properties=bprops) 
+bpl <- list(name=paste("Batch ", as.character(date())),properties=bprops) 
+rpl <- list(name=paste("Assay Run ", as.character(date())))
 
 assayInfo<- labkey.saveBatch(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",
 	"SimpleMeans", 
 	results, 
-	batchPropertyList=bpl
+	batchPropertyList=bpl,
+	runPropertyList=rpl
 )
 
 }

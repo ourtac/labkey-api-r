@@ -40,16 +40,14 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-\dontrun{
 
 ## List of queries in a schema
-library(Rlabkey)
+# library(Rlabkey)
 queriesDF <- labkey.getQueries(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",
 	schemaName="lists"
 )
 
-}
 }
 \keyword{IO}

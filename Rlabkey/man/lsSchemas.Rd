@@ -15,15 +15,12 @@ lsSchemas(session)
 
 \value{ A character array containing the available schema names
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{getSession}}}
+\seealso{\code{\link{getSession}}, {\code{\link{lsFolders}}, \code{\link{lsProjects}}}
+}
 \examples{
-
 ##  get a list of schemas available in the current session context
-library(Rlabkey)
+# library(Rlabkey)
 
 lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 

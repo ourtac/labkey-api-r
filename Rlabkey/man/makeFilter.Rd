@@ -1,9 +1,9 @@
 \name{makeFilter}
 \alias{makeFilter}
-\title{Builds filters to be used in labkey.selectRows}
+\title{Builds filters to be used in labkey.selectRows and getRows}
 \description{
 This function takes inputs of column name, filter value and filter operator and 
-returns an array of filters to be used in \code{labkey.selectRows}.
+returns an array of filters to be used in \code{labkey.selectRows} and \code{getRows}.
 }
 \usage{
 makeFilter(...)
@@ -56,8 +56,7 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}
 \examples{
-
-library(Rlabkey)
+# library(Rlabkey)
 
 ## Two filters, ANDed together
 filter1<- makeFilter(c("TextFld","CONTAINS","h"), c("BooleanFld","EQUAL","TRUE"))

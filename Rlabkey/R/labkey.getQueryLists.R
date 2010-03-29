@@ -93,14 +93,14 @@ getQueryLists <- function(baseUrl, folderPath, schemaName, queryName=NULL)
 	message <- h$statusMessage
 
 	if(status==500)
-	{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+	{decode <- fromJSON2(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 	if(status>=400)
 	  {contTypes <- which(names(h)=='Content-Type')
 	  if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
-		  {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
+		  {decode <- fromJSON2(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
 	  {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-	decode <- fromJSON(mydata)
+	decode <- fromJSON2(mydata)
 	qs <- decode[[queryObjType]]
 
 	dmall <- matrix(nrow=0, ncol=2, byrow=TRUE)

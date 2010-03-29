@@ -1,18 +1,18 @@
-	##
-	# Copyright (c) 2010 LabKey Corporation
-	# 
-	# Licensed under the Apache License, Version 2.0 (the "License");
-	# you may not use this file except in compliance with the License.
-	# You may obtain a copy of the License at
-	#
-	#     http://www.apache.org/licenses/LICENSE-2.0
-	#
-	# Unless required by applicable law or agreed to in writing, software
-	# distributed under the License is distributed on an "AS IS" BASIS,
-	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	# See the License for the specific language governing permissions and
-	# limitations under the License.
-	##
+##
+# Copyright (c) 2010 LabKey Corporation
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+##
 
 	## an environment to hold metadata descriptions
 	.lksite <- new.env(parent=emptyenv())
@@ -442,3 +442,31 @@
 	#	print(x)
 	#}
 
+
+## the following two functions add an entry for the Rlabkey Users guide to the Vignettes menu
+RlabkeyUsersGuide <- function(view=TRUE)
+{
+     f <- system.file("doc", "usersguide.pdf", package = "Rlabkey")
+    if (view) {
+        if (.Platform$OS.type == "windows") 
+            shell.exec(f)
+        else system(paste(Sys.getenv("R_PDFVIEWER"), f, "&"))
+    }
+    return(f)
+}
+
+.onLoad<- function(libname, pkgname)
+{	
+	try(winMenuAddItem("Vignettes", "Rlabkey", "RlabkeyUsersGuide()"), TRUE)
+}
+
+.onUnload<- function(libpath)
+{	
+	numItems= as.integer(0);
+	
+	try (numItems<- length(winMenuItems("Vignettes")), TRUE)
+	if (numItems > 0)
+	{
+		try(winMenuDelItem("Vignettes", "Rlabkey"), TRUE)
+	}	
+}
