@@ -103,7 +103,7 @@
 	if(is.null(dim(newdat))==FALSE) 
   	{for(j in 1:ncol(newdat))
   	    {mod <- refdf$type[j]
-  	    if(mod=="date"){ newdat[,j] <- as.Date(as.character(newdat[,j]), "%d %b %Y %H:%M:%S %Z")}else
+  	    if(mod=="date"){ newdat[,j] <- as.Date(as.character(newdat[,j]), "%d %b %Y %H:%M:%S")}else
 	    if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
   	    if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
   	    if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
