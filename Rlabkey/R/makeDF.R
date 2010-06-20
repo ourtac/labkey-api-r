@@ -113,7 +113,7 @@
 	## Set mode for single column of data
 	if(is.null(dim(newdat))==TRUE & length(newdat)>1) 
 	{mod <- refdf$type
-  	if(mod=="date"){ newdat <- as.Date(as.character(newdat), "%d %b %Y %H:%M:%S %Z")}else
+  	if(mod=="date"){ newdat <- as.Date(as.character(newdat), "%d %b %Y %H:%M:%S")}else
   	if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
   	if(mod=="int"){ suppressWarnings(mode(newdat) <- "numeric")} else
   	if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
