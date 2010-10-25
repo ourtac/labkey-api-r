@@ -18,7 +18,7 @@ labkey.updateRows(baseUrl, folderPath, schemaName, queryName, toUpdate)
 A single row or multiple rows of data can be updated.  The \code{toUpdate} data frame should contain 
 the rows of data to be updated and must be created with the \code{stringsAsFactors} option
 set to FALSE. The names of the data in the data frame must be the column names from the
-labkey database. 
+labkey database.   To update a row/column to a value of NULL, use an empty string ("") in the data frame (regardless of the database column type).
 
 }
 \value{
@@ -36,6 +36,8 @@ updated.
 \code{\link{labkey.deleteRows}}
 }
 \examples{
+\dontrun{
+
 ## Insert, update and delete
 ## Note that users must have the necessary permissions in the database
 ## to be able to modify data through the use of these functions
@@ -78,5 +80,6 @@ deleterow <- data.frame(RowId=newRowId, stringsAsFactors=FALSE)
 result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists", queryName="AllTypes",  toDelete=deleterow)
 str(result)
 
+}
 }
 \keyword{IO}

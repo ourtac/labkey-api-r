@@ -18,7 +18,8 @@ labkey.insertRows(baseUrl, folderPath, schemaName, queryName, toInsert)
 A single row or multiple rows of data can be inserted.  The \code{toInsert} data frame must contain
 values for each column in the dataset and must be created with the \code{stringsAsFactors} option
 set to FALSE. The names of the data in the data frame must be the column names from the
-LabKey Server. Also, when inserting data into a study dataset, the sequence number must be specified..
+LabKey Server.To insert a value of NULL, use an empty string ("") in the data frame (regardless of the database column type). 
+Also, when inserting data into a study dataset, the sequence number must be specified..
 }
 
 \value{
@@ -36,6 +37,8 @@ inserted.
 \code{\link{labkey.deleteRows}}
 }
 \examples{
+\dontrun{
+
 ## Insert, update and delete
 ## Note that users must have the necessary permissions in the database
 ## to be able to modify data through the use of these functions
@@ -75,5 +78,6 @@ selectedRow<-labkey.selectRows("http://localhost:8080/labkey", folderPath="/apis
 deleterow <- data.frame(RowId=newRowId, stringsAsFactors=FALSE)
 result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists", queryName="AllTypes",  toDelete=deleterow)
 
+}
 }
 \keyword{IO}
