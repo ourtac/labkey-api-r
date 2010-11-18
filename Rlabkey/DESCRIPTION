@@ -6,7 +6,7 @@ Author: Peter Hussey
 SystemRequirements: curl (version 7.12.0 or higher)
         <http://curl.haxx.se>
 Maintainer: Karl Lum <klum@labkey.com>
-Description: This package allows an R user to discover, query and modify data in LaaKey Server
+Description: This package allows an R user to discover, query and modify data in LabKey Server
 License: Apache License 2.0
 LazyLoad: true
 Depends: RCurl, rjson (>= 0.1.3)
