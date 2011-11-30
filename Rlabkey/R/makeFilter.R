@@ -58,8 +58,8 @@
 								
  				if(is.null(fop)==TRUE) stop ("Invalid operator name.")
  				# url encode column name and value
- 				colnam <- URLencode(fmat[i,1])
- 				fvalue <- URLencode(fmat[i,3])
+ 				colnam <- curlEscape(fmat[i,1])
+ 				fvalue <- curlEscape(fmat[i,3])
  				filters[i] <- paste(colnam,"~",fop,"=",fvalue,sep="")
  			}
 
