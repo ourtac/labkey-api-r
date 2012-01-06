@@ -30,8 +30,8 @@ labkey.getSchemas <- function(baseUrl, folderPath)
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
-## URL encoding of folder path
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
+## URL encoding of folder path (if not already encoded)
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

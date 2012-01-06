@@ -1,3 +1,6 @@
+Changes in version 2.1.117
+Changes to use curlEscape instead of URLencode for schemaName, queryName, lookupKey, assayName, viewName, and colSelect
+
 Changes in version 2.1.116
 Minor change to makeFiler.R to use curlEscape instead of URLencode for encoding the colFilter parameters.
 

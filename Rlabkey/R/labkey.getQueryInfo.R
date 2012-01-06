@@ -47,11 +47,11 @@ if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName
 
 if(is.null(lookupKey)==FALSE) {char <- nchar(lookupKey); if(char<1) {lookupKey<-NULL} }
 
-## URL encoding 
-if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
-if(length(grep("%",queryName))<1) {queryName <- URLencode(queryName)}
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
-if(is.null(lookupKey)==FALSE) {if(length(grep("%",lookupKey))<1) lookupKey <- URLencode(lookupKey)}
+## URL encoding (if not already encoded)
+if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+if(queryName==curlUnescape(queryName)) {queryName <- curlEscape(queryName)}
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(is.null(lookupKey)==FALSE) {if(lookupKey==curlUnescape(lookupKey)) lookupKey <- curlEscape(lookupKey)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

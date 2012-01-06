@@ -22,8 +22,8 @@ labkey.getFolders <- function(baseUrl, folderPath, includeSubfolders=FALSE, dept
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE)
 stop (paste("A value must be specified for both baseUrl and folderPath"))
 
-## URL encoding of folder path
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
+## URL encoding of folder path  (if not already encoded)
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

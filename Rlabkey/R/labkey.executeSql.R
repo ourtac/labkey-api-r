@@ -25,9 +25,9 @@ if(is.null(maxRows)==FALSE || is.null(rowOffset)==FALSE){showAllRows=FALSE}
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("sql")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and sql."))
 
-## URL encoding of schema and folder path
-if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
+## URL encoding of schema and folder path (if not already encoded)
+if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
