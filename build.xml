@@ -41,9 +41,9 @@
 			<include name="*.o"/>
 			<include name="*.dll"/>
 		</fileset>
-		<fileset dir="${project.root}/remoteapi/r/Rlabkey/inst/doc">
-			<include name="RlabkeyExample.pdf"/>
-		</fileset>				
+		<!--<fileset dir="${project.root}/remoteapi/r/Rlabkey/inst/doc">-->
+			<!--<include name="RlabkeyExample.pdf"/>-->
+		<!--</fileset>-->
 	</delete>	
 	<delete dir="${project.root}/remoteapi/r/build" />
 	<delete dir="${project.root}/remoteapi/r/Rlabkey.Rcheck" />
