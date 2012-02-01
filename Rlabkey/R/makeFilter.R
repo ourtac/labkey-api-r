@@ -58,8 +58,6 @@
 								"NO_MV_INDICATOR"="nomvvalue",
 								"NOT_QC_VALUE"="nomvvalue",
 								"NOT_IN"="notin",
-								"IN_OR_NULL"="inornull",
-								"NOT_IN_OR_NULL"="notinornull",
 								"CONTAINS_ONE_OF"="containsoneof",
 								"CONTAINS_NONE_OF"="containsnoneof")
 								
