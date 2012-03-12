@@ -107,7 +107,7 @@
 	if(is.null(dim(newdat))==FALSE) 
   	{for(j in 1:ncol(newdat))
   	    {mod <- refdf$type[j]
-  	    if(mod=="date"){ newdat[,j] <- as.Date(as.character(newdat[,j]), "%d %b %Y %H:%M:%S")}else
+  	    if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
 	    if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
   	    if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
   	    if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
@@ -162,4 +162,16 @@ return(filtered)
   	    	} 
   	}    	
   	return (rname)
+}
+
+.parseDate <- function(s)
+{
+    s <- as.character(s);
+    d <- tryCatch(as.Date(s),error = function(e) NA);
+    if (is.na(d))
+    {
+        d <- as.Date(s, "%d %b %Y %H:%M:%S");
+    }
+    print(c(".parseDate", s, d));
+    return(d);
 }
