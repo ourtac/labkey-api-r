@@ -159,7 +159,7 @@ return(filtered)
 				{break;}
 			else 
 				{rname<- c(rname + as.character(i))}
-  	    	} 
+        } 
   	}    	
   	return (rname)
 }
@@ -168,10 +168,9 @@ return(filtered)
 {
     s <- as.character(s);
     d <- tryCatch(as.Date(s),error = function(e) NA);
-    if (is.na(d))
+    if (any(is.na(d)))
     {
-        d <- as.Date(s, "%d %b %Y %H:%M:%S");
+        d[is.na(d)] <- as.Date(s[is.na(d)], "%d %b %Y %H:%M:%S");
     }
-    print(c(".parseDate", s, d));
     return(d);
 }
