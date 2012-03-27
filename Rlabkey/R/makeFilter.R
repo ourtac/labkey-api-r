@@ -53,10 +53,12 @@
  								"STARTS_WITH"="startswith",
  								"DOES_NOT_START_WITH"="doesnotstartwith",
  								"EQUALS_ONE_OF"="in",
+ 								"IN"="in",
 								"MV_INDICATOR"="hasmvvalue",
 								"QC_VALUE"="hasmvvalue",
 								"NO_MV_INDICATOR"="nomvvalue",
 								"NOT_QC_VALUE"="nomvvalue",
+								"EQUALS_NONE_OF"="notin",
 								"NOT_IN"="notin",
 								"CONTAINS_ONE_OF"="containsoneof",
 								"CONTAINS_NONE_OF"="containsnoneof")

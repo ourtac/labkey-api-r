@@ -39,10 +39,10 @@ CONTAINS\cr
 DOES_NOT_CONTAIN\cr
 STARTS_WITH\cr
 DOES_NOT_START_WITH\cr
-EQUALS_ONE_OF\cr
+IN\cr
+NOT_IN\cr
 MV_INDICATOR\cr
 NO_MV_INDICATOR\cr
-NOT_IN\cr
 CONTAINS_ONE_OF\cr
 CONTAINS_NONE_OF
 
@@ -78,8 +78,8 @@ rows <- labkey.selectRows(
 )
 rows
 
-## Using "equals one of" operator:
-filter2 <- makeFilter(c("RowId","EQUALS_ONE_OF","2;3;6"))
+## Using "in" operator:
+filter2 <- makeFilter(c("RowId","IN","2;3;6"))
 rows <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",
