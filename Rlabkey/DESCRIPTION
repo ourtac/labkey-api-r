@@ -1,6 +1,6 @@
 Package: Rlabkey
-Version: 2.1.119
-Date: 2012-08-15
+Version: 2.1.120
+Date: 2012-12-31
 Title: Data exchange between R and LabKey Server
 Author: Peter Hussey 
 SystemRequirements: curl (version 7.12.0 or higher)
