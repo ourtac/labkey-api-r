@@ -1,5 +1,5 @@
 Changes in version 2.1.121
-  o fix to error message on failed executeSql call
+  o fix to error message on failed API call (deleteRows, insertRows, updateRows, etc.)
   o fix URL encoding of schemaName in executeSql call
 
 Changes in version 2.1.120

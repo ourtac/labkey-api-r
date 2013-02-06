@@ -74,14 +74,16 @@ if(status==500)
 if(status>=400)
 {
     contTypes <- which(names(h)=='Content-Type')
-    if((length(contTypes)==1 & tolower(h[contTypes[1]])=="application/json;charset=utf-8") | length(contTypes)>1 & tolower(h[contTypes[2]])=="application/json;charset=utf-8") {
+    if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
+    {
         decode <- fromJSON2(reader$value());
         message<-decode$exception;
         stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     }
     else {
-        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     }
+}
 
 
 newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden, colNameOpt=colNameOpt)
