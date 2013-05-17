@@ -31,7 +31,7 @@
 
     <target name="check">
         <exec executable="R">
-            <arg line="CMD check Rlabkey --no-examples"/>
+            <arg line="CMD check Rlabkey --no-examples --as-cran"/>
         </exec>
     </target>
 
@@ -47,6 +47,8 @@
 	</delete>	
 	<delete dir="${project.root}/remoteapi/r/build" />
 	<delete dir="${project.root}/remoteapi/r/Rlabkey.Rcheck" />
+    <delete dir="${project.root}/remoteapi/r/Rlabkey/src-i386" />
+    <delete dir="${project.root}/remoteapi/r/Rlabkey/src-x64" />
     </target>
     
     
@@ -62,15 +64,13 @@
             </fileset>    	
         </copy>
         <exec executable="R" dir="${project.root}/remoteapi/r/build" osfamily="windows" >
-            <arg line="CMD build --binary ${project.root}/remoteapi/r/Rlabkey"/>
+            <arg line="CMD INSTALL --build ${project.root}/remoteapi/r/build/*.tar.gz"/>
         </exec>
         <copy overwrite="true" todir="latest" >
             <fileset dir="build" >	
             	<include name="*.zip" />
             </fileset>    	            
         </copy>
-
-        
     </target>
     <target name="install">
 	<exec dir="./latest" executable="Rterm" osfamily="windows" input="./test/instwin.r">
