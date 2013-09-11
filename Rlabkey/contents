@@ -30,6 +30,11 @@ Keywords: IO
 Description: Insert rows of data from R into a LabKey Server
 URL: ../../../library/Rlabkey/html/labkey.insertRows.html
 
+Entry: labkey.importRows
+Aliases: labkey.importRows
+Keywords: IO
+Description: Bulk import rows of data from R into a LabKey Server
+URL: ../../../library/Rlabkey/html/labkey.importRows.html
 
 Entry: labkey.updateRows
 Aliases: labkey.updateRows
