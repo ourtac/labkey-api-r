@@ -60,6 +60,7 @@
 								"NOT_QC_VALUE"="nomvvalue",
 								"EQUALS_NONE_OF"="notin",
 								"NOT_IN"="notin",
+								"MEMBER_OF"="memberof",
 								"CONTAINS_ONE_OF"="containsoneof",
 								"CONTAINS_NONE_OF"="containsnoneof")
 								
