@@ -78,13 +78,13 @@ h <- parseHeader(header$value())
 status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 if(status==500) 
-{decode <- fromJSON2(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
 {
     contTypes <- which(names(h)=='Content-Type')
     if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
 	{
-	    decode <- fromJSON2(reader$value());
+	    decode <- fromJSON(reader$value());
 	    message<-decode$exception;
 	    stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     } else{
@@ -92,7 +92,7 @@ if(status>=400)
     }
 }
 
-newdata <- fromJSON2(reader$value())
+newdata <- fromJSON(reader$value())
 
 return(newdata)
 }

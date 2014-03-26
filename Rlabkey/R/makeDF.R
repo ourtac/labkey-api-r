@@ -17,7 +17,7 @@
  makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 {
 
-    decode <- fromJSON2(rawdata)
+    decode <- fromJSON(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){

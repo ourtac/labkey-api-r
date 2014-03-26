@@ -67,13 +67,13 @@ status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 
 if(status==500)
-{decode <- fromJSON2(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
 {
     contTypes <- which(names(h)=='Content-Type')
     if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
     {
-        decode <- fromJSON2(mydata);
+        decode <- fromJSON(mydata);
         message<-decode$exception;
         stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     } else
@@ -82,7 +82,7 @@ if(status>=400)
     }
 }
 
-decode <- fromJSON2(mydata)
+decode <- fromJSON(mydata)
 cn<-names(decode)
 newdata<- as.data.frame(cn)
 names(newdata)[1]<-"schemaName"

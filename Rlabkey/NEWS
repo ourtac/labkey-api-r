@@ -1,3 +1,6 @@
+Changes in version 2.1.124
+  o replace usage of fromJSON2 with fromJSON
+
 Changes in version 2.1.123
   o added labkey.importRows
   o performance improvement for labkey.importRows, labkey.insertRows, labkey.deleteRows, labkey.updateRows
