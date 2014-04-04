@@ -8,6 +8,6 @@ SystemRequirements: curl (version 7.12.0 or higher)
 Maintainer: Cory Nathe <cnathe@labkey.com>
 Description: This package allows an R user to discover, query and modify data in LabKey Server
 License: Apache License 2.0
-Copyright: Copyright (c) 2008-2013 LabKey Corporation
+Copyright: Copyright (c) 2008-2014 LabKey Corporation
 LazyLoad: true
 Depends: RCurl, rjson (>= 0.1.3)
