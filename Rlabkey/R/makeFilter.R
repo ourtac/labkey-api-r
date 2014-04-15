@@ -83,7 +83,7 @@
 								"EQUALS_NONE_OF"="notin",
 
 								"BETWEEN"="between",
-								"NOT_BETWEEN"="between",
+								"NOT_BETWEEN"="notbetween",
 
 								"MEMBER_OF"="memberof",
 
