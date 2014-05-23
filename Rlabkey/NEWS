@@ -1,5 +1,7 @@
 Changes in version 2.1.124
   o replace usage of fromJSON2 with fromJSON
+  o add between and not between filter types
+  o fix to handle results from multi-valued columns
 
 Changes in version 2.1.123
   o added labkey.importRows
