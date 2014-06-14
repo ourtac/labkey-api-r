@@ -67,7 +67,7 @@ if(is.null(lookupKey)==FALSE) {myurl <- paste(myurl,"&fk=",lookupKey,sep="")}
 ## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
-myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, netrc=1, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE, followlocation=TRUE)
+myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
 
 ## Support user-settable options for debuggin and setting proxies etc
 if(exists(".lksession"))

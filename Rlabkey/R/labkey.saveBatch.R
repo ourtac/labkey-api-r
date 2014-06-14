@@ -41,11 +41,13 @@ header <- basicTextGatherer()
 handle <- getCurlHandle()
 headerFields <- c('Content-Type'="application/json;charset=utf-8")
 clist <- ifcookie()
-if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont,sep=""),
-                        writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
-                        ssl.verifypeer=FALSE, followlocation=TRUE)} else
-{myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
-                        ssl.verifypeer=FALSE, followlocation=TRUE)}
+if(clist$Cvalue==1) {
+    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
+                        .opts=c(labkey.curlOptions()))
+} else {
+    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
+                        .opts=c(labkey.curlOptions()))
+}
 
 ## Support user-settable options for debugging and setting proxies etc
 if(exists(".lksession"))
