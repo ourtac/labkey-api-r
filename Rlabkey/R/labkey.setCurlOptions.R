@@ -13,6 +13,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 ##
+PACKAGE_ENV = new.env()
 
 # Helper function to get the base curl options used for all http or https requests
 #
@@ -30,9 +31,9 @@ labkey.setCurlOptions <- function(...)
 
     # merge in any overrides
     options <- curlOptions(..., .opts=c(options))
-    RLABKEY_CURL_OPTIONS <<- options
+    assign("RLABKEY_CURL_OPTIONS", options, envir=PACKAGE_ENV)
 
-    return(RLABKEY_CURL_OPTIONS)
+    return(get("RLABKEY_CURL_OPTIONS", envir=PACKAGE_ENV))
 }
 
 labkey.acceptSelfSignedCerts <- function()

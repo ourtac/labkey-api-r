@@ -18,9 +18,9 @@
 #
 labkey.curlOptions <- function()
 {
-    if (!exists("RLABKEY_CURL_OPTIONS"))
+    if (!exists("RLABKEY_CURL_OPTIONS", envir=PACKAGE_ENV))
     {
         labkey.setCurlOptions();
     }
-    return(RLABKEY_CURL_OPTIONS)
+    return(get("RLABKEY_CURL_OPTIONS", envir=PACKAGE_ENV))
 }
