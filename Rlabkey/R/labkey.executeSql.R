@@ -17,9 +17,6 @@
 labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL,
 rowOffset=NULL, showHidden=FALSE, colNameOpt='caption', containerFilter=NULL)
 {
-## If maxRows and/or rowOffset are specified, set showAllRows=FALSE
-showAllRows=TRUE
-if(is.null(maxRows)==FALSE || is.null(rowOffset)==FALSE){showAllRows=FALSE}
 
 ## Error if any of baseUrl, folderPath, schemaName or sql are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("sql")==FALSE)
@@ -39,6 +36,9 @@ if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## Construct url
 myurl <- paste(baseUrl,"query",folderPath,"executeSql.api?schemaName=",schemaName,"&apiVersion=8.3",sep="")
+if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&maxRows=",maxRows,sep="")}
+if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&showRows=all",sep="")}
+if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&offset=",rowOffset,sep="")}
 if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
 ## Set options

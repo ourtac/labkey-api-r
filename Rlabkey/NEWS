@@ -1,5 +1,6 @@
 Changes in version 2.1.127
   o change sslversion default values in curlOptions to TLSv1
+  o fix to handle maxRows and rowOffset for labkey.executeSql
 
 Changes in version 2.1.126
   o change ssl.verifyhost default values in curlOptions from boolean to numeric
