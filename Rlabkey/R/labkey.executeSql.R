@@ -15,7 +15,8 @@
 ##
 
 labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL,
-rowOffset=NULL, showHidden=FALSE, colNameOpt='caption', containerFilter=NULL)
+        rowOffset=NULL, colSort=NULL, showHidden=FALSE, colNameOpt='caption',
+        containerFilter=NULL, parameters=NULL)
 {
 
 ## Error if any of baseUrl, folderPath, schemaName or sql are missing
@@ -25,6 +26,7 @@ stop (paste("A value must be specified for each of baseUrl, folderPath, schemaNa
 ## URL encoding of schema and folder path (if not already encoded)
 if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
 if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
 
 ## Formatting
@@ -39,6 +41,8 @@ myurl <- paste(baseUrl,"query",folderPath,"executeSql.api?schemaName=",schemaNam
 if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&maxRows=",maxRows,sep="")}
 if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&showRows=all",sep="")}
 if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&offset=",rowOffset,sep="")}
+if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
+if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) myurl <- paste(myurl,"&query.param.",parameters[k],sep="")}
 if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
 ## Set options

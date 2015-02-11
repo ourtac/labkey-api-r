@@ -1,6 +1,8 @@
 Changes in version 2.1.127
   o change sslversion default values in curlOptions to TLSv1
   o fix to handle maxRows and rowOffset for labkey.executeSql
+  o fix for labkey.getFolders includeSubfolders for non-Guest access
+  o add additional parameters to existing functions (labkey.executeSql: colSort, parameters; labkey.selectRows: parameters; labkey.getFolders: includeEffectivePermissions)
 
 Changes in version 2.1.126
   o change ssl.verifyhost default values in curlOptions from boolean to numeric
