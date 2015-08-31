@@ -42,6 +42,7 @@ for(j in 1:nrows)
 {
     cvalues <- as.list(toImport[j,])
 	names(cvalues) <- cnames
+	cvalues[is.na(cvalues)] = NULL
     p2 <- toJSON(cvalues)
     p3 <- c(p3, p2)
 }
