@@ -30,7 +30,7 @@ has their login information in a netrc file. The netrc file
 contains configuration and autologin information for the File Transfer Protocol client (ftp) and
 other programs such as CURL.
 
-On a UNIX system this file should be named .netrc (dot netrc) and on windows it sould be 
+On a UNIX system this file should be named .netrc (dot netrc) and on windows it should be
 named _netrc (underscore netrc). The file should be located in the users home directory and the
 permissions on the file should be unreadable for everybody except the owner.  
 
