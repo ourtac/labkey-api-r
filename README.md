@@ -7,7 +7,7 @@ This file describes the sources for the Rlabkey package and a number of addition
 - latest			Contains latest built packages checked in to project
 - test			Contains R script file designed to connect to a LabKey instance on localhost with a project named apisamples.
 			The list dataset referenced by this test can be created by importing the list archive listArchive.zip
-**Note:** The "latest" and "test" folders are also in the former svn location (remoteapi/r). This is necessary at this time for running automated tests and is subject to change.
+   **Note:** The "latest" and "test" folders are also in the former svn location (remoteapi/r). This is necessary at this time for running automated tests and is subject to change.
 
 - docs			The source files for the Users Guide, plus a latex doc and corresponding Pdf describing the package build environment.
 			

@@ -5,7 +5,7 @@
 - Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
  - Tested with Rtools33
  - Default components are correct
-  - Do **not** unselect the Cygwin DLLs component
+ - Do **not** unselect the Cygwin DLLs component
   - TCL/TK is not required
  - Allow installation to edit the system path
   - Click next. There is then an editable preview of the new system path. Leave as is.
