@@ -18,8 +18,6 @@
 <project name="test" default="usage" basedir=".">
 
     <property environment="env"/>
-    <property name="test.dir" value="${basedir}" />
-    <property name="project.root" value="${test.dir}/../.." />
 
     <target name="usage">
         <echo message="Valid Targets:" />
@@ -37,34 +35,34 @@
 
     <target name="clean">
 	<delete>
-		<fileset dir="${project.root}/remoteapi/r/Rlabkey/src">
+		<fileset dir="${basedir}/Rlabkey/src">
 			<include name="*.o"/>
 			<include name="*.dll"/>
 		</fileset>
-		<!--<fileset dir="${project.root}/remoteapi/r/Rlabkey/inst/doc">-->
+		<!--<fileset dir="${basedir}/Rlabkey/inst/doc">-->
 			<!--<include name="RlabkeyExample.pdf"/>-->
 		<!--</fileset>-->
 	</delete>	
-	<delete dir="${project.root}/remoteapi/r/build" />
-	<delete dir="${project.root}/remoteapi/r/Rlabkey.Rcheck" />
-    <delete dir="${project.root}/remoteapi/r/Rlabkey/src-i386" />
-    <delete dir="${project.root}/remoteapi/r/Rlabkey/src-x64" />
+	<delete dir="${basedir}/build" />
+	<delete dir="${basedir}/Rlabkey.Rcheck" />
+    <delete dir="${basedir}/Rlabkey/src-i386" />
+    <delete dir="${basedir}/Rlabkey/src-x64" />
     </target>
     
     
     <target name="build">
-        <delete dir="${project.root}/remoteapi/r/build" />
-        <mkdir dir="${project.root}/remoteapi/r/build"/>
-        <exec executable="R" dir="${project.root}/remoteapi/r/build">
-            <arg line="CMD build ${project.root}/remoteapi/r/Rlabkey"/>
+        <delete dir="${basedir}/build" />
+        <mkdir dir="${basedir}/build"/>
+        <exec executable="R" dir="${basedir}/build">
+            <arg line="CMD build ${basedir}/Rlabkey"/>
         </exec>
         <copy overwrite="true" todir="./latest">
             <fileset dir="build" >	
             	<include name="*.tar.gz" />
             </fileset>    	
         </copy>
-        <exec executable="R" dir="${project.root}/remoteapi/r/build" osfamily="windows" >
-            <arg line="CMD INSTALL --build ${project.root}/remoteapi/r/build/*.tar.gz"/>
+        <exec executable="R" dir="${basedir}/build" osfamily="windows" >
+            <arg line="CMD INSTALL --build ${basedir}/build/*.tar.gz"/>
         </exec>
         <copy overwrite="true" todir="latest" >
             <fileset dir="build" >	
