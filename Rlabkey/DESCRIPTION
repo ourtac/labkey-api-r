@@ -1,11 +1,11 @@
 Package: Rlabkey
-Version: 2.1.129
-Date: 2015-11-05
+Version: 2.1.130
+Date: 2016-03-21
 Title: Data Exchange Between R and LabKey Server
 Author: Peter Hussey 
 Maintainer: Cory Nathe <cnathe@labkey.com>
 Description: Allow a user to discover, query and modify data from a LabKey Server.
 License: Apache License 2.0
-Copyright: Copyright (c) 2008-2015 LabKey Corporation
+Copyright: Copyright (c) 2008-2016 LabKey Corporation
 LazyLoad: true
 Depends: RCurl, rjson (>= 0.1.3)
