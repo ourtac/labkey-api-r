@@ -7,6 +7,8 @@ This file describes the sources for the Rlabkey package and a number of addition
 - latest			Contains latest built packages checked in to project
 - test			Contains R script file designed to connect to a LabKey instance on localhost with a project named apisamples.
 			The list dataset referenced by this test can be created by importing the list archive listArchive.zip
+**Note:** The "latest" and "test" folders are also in the former svn location (remoteapi/r). This is necessary at this time for running automated tests and is subject to change.
+
 - docs			The source files for the Users Guide, plus a latex doc and corresponding Pdf describing the package build environment.
 			
 ## Rlabkey: Root of all source code for both documentation and R code.
@@ -33,6 +35,11 @@ This file describes the sources for the Rlabkey package and a number of addition
 ## Building:Rlabkey
 
 Install all the components needed, as described in docs/updateRPkgs.pdf.
-Run ant check, then ant build.
+**Note:** This document is outdated and none of the links are correct. All operating systems need Rtools and latex installed. Rtools is available via
+direct download or instructions [here](https://cran.r-project.org/). OS specific instructions:
+- [Windows](docs/build_windows.md)
+- Others TBD
+
+After all tools are installed, run ant check, then ant build.
 
 
