@@ -1,19 +1,17 @@
 This file describes the sources for the Rlabkey package and a number of additional files and folders for developers intending to build the Rlabkey package.  
 
 
-Contents of <labkey>/remoteapi/r:
+## Contents of labkey-api-r:
 
 Rlabkey.Rcheck		Temporary folder created by "check" target of build, contains intermediate files for validation checks 
 build			Directory where packages are built, not checked into project.
 latest			Contains latest built packages checked in to project
 test			Contains R script file designed to connect to a LabKey instance on localhost with a project named apisamples.  
 			The list dataset referenced by this test can be created by importing the list archive listArchive.zip
-docs			The source files for the Users Guide, plus a latex doc and corresponding Pdf describing the package build environment.	
-			PDFCreator is Windows-based driver used to render the Word document into a pdf file.
+docs			The source files for the Users Guide, plus a latex doc and corresponding Pdf describing the package build environment.
 			
-Rlabkey: Root of all source code for both documentation and R code. 
+## Rlabkey: Root of all source code for both documentation and R code.
 	DESCRIPTION 	Text manifest file specifying version number, dependencies, and other properties.  Developer maintained.
-	license		Apache 2.0 licences covering Rlabkey
 	NAMESPACE	Specifies the public function names.  Developer maintained.
 	NEWS		Document of change history for this project, developer maintaind.
 	
@@ -33,7 +31,7 @@ Rlabkey: Root of all source code for both documentation and R code.
 						
 --------------------------------------------------------------------------------------------------------------------
 
-Building:Rlabkey
+## Building:Rlabkey
 
 Install all the components needed, as described in docs/updateRPkgs.pdf.
 Run ant check, then ant build.
