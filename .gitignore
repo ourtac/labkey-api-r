@@ -18,5 +18,6 @@ Rlabkey.Rcheck/
 build/
 src-i386/
 src-x64/
-src/*.o
-src/*.dll
+Rlabkey/src/*.o
+Rlabkey/src/*.dll
+Rlabkey/src/*.rds
