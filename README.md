@@ -21,12 +21,12 @@ This file describes the sources for the Rlabkey package and a number of addition
 						The official vignette pages acts as a pointer to the userguide.
  - usersguide.pdf			The pdf version of the source document found in \lktrunk\remoteapi\r\docs, printed to pdf format
 	
-- man		Source files for function-by-function refernece documentation.  After a successful build,
+- man		Source files for function-by-function reference documentation.  After a successful build,
 			a final pdf of the function reference documentation can be found in Rlabkey.Rcheck/Rlabkey-manual.pdf.
 
 - R		R Source files for package functions
 
-- src		Source files for a faster implentation of Json parsing for retrieved data.  Written in C, build occurs at package build time for windows,
+- src		Source files for a faster implementation of Json parsing for retrieved data.  Written in C, build occurs at package build time for windows,
 			and at package install time for unix
 			
 						
