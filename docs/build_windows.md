@@ -12,7 +12,7 @@
   - If reinstalling Rtools, make sure there is only one copy of the new entries in the path
 
 - Install [MiKTeX](http://www.miktex.org/download) for Latex support
- - After installation, open the MiKTeX package manager and install these addtional packages:
+ - After installation, open the MiKTeX package manager and install these additional packages:
   - fancyvrb
   - inconsolata
   - mptopdf
