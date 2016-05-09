@@ -76,7 +76,7 @@ if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",co
 ## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
-myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
+myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
 
 ## Support user-settable options for debuggin and setting proxies etc
 if(exists(".lksession"))
@@ -92,11 +92,16 @@ clist <- ifcookie()
 if(clist$Cvalue==1) 
 {	
 	mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))
-} 
-else 
-{
-	myopts <-curlOptions(.opts=c(myopts, httpauth=1L))
-	mydata <- getURI(myurl, .opts=myopts, curl=handle)
+} else {
+    myopts <- curlOptions(.opts=c(myopts, httpauth=1L))
+    apikey <- labkey.ifApiKey();
+
+    if (!is.null(apikey))
+    {
+        mydata <- getURI(myurl, .opts=myopts, curl=handle, httpheader = c("apikey"=apikey))
+    } else {
+        mydata <- getURI(myurl, .opts=myopts, curl=handle)
+    }
 }
 
 

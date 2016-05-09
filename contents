@@ -97,3 +97,10 @@ Aliases: labkey.saveBatch
 Keywords: IO
 Description: Save an assay object to labkey server 
 URL: ../../../library/Rlabkey/html/labkey.saveBatch.html
+
+
+Entry: labkey.setDefaults
+Aliases: labkey.setDefaults
+Keywords: IO
+Description: Set the default settings used for connecting with labkey server 
+URL: ../../../library/Rlabkey/html/labkey.setDefaults.html
