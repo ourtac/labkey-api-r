@@ -35,37 +35,11 @@ if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 if(assayName==curlUnescape(assayName)) {assayNameParam <- curlEscape(assayName)}
 else {assayNameParam <- assayName}
 
-## Set options
-reader <- basicTextGatherer()
-header <- basicTextGatherer()
-handle <- getCurlHandle()
-headerFields <- c('Content-Type'="application/json;charset=utf-8")
-clist <- ifcookie()
-if(clist$Cvalue==1) {
-    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-} else {
-    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-}
-
-## Support user-settable options for debugging and setting proxies etc
-if(exists(".lksession"))
-{
-	userOpt <- .lksession[["curlOptions"]] 
-	if (!is.null(userOpt))
-		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
-}
-
 ## Translate assay name to an ID
 myurl <- paste(baseUrl,"assay",folderPath,"assayList.view?name=", assayNameParam, sep="")
 
-assayInfoJSON <- getURI(myurl, .opts=myopts, curl=handle)
-h <- parseHeader(header$value())
-status <- getCurlInfo(handle)$response.code
-message <- h$statusMessage
-if(status>=400)
-  {stop(paste("Could not find assay by that name. Status code = ",status,", Error message = ",message,sep=""))}
+## Execute via our standard GET function
+assayInfoJSON <- labkey.get(myurl)
 
 assayDef <- NULL
 assayInfo<- fromJSON(assayInfoJSON)

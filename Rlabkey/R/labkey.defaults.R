@@ -32,3 +32,65 @@ labkey.ifApiKey <- function()
         .lkdefaults[["apiKey"]];
     }
 }
+
+labkey.get <- function(myurl)
+{
+    ## Set options
+    reader <- basicTextGatherer()
+    header <- basicTextGatherer()
+    myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
+
+    ## Support user-settable options for debugging and setting proxies etc
+    if(exists(".lksession"))
+    {
+        userOpt <- .lksession[["curlOptions"]]
+        if (!is.null(userOpt))
+            {myopts<- curlOptions(.opts=c(myopts, userOpt))}
+    }
+
+    ## Http get
+    handle <- getCurlHandle()
+    clist <- ifcookie()
+    if(clist$Cvalue==1)
+    {
+        mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname, "=", clist$Ccont, sep=""))
+    } else {
+        myopts <- curlOptions(.opts=c(myopts, httpauth=1L))
+        apikey <- labkey.ifApiKey();
+
+        if (!is.null(apikey))
+        {
+            mydata <- getURI(myurl, .opts=myopts, curl=handle, httpheader = c("apikey"=apikey))
+        } else {
+            mydata <- getURI(myurl, .opts=myopts, curl=handle)
+        }
+    }
+
+    ## Error checking, decode data and return data frame
+    h <- parseHeader(header$value())
+    status <- getCurlInfo(handle)$response.code
+    message <- h$statusMessage
+
+    if(status==500)
+    {
+        decode <- fromJSON(mydata)
+        message <- decode$exception
+        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+    }
+
+    if(status>=400)
+    {
+        contTypes <- which(names(h)=='Content-Type')
+        if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
+        {
+            decode <- fromJSON(mydata);
+            message<-decode$exception;
+            stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+        } else
+        {
+            stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+        }
+    }
+
+    mydata;
+}
