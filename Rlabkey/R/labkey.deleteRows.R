@@ -46,7 +46,7 @@ for(j in 1:nrows)
     p3 <- c(p3, p2)
 }
 p3 <- paste(p3, collapse=",")
-pbody <- paste(substr(p1,1,nchar(p1)-1),', \"rows\":[',p3,"] }",sep="")
+pbody <- paste(substr(p1, 1, nchar(p1) - 1),', \"rows\":[',p3,"] }",sep="")
 
 myurl <- paste(baseUrl, "query", folderPath, "deleteRows.api", sep="")
 

@@ -67,17 +67,17 @@ for(j in 1:nrows) {
 dataInputsArray <- vector(mode="list", length=0)
 
 runsArray <- vector(mode="list", length=1)
-runPropertyList <- c(runPropertyList, list("dataInputs"=dataInputsArray))
+runPropertyList <- c(runPropertyList, list("dataInputs" = dataInputsArray))
 
 runsArray[[1]] <- c(runPropertyList, list("dataRows" = rowsVector))
 
-batchPropertyList <- c(batchPropertyList, list("runs"= runsArray))
+batchPropertyList <- c(batchPropertyList, list("runs" = runsArray))
 	
 baseAssayList <- list(assayId=assayDef$id)
 baseAssayList <- c(baseAssayList, list(batch=batchPropertyList))
 
 ## Now post form with batch object filled out
-myurl <- paste(baseUrl,"assay",folderPath,"saveAssayBatch.view", sep="")
+myurl <- paste(baseUrl, "assay", folderPath, "saveAssayBatch.view", sep="")
 pbody <- toJSON(baseAssayList)
 
 ## Execute via our standard POST function

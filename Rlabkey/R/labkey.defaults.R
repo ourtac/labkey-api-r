@@ -67,7 +67,7 @@ labkey.get <- function(myurl)
         }
     }
 
-    ## Error checking, decode data and return data frame
+    ## Error checking, decode data and return
     h <- parseHeader(header$value())
     status <- getCurlInfo(handle)$response.code
     message <- h$statusMessage
@@ -76,7 +76,7 @@ labkey.get <- function(myurl)
     {
         decode <- fromJSON(mydata)
         message <- decode$exception
-        stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message,sep=""))
+        stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
     }
 
     if(status>=400)
@@ -96,6 +96,7 @@ labkey.get <- function(myurl)
     mydata
 }
 
+## Executes an HTTP POST against the supplied URL, with standard handling for session, [api key - NYI], status codes and error messages.
 labkey.post <- function(myurl, pbody)
 {
     ## Set options
@@ -110,29 +111,31 @@ labkey.post <- function(myurl, pbody)
         myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
     }
 
-    ## Support user-settable options for debuggin and setting proxies etc
+    ## Support user-settable options for debugging and setting proxies etc
     if(exists(".lksession"))
     {
         userOpt <- .lksession[["curlOptions"]]
 
         if (!is.null(userOpt))
         {
-            myopts<- curlOptions(.opts=c(myopts, userOpt))
+            myopts <- curlOptions(.opts=c(myopts, userOpt))
         }
     }
 
     ## Post form
     curlPerform(url=myurl, postFields=pbody, httpheader=headerFields, .opts=myopts, curl=handle)
+    mydata <- reader$value();
 
     ## Error checking, decode data and return
     h <- parseHeader(header$value())
     status <- getCurlInfo(handle)$response.code
     message <- h$statusMessage
+
     if(status==500)
     {
-        decode <- fromJSON(reader$value())
+        decode <- fromJSON(mydata)
         message <- decode$exception
-        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+        stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
     }
 
     if(status>=400)
@@ -140,14 +143,14 @@ labkey.post <- function(myurl, pbody)
         contTypes <- which(names(h)=='Content-Type')
         if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
         {
-            decode <- fromJSON(reader$value())
+            decode <- fromJSON(mydata)
             message <- decode$exception
-            stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+            stop (paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
         } else
         {
-            stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+            stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
         }
     }
 
-    reader$value()
+    mydata
 }
