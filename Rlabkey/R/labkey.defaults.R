@@ -24,7 +24,7 @@ labkey.setDefaults <- function(apiKey=NULL)
         .lkdefaults[["apiKey"]] = apiKey;
 }
 
-labkey.ifApiKey <- function()
+ifApiKey <- function()
 {
     if (exists("labkey.apiKey")) {
         labkey.apiKey;
@@ -49,7 +49,7 @@ labkey.get <- function(myurl)
             {myopts<- curlOptions(.opts=c(myopts, userOpt))}
     }
 
-    ## Http get
+    ## HTTP GET
     handle <- getCurlHandle()
     clist <- ifcookie()
     if(clist$Cvalue==1)
@@ -57,7 +57,7 @@ labkey.get <- function(myurl)
         mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname, "=", clist$Ccont, sep=""))
     } else {
         myopts <- curlOptions(.opts=c(myopts, httpauth=1L))
-        apikey <- labkey.ifApiKey();
+        apikey <- ifApiKey();
 
         if (!is.null(apikey))
         {
@@ -67,36 +67,10 @@ labkey.get <- function(myurl)
         }
     }
 
-    ## Error checking, decode data and return
-    h <- parseHeader(header$value())
-    status <- getCurlInfo(handle)$response.code
-    message <- h$statusMessage
-
-    if(status==500)
-    {
-        decode <- fromJSON(mydata)
-        message <- decode$exception
-        stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
-    }
-
-    if(status>=400)
-    {
-        contTypes <- which(names(h)=='Content-Type')
-        if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
-        {
-            decode <- fromJSON(mydata)
-            message <- decode$exception
-            stop (paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
-        } else
-        {
-            stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
-        }
-    }
-
-    mydata
+    processResponse(mydata, header, handle)
 }
 
-## Executes an HTTP POST against the supplied URL, with standard handling for session, [api key - NYI], status codes and error messages.
+## Executes an HTTP POST of pbody against the supplied URL, with standard handling for session, api key, status codes and error messages.
 labkey.post <- function(myurl, pbody)
 {
     ## Set options
@@ -108,7 +82,15 @@ labkey.post <- function(myurl, pbody)
     if(clist$Cvalue==1) {
         myopts <- curlOptions(cookie=paste(clist$Cname, "=", clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
     } else {
-        myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
+        apikey <- ifApiKey();
+
+        if (!is.null(apikey))
+        {
+            myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
+            headerFields <- c(headerFields, apikey=apikey)
+        } else {
+            myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
+        }
     }
 
     ## Support user-settable options for debugging and setting proxies etc
@@ -122,10 +104,15 @@ labkey.post <- function(myurl, pbody)
         }
     }
 
-    ## Post form
+    ## HTTP POST form
     curlPerform(url=myurl, postFields=pbody, httpheader=headerFields, .opts=myopts, curl=handle)
     mydata <- reader$value();
 
+    processResponse(mydata, header, handle)
+}
+
+processResponse <- function(mydata, header, handle)
+{
     ## Error checking, decode data and return
     h <- parseHeader(header$value())
     status <- getCurlInfo(handle)$response.code
@@ -148,7 +135,7 @@ labkey.post <- function(myurl, pbody)
             stop (paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
         } else
         {
-            stop(paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
+            stop (paste("HTTP request was unsuccessful. Status code = ", status, ", Error message = ", message, sep=""))
         }
     }
 
