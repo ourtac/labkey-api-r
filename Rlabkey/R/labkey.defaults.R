@@ -26,8 +26,8 @@ labkey.setDefaults <- function(apiKey=NULL)
 
 ifApiKey <- function()
 {
-    if (exists("labkey.apiKey")) {
-        labkey.apiKey;
+    if (exists("labkey.apiKey", envir = .GlobalEnv)) {
+        get("labkey.apiKey", envir = .GlobalEnv)
     } else {
         .lkdefaults[["apiKey"]];
     }
