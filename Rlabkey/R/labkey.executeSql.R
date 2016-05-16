@@ -23,11 +23,8 @@ labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("sql")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and sql."))
 
-## URL encoding of schema and folder path (if not already encoded)
-if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+## URL encoding of folder path (if not already encoded)
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
-if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
-if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
