@@ -20,8 +20,7 @@
 # For now, just apiKey. TODO: Add email, password, baseUrl, folderPath, and maybe curlOptions & lkOptions
 labkey.setDefaults <- function(apiKey=NULL)
 {
-    if (!is.null(apiKey))
-        .lkdefaults[["apiKey"]] = apiKey;
+    .lkdefaults[["apiKey"]] = apiKey;
 }
 
 ifApiKey <- function()
@@ -39,7 +38,7 @@ labkey.get <- function(myurl)
     ## Set options
     reader <- basicTextGatherer()
     header <- basicTextGatherer()
-    myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
+    myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
 
     ## Support user-settable options for debugging and setting proxies etc
     if(exists(".lksession"))
@@ -63,6 +62,7 @@ labkey.get <- function(myurl)
         {
             mydata <- getURI(myurl, .opts=myopts, curl=handle, httpheader = c("apikey"=apikey))
         } else {
+            myopts <- curlOptions(.opts=c(myopts, netrc=1))
             mydata <- getURI(myurl, .opts=myopts, curl=handle)
         }
     }
