@@ -48,11 +48,16 @@ if (!is.null(includeDisplayValues) && includeDisplayValues == TRUE) {
 }
 
 ## Format colSelect
-if(is.null(colSelect)==FALSE)
-  {   lencolSel <- length(colSelect)
+colSelect2=NULL
+if(is.null(colSelect)==FALSE) {
+    lencolSel <- length(colSelect)
     holder <- NULL
-      for(i in 1:length(colSelect)) holder <-paste(holder,curlEscape(colSelect[i]),",",sep="")
-      colSelect <- substr(holder, 1, nchar(holder)-1)}
+    for(i in 1:length(colSelect)) {
+        holder <-paste(holder,curlEscape(colSelect[i]),",",sep="")
+    }
+    colSelect2 <- substr(holder, 1, nchar(holder)-1)
+    colSelect <- paste(colSelect, collapse=",")
+}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
@@ -64,7 +69,7 @@ if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 ## Construct url
 myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,"&apiVersion=",apiVersion,sep="")
 if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
-if(is.null(colSelect)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect,sep="")}
+if(is.null(colSelect2)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect2,sep="")}
 if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&query.maxRows=",maxRows,sep="")}
 if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
 if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,sep="")}
