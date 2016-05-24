@@ -30,11 +30,13 @@ and session information already set in the browser.\cr
 
 labkey.setDefaults(apiKey="session|abcdef0123456789abcdef0123456789")
 
-## Functions invoked at this point share authorization and session information with the browser session
+## Functions invoked at this point share authorization
+## and session information with the browser session
 
 labkey.setDefaults()
 
-## Functions no longer share authorization and session information with the browser session
+## Functions no longer share authorization and session
+## information with the browser session
 
 }
 }
