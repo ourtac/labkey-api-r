@@ -12,6 +12,8 @@ labkey.setDefaults(apiKey)
 }
 
 \details{
+Note: Support for API keys was added in LabKey Server release 16.2; they are not supported in 16.1 or earlier.
+
 An API key can be used to authorize Rlabkey functions that access protected content on LabKey Server. Using an API key
 avoids copying and storing credentials on the client machine. Also, all Rlabkey access is tied to the current browser
 session, which means the code runs in the same context as the browser (e.g., same user, same authorizations, same
