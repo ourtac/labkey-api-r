@@ -115,8 +115,11 @@ processResponse <- function(mydata, header, handle)
 {
     ## Error checking, decode data and return
     h <- parseHeader(header$value())
-    status <- getCurlInfo(handle)$response.code
     message <- h$statusMessage
+    status <- getCurlInfo(handle)$response.code
+    if (status == 0) {
+        status <- h$status
+    }
 
     if(status==500)
     {
