@@ -28,6 +28,7 @@ labkey.setDefaults <- function(apiKey="",baseUrl="")
     if (apiKey == "" && baseUrl=="")
       .lkdefaults <- new.env(parent=emptyenv());
 }
+
 ifApiKey <- function()
 {
     if (exists("labkey.apiKey", envir = .GlobalEnv)) {
