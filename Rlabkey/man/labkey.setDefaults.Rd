@@ -5,8 +5,7 @@
 Use this function to set the "apiKey" and "baseUrl" package environment variables to be used for all http or https requests.
 You can also use labkey.setDefaults() without any parameters to reset/clear the settings.}
 \usage{
-labkey.setDefaults(apiKey='value')
-labkey.setDefaults(baseUrl='value')
+labkey.setDefaults(apiKey="", baseUrl="")
 }
 \arguments{
   \item{apiKey}{session key from your server}

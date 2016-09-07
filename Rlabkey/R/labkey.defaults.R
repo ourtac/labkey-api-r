@@ -17,8 +17,8 @@
 .lkdefaults <- new.env(parent=emptyenv());
 
 # Set the credentials used for all http or https requests
-# For now, just apiKey. TODO: Add email, password, folderPath, and maybe curlOptions & lkOptions
-labkey.setDefaults <- function(apiKey="",baseUrl="")
+# For now, just apiKey and baseUrl. TODO: Add email, password, folderPath, and maybe curlOptions & lkOptions
+labkey.setDefaults <- function(apiKey="", baseUrl="")
 {
     if (apiKey != "")
         .lkdefaults[["apiKey"]] = apiKey;
