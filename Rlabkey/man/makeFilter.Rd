@@ -50,6 +50,8 @@ MISSING\cr
 NOT_MISSING\cr
 MV_INDICATOR\cr
 NO_MV_INDICATOR\cr
+Q\cr
+WHERE\cr
 
 When using the MISSING, NOT_MISSING, MV_INDICATOR, or NO_MV_INDICATOR operators, an empty string should be supplied as the value.
 See example below.

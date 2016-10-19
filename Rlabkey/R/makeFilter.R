@@ -103,6 +103,13 @@
 								"NO_MV_INDICATOR"="nomvvalue",
 								"NOT_QC_VALUE"="nomvvalue",
 
+								#
+								# Table/Query-wise operators
+								#
+
+								"Q"="q",
+								"WHERE"="where",
+
 								)
 
  				if(is.null(fop)==TRUE) stop ("Invalid operator name.")
