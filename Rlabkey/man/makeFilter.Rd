@@ -60,7 +60,7 @@ See example below.
 The function returns either a single string or an array of strings to be use in the
 \code{colFilter} argument of the \code{labkey.selectRows} function.
 }
-\references{http://www.omegahat.org/RCurl/, \cr
+\references{http://www.omegahat.net/RCurl/, \cr
 https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}

@@ -57,7 +57,7 @@ Multiple such blocks can exist in one file.
 
 \author{Valerie Obenchain
 }
-\references{http://www.omegahat.org/RCurl/,\cr
+\references{http://www.omegahat.net/RCurl/,\cr
 http://www.labkey.org/project/home/begin.view}
 \keyword{ package }
 \seealso{
