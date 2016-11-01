@@ -203,7 +203,7 @@ return(filtered)
     ## if none of the values have time part, convert the variable to a date
     t <- format(d, "%H-%M-%S")
     if (all(t == "00-00-00", na.rm = TRUE)) {
-        d <- as.Date(d);
+        d <- as.Date(d, tz = attr (d, which = "tzone"));
     }
 
     return(d);
