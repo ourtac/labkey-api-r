@@ -107,7 +107,7 @@
 								# Table/Query-wise operators
 								#
 
-								"Q"="q",
+								"Q"="q"
 
 								)
 
