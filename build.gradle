@@ -1,0 +1,90 @@
+buildDir = project.file("build")
+import org.apache.tools.ant.taskdefs.condition.Os
+
+project.task(
+        "check",
+        group: "RBuild",
+        description: "Run validation checks on the Rlabkey package",
+        type: Exec,
+        {
+            executable "R"
+            args "CMD check Rlabkey --no-examples --as-cran"
+            outputs.dir project.file("Rlabkey.Rcheck")
+            outputs.dir project.file("Rlabkey/src-i386")
+            outputs.dir project.file("Rlabkey/src-x64")
+            outputs.files project.fileTree(dir: "Rlabkey/src", includes: ["*.o", "*.dll"])
+        }
+
+)
+
+project.task(
+        "build",
+        group: "RBuild",
+        description: "Build the Rlabkey package that can be installed and tested in R. Builds binary package on windows, source only on unix",
+        {
+            inputs.files project.fileTree(dir: "Rlabkey", excludes: ["src-i386", "src-x64"]).files
+            outputs.dir project.buildDir
+            doFirst(
+                    {
+                        project.exec {
+                            executable "R"
+                            args "CMD build ${project.projectDir}/Rlabkey"
+                        }
+                        project.copy {
+                            from project.buildDir
+                            include*.tar.gz
+                            into project.file(LATEST_DIR)
+                        }
+                        if (Os.isFamily(Os.FAMILY_WINDOWS))
+                        {
+                            project.exec {
+                                executable "R"
+                                args "CMD INSTALL --build ${project.projectDir}/build/*.tar.gz"
+                            }
+                        }
+                        project.copy {
+                            from project.buildDir
+                            include*.zip
+                            into project.file(LATEST_DIR)
+                        }
+                    }
+            )
+        }
+)
+
+project.task(
+        "clean",
+        group: "RBuild",
+        description: "Deletes all non-versioned files generated during the build process",
+        type: Delete,
+        {
+            delete project.tasks.check
+            delete project.tasks.build
+        }
+)
+
+project.task(
+        "install",
+        group: "RBuild",
+        description: "install the Rlabkey package to the local R instance. Must be run as administrator.",
+        {
+            doFirst {
+                if (Os.isFamily(Os.FAMILY_WINDOWS))
+                {
+                    project.exec {
+                        executable "Rterm"
+                        args "--vanilla"
+                        workingDir project.file(LATEST_DIR)
+                        setStandardInput project.file("test/instwin.r")
+                    }
+                }
+                if (Os.isFamily(Os.FAMILY_UNIX))
+                {
+                    project.exec {
+                        executable "R"
+                        args "CMD INSTALL Rlabkey"
+                    }
+                }
+            }
+        }
+)
