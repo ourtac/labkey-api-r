@@ -16,7 +16,7 @@
 
 labkey.saveBatch <- function(baseUrl=NULL, folderPath, assayName, resultDataFrame, batchPropertyList=NULL, runPropertyList=NULL)
 {
-baseUrl = labkey.getBaseUrl()
+baseUrl = labkey.getBaseUrl(baseUrl)
 
 ## Error if any of baseUrl, folderPathare missing
 if(exists("baseUrl")==FALSE || is.null(baseUrl) || exists("folderPath")==FALSE || exists("assayName")==FALSE  || exists("resultDataFrame")==FALSE)
