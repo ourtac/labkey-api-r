@@ -195,10 +195,6 @@ return(filtered)
 
     ## format from DateUtil.getJsonDateTimeFormatString ("yyyy/MM/dd HH:mm:ss")
     d <- tryCatch(fastPOSIXct(s, "GMT"),error = function(e) NA);
-    if (any(is.na(d))) {
-        ## backwards compatibility for DateUtil.getJsonDateTimeFormatString ("d MMM yyyy HH:mm:ss")
-        d[is.na(d)] <- as.POSIXct(s[is.na(d)], format = "%d %b %Y %H:%M:%S");
-    }
 
     ## if none of the values have time part, convert the variable to a date
     t <- format(d, "%H-%M-%S")
