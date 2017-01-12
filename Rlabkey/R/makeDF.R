@@ -87,7 +87,7 @@
 		hold.dat <- NULL
 		tmprow <- filterrow(decode$rows[[1]])
 		hold.dat<-listToMatrix(decode$rows, names(tmprow))
-    hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
+        hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
 		names(hold.dat) <- names(tmprow)   			
 	}
 
