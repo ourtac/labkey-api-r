@@ -1,12 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-template <int RTYPE>
-Vector<RTYPE> getVector( Vector<RTYPE> in)
-{
-  return in;
-}
-
 // [[Rcpp::export]]
 CharacterMatrix listToMatrix(List data, List names) {
   int rowCount = data.size(); // rows
