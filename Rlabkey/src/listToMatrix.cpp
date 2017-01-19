@@ -1,6 +1,12 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+template <int RTYPE>
+Vector<RTYPE> getVector( Vector<RTYPE> in)
+{
+  return in;
+}
+
 // [[Rcpp::export]]
 CharacterMatrix listToMatrix(List data, List names) {
   int rowCount = data.size(); // rows
@@ -28,7 +34,11 @@ CharacterMatrix listToMatrix(List data, List names) {
       // If values are not null add to matrix
       if(!Rf_isNull((as<List>(data[i]))[as<int>(indexList[j])])) 
       {
-        cMatrix(i,j) = (as<CharacterVector>((as<List>(as<List>(data[i]))[as<int>(indexList[j])])))[0];
+        // Do not add extra vector from group concat
+        if(TYPEOF((as<List>(data[i]))[as<int>(indexList[j])]) != VECSXP)
+        {
+          cMatrix(i,j) = (as<CharacterVector>((as<List>(as<List>(data[i]))[as<int>(indexList[j])])))[0];
+        }
       }
     }
   }
