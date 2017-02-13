@@ -17,7 +17,7 @@ labkey.selectRows(baseUrl, folderPath, schemaName, queryName,
   \item{schemaName}{a string specifying the  \code{schemaName} for the query}
   \item{queryName}{a string specifying the \code{queryName}}
   \item{viewName}{(optional) a string specifying the \code{viewName} associated with the query. If not specified, the default view determines the rowset returned.  }
-  \item{colSelect}{(optional) a vector of comma separated strings specifying which columns of a dataset or view to import}
+  \item{colSelect}{(optional) a vector of comma separated strings specifying which columns of a dataset or view to import. The wildcard character ("*") may also be used here to get all columns including those not in the default view.}
   \item{maxRows}{(optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.}
   \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval. If no
 value is specified, the retrieval starts with the first row.}
