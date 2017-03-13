@@ -15,10 +15,8 @@ S3method(print, LabkeySchema)
 S3method(print, LabkeyQuery)
 #S3method(print, LabkeyField)
 
-
 import(RCurl)
 import(rjson)
-import(fasttime)
 
 importFrom("utils", "URLdecode", "URLencode")
 importFrom(Rcpp, sourceCpp)
