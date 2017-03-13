@@ -51,7 +51,7 @@ the return data frame.  View columns can be a subset or superset of the columns 
 query are left out of the view, and a superset if lookup columns in the underlying query are used to include columns from related queries.  
 Views can also include filter and sort properties that will make their result set different from the underlying query.
 If no view is specified, the columns and rows returned are determined by the default view, which may not be the same as the 
-result rows of the underlying query.  The primary key will always be included in the results.  Please see the topic on Saving Views in the LabKey online documentation.
+result rows of the underlying query.  Please see the topic on Saving Views in the LabKey online documentation.
 
 In the returned data frame, there are three different ways to have the columns named:  
 \code{colNameOpt='caption'} uses the caption value, and is the default option for backward compatibility.  
