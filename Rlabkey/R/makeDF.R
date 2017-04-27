@@ -128,7 +128,7 @@
   	        try(
                 if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
                 if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
-                if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
+                if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "integer")} else
                 if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
                 if(mod=="float"){suppressWarnings(mode(newdat[,j]) <- "numeric")} else
                 {print("MetaData field type not recognized.")}
@@ -144,7 +144,7 @@
 	    try(
             if(mod=="date"){ newdat <- .parseDate(newdat)}else
             if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
-            if(mod=="int"){ suppressWarnings(mode(newdat) <- "numeric")} else
+            if(mod=="int"){ suppressWarnings(mode(newdat) <- "integer")} else
             if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
             if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
             {print("MetaData field type not recognized.")}
